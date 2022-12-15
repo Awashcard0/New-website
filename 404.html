@@ -14,5 +14,20 @@
         <a href="/stuff">What I have made</a>
         <a href="/about">About</a>
       </div>
+
+      <div class="main">
+        <h1>404</h1>
+        <br><h2>How did you get here</h2>
+        <p id="text"></p>
+      </div>
+      <style>
+        .main {
+            align-content: center;
+        }
+      </style>
+      <script>
+        document.getElementById("text").innerHTML =
+window.location.pathname + " does not exist";
+      </script>
 </body>
 </html>
