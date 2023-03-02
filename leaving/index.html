@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Good bye</title>
+</head>
+<body>
+    <h1>Good bye</h1>
+    <p id="thing">Checking... Is js on?</p>
+</body>
+<script>
+var url = window.location.href
+var externalFile = url.includes("?")
+
+if (externalFile == true) {
+    let externalUrl = url.split("?");
+    document.getElementById("thing").innerText = "You are leaving " + location.hostname + " and going to " + externalUrl[1];
+    setTimeout(function() {
+        location.href = externalUrl[1]
+      }, 2000);
+} else {
+    alert("No redirect\nGoing back")
+    location.href = "/";
+}
+</script>
+</html>
