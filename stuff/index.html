@@ -47,9 +47,9 @@
       for (i = 0; i < li.length; i++) {
         a = li[i].getElementsByTagName("a")[0];
         if (a.innerHTML.toUpperCase().indexOf(filter) > -1) {
-          li[i].style.display = "";
+          li[i].style.visibility = 'visible';
         } else {
-          li[i].style.display = "none";
+          li[i].style.visibility = 'hidden';
         }
       }
     }
@@ -66,7 +66,6 @@
 /* Create a column layout with Flexbox */
 .row {
   display: flex;
-  block-size: fit-content;
 }
 
 /* Left column (menu) */
