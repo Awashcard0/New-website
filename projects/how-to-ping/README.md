@@ -4,7 +4,7 @@ Ping someone is a good way to tell them something even if they're offline howeve
 
 **Editing your message to have a ping makes it glow but dose not ping or send a notification**
 
-## Bad pings
+## Bad ping
 A ping in separate from your message makes it look weird in a notification
 
 This looks bad and dose not get your message across
