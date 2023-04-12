@@ -1,0 +1,51 @@
+btn {
+  display: block;
+  position: fixed;
+  z-index: 1000;
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.4);
+  background-size: 45px;
+  background-repeat: no-repeat;
+  background-position: 50% 80%;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: all .2s;
+  right: 10px;
+  bottom: 10px;
+  transform: translateZ(0);
+}
+btn, .blockscreen btn:hover {
+  background-image: url("https://awashcard0.pages.dev/home-thing/light.svg");
+}
+btn:hover {
+  background-color: rgba(255,255,255,0.8);
+  box-shadow: 0 0 4px rgba(0,0,0,0.5);
+  background-image: url("https://awashcard0.pages.dev/home-thing/dark.svg");
+}
+btn:active {
+  box-shadow: 0 0 2px rgba(0,0,0,0.5);
+  transform: translateZ(0) scale(0.9);
+}
+btn:focus {
+  outline: none;
+  box-shadow: 0 0 4px rgba(0,0,0,0.5), 0 0 0 5px rgba(79,161,167,0.3);
+}
+.blockscreen {
+  pointer-events: none;
+}
+.blockscreen btn {
+  right: 50%;
+  bottom: 50%;
+  width: 142vmax;
+  height: 142vmax;
+  margin: -71vmax;
+  background-color: black;
+  background-size: 90px;
+  background-position: 50% 50%;
+  box-shadow: none;
+  pointer-events: none;
+  transition: all .5s;
+}

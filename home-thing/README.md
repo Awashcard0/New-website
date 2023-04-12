@@ -1,0 +1,1 @@
+Code taken from https://github.com/SheepTester/sheeptester.github.io/blob/master/sheep3.js and edited to fit my needs
