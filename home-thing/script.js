@@ -10,7 +10,13 @@ document.addEventListener("DOMContentLoaded", function(e) {
           // Try forcing repaint
           homeButton.getBoundingClientRect();
           let utm = location.href
-          window.location = `/?utm=${utm}`;
+          if (location.hostname == "awashcard0.ga" || location.hostname == "awashcard0.pages.dev") {
+            document.getElementsByClassName('blockscreen').style.backgroundColor = "green";
+            window.location = `/?utm=${utm}`;
+          } else {
+            document.getElementsByClassName('blockscreen').style.backgroundColor = "blue";
+            window.location = `http://awashcard0.pages.dev/?utm=${utm}`;
+          }
         });
       });
     });
