@@ -14,14 +14,14 @@ document.addEventListener("DOMContentLoaded", function(e) {
           if (location.hostname == "awashcard0.ga" || location.hostname == "awashcard0.pages.dev") {
             var myDivs = document.getElementsByClassName("blockscreen");
                 for (var i = 0; i < myDivs.length; i++) {
-                myDivs[i].style.backgroundColor = "green";
+                myDivs[i].style.backgroundColor = "#00ff77";
                 }
                 removeAll();
             window.location = `/?utm=${utm}`;
           } else {
             var myDivs = document.getElementsByClassName("blockscreen");
                 for (var i = 0; i < myDivs.length; i++) {
-                myDivs[i].style.backgroundColor = "blue";
+                myDivs[i].style.backgroundColor = "#3217ff";
                 }
                 removeAll();
             window.location = `http://awashcard0.pages.dev/?utm=${utm}`;
