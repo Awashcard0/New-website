@@ -25,3 +25,18 @@ document.addEventListener("DOMContentLoaded", function(e) {
     });
     document.body.appendChild(homeButton);
   }, {once: true});
+
+  //set favicon
+  function changeFavicon(src) {
+ var link = document.createElement('link'),
+     oldLink = document.getElementById('dynamic-favicon');
+ link.id = 'dynamic-favicon';
+ link.rel = 'shortcut icon';
+ link.href = src;
+ if (oldLink) {
+  document.head.removeChild(oldLink);
+ }
+ document.head.appendChild(link);
+}
+
+changeFavicon('https://awashcard0.pages.dev/favicon.ico');
