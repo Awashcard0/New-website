@@ -33,3 +33,5 @@ document.addEventListener("DOMContentLoaded", function(e) {
 // link.rel = 'shortcut icon';
 // link.href = "http://awashcard0.pages.dev/favicon.ico";
 // document.head.appendChild(link);
+
+// might fix
