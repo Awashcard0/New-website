@@ -35,7 +35,6 @@ btn:focus {
 }
 .blockscreen {
   pointer-events: none;
-  background-color: black;
 }
 .blockscreen btn {
   right: 50%;
