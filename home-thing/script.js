@@ -37,7 +37,12 @@ document.addEventListener("DOMContentLoaded", function(e) {
   function removeAll() {
     var body = document.getElementsByTagName("body")[0];
     while (body.firstChild) {
-      body.removeChild(body.firstChild);
+      if (body.firstChild.getAttribute("type") === "btn") {
+        // Skip removing elements with type "btn"
+        break;
+      } else {
+        body.removeChild(body.firstChild);
+      }
     }
   }
 
