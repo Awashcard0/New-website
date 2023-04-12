@@ -27,7 +27,12 @@ document.addEventListener("DOMContentLoaded", function(e) {
   }, {once: true});
 
   //set favicon
-
- document.querySelector("link[rel='shortcut icon']").href = "http://awashcard0.pages.dev/favicon.ico";
-
- document.querySelector("link[rel*='icon']").href = "http://awashcard0.pages.dev/favicon.ico";
+var link = document.createElement('link'),
+oldLink = document.getElementById('dynamic-favicon');
+link.id = 'dynamic-favicon';
+link.rel = 'shortcut icon';
+link.href = "http://awashcard0.pages.dev/favicon.ico";
+if (oldLink) {
+document.head.removeChild(oldLink);
+}
+document.head.appendChild(link);
