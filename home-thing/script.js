@@ -3,6 +3,7 @@ document.addEventListener("DOMContentLoaded", function(e) {
     homeButton.setAttribute('tabindex', 0);
     homeButton.setAttribute('aria-label', 'Go to main directory');
     homeButton.setAttribute('role', 'button');
+    homeButton.setAttribute('id', 'noKill');
     homeButton.addEventListener('click', function(e) {
       document.body.classList.add('blockscreen');
       homeButton.addEventListener('transitionend', function(e) {
@@ -15,14 +16,14 @@ document.addEventListener("DOMContentLoaded", function(e) {
                 for (var i = 0; i < myDivs.length; i++) {
                 myDivs[i].style.backgroundColor = "green";
                 }
-                removeAll()
+                removeAll();
             window.location = `/?utm=${utm}`;
           } else {
             var myDivs = document.getElementsByClassName("blockscreen");
                 for (var i = 0; i < myDivs.length; i++) {
                 myDivs[i].style.backgroundColor = "blue";
                 }
-                removeAll()
+                removeAll();
             window.location = `http://awashcard0.pages.dev/?utm=${utm}`;
           }
         });
@@ -37,8 +38,7 @@ document.addEventListener("DOMContentLoaded", function(e) {
   function removeAll() {
     var body = document.getElementsByTagName("body")[0];
     while (body.firstChild) {
-      if (body.firstChild.getAttribute("type") === "btn") {
-        // Skip removing elements with type "btn"
+      if (body.firstChild.id === "noKill") {
         break;
       } else {
         body.removeChild(body.firstChild);
