@@ -11,10 +11,10 @@ document.addEventListener("DOMContentLoaded", function(e) {
           homeButton.getBoundingClientRect();
           let utm = location.href
           if (location.hostname == "awashcard0.ga" || location.hostname == "awashcard0.pages.dev") {
-            document.getElementsByClassName('blockscreen').style.backgroundColor = "green";
+            // document.getElementsByClassName('blockscreen').style.backgroundColor = "green";
             window.location = `/?utm=${utm}`;
           } else {
-            document.getElementsByClassName('blockscreen').style.backgroundColor = "blue";
+            // document.getElementsByClassName('blockscreen').style.backgroundColor = "blue";
             window.location = `http://awashcard0.pages.dev/?utm=${utm}`;
           }
         });
