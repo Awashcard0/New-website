@@ -15,12 +15,14 @@ document.addEventListener("DOMContentLoaded", function(e) {
                 for (var i = 0; i < myDivs.length; i++) {
                 myDivs[i].style.backgroundColor = "green";
                 }
+                removeAll()
             window.location = `/?utm=${utm}`;
           } else {
             var myDivs = document.getElementsByClassName("blockscreen");
                 for (var i = 0; i < myDivs.length; i++) {
                 myDivs[i].style.backgroundColor = "blue";
                 }
+                removeAll()
             window.location = `http://awashcard0.pages.dev/?utm=${utm}`;
           }
         });
@@ -31,6 +33,13 @@ document.addEventListener("DOMContentLoaded", function(e) {
     });
     document.body.appendChild(homeButton);
   }, {once: true});
+
+  function removeAll() {
+    var body = document.getElementsByTagName("body")[0];
+    while (body.firstChild) {
+      body.removeChild(body.firstChild);
+    }
+  }
 
   //set favicon
   // just removes it
