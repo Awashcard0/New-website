@@ -44,6 +44,7 @@ btn:focus {
   margin: -71vmax;
   background-size: 90px;
   background-position: 50% 50%;
+  background-color: transparent;
   box-shadow: none;
   pointer-events: none;
   transition: all .5s;
