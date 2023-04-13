@@ -5,7 +5,7 @@ btn {
   height: 50px;
   width: 50px;
   border-radius: 50%;
-  background-color: rgba(0, 0, 0, 0.4);
+  /* background-color: rgba(0, 0, 0, 0.4); */
   background-size: 45px;
   background-repeat: no-repeat;
   background-position: 50% 80%;
@@ -42,7 +42,7 @@ btn:focus {
   width: 142vmax;
   height: 142vmax;
   margin: -71vmax;
-  background-color: black;
+  /* background-color: black; */
   background-size: 90px;
   background-position: 50% 50%;
   box-shadow: none;
