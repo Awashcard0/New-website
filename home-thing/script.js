@@ -12,6 +12,7 @@ document.addEventListener("DOMContentLoaded", function(e) {
           homeButton.getBoundingClientRect();
           let utm = location.href
           document.getElementById("noKill").style.removeProperty('background-color');
+          document.getElementById("noKill").style.removeProperty('backgroundColor');
           if (location.hostname == "awashcard0.ga" || location.hostname == "awashcard0.pages.dev") {
             var myDivs = document.getElementsByClassName("blockscreen");
                 for (var i = 0; i < myDivs.length; i++) {
