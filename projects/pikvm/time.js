@@ -36,4 +36,4 @@ function checkTime(i) {
 // timers
 setInterval(function(){
     timeanddate();
-}, 500); 
+}, 500);
