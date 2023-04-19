@@ -1,4 +1,5 @@
 function timeanddate() {
+    let user = sessionStorage.getItem("name");
  today = new Date();
 ///let day = today.getDay()
  date = (today.getMonth()+1)+"/"+today.getDate()+"/"+today.getFullYear();
@@ -24,7 +25,8 @@ function timeanddate() {
     if(h==0) {
     h=12;
     }
-time = h+":"+m+":"+s+ampm+" "+date;
+
+time = h+":"+m+":"+s+ampm+" "+date+" Logged in as: "+ user;
 document.getElementById("time").innerHTML = time
 }
 
