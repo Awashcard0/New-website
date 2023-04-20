@@ -28,7 +28,9 @@
           <br><p id="onlineusernow">Loading online users</p>
       </div>
       <script>
-          document.getElementById("onlineusernow").innerHTML = "Users online: " + usersOnline
+          setInterval(() => {
+            document.getElementById("onlineusernow").innerHTML = "Users online: " + usersOnline + " (Hover over the circle in the bottom corners to see)";
+    }, 1000);
       </script>
       <style>
         .main {
