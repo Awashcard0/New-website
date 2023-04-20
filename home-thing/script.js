@@ -4,7 +4,7 @@
     homeButton.setAttribute('aria-label', 'Go to main directory');
     homeButton.setAttribute('role', 'button');
     homeButton.setAttribute('id', 'noKill');
-    homeButton.setAttribute('title', 'Hover to see user count for every awashcard0 site');
+    // homeButton.setAttribute('title', 'Hover to see user count for every awashcard0 site');
     homeButton.addEventListener('click', function(e) {
       document.body.classList.add('blockscreen');
       homeButton.addEventListener('transitionend', function(e) {
