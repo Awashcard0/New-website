@@ -1,9 +1,10 @@
-document.addEventListener("DOMContentLoaded", function(e) {
+    document.addEventListener("DOMContentLoaded", function(e) {
     var homeButton = document.createElement("btn");
     homeButton.setAttribute('tabindex', 0);
     homeButton.setAttribute('aria-label', 'Go to main directory');
     homeButton.setAttribute('role', 'button');
     homeButton.setAttribute('id', 'noKill');
+    homeButton.setAttribute('title', 'Hover to see user count for every awashcard0 site');
     homeButton.addEventListener('click', function(e) {
       document.body.classList.add('blockscreen');
       homeButton.addEventListener('transitionend', function(e) {
@@ -35,7 +36,21 @@ document.addEventListener("DOMContentLoaded", function(e) {
       if (e.keyCode === 13) homeButton.click();
     });
     document.body.appendChild(homeButton);
+
+
+homeButton.addEventListener("mouseenter", function(e) {
+  showUsers = true;
+  updateusers();
+});
+
+homeButton.addEventListener("mouseleave", function(e) {
+  showUsers = false;
+  updateusers();
+});
+
   }, {once: true});
+
+  let showUsers = false;
 
   function removeAll() {
     var body = document.getElementsByTagName("body")[0];
@@ -48,12 +63,32 @@ document.addEventListener("DOMContentLoaded", function(e) {
     }
   }
 
-  //set favicon
-  // just removes it
-// var link = document.createElement('link');
-// link.id = 'dynamic-favicon';
-// link.rel = 'shortcut icon';
-// link.href = "http://awashcard0.pages.dev/favicon.ico";
-// document.head.appendChild(link);
+  function updateusers() {
+    if (showUsers) {
+      var usersCount = document.createElement("span");
+      usersCount.setAttribute('tabindex', 0);
+      usersCount.setAttribute('aria-label', 'Go to main directory');
+      usersCount.setAttribute('id', 'userThing');
+      document.body.appendChild(usersCount);
+      document.getElementById("userThing").innerHTML = "Users online: " + usersOnline;
+    } else {
+      document.getElementById("userThing").remove();
+    }
+  }
 
-// might fix
+  var usersOnline = 1;
+
+   setInterval(() => {
+      fetch('https://usercount.awashcard0.repl.co/')
+        .then(response => response.text())
+        .catch(error => console.error(error));
+    }, 4500);
+
+    setInterval(() => {
+      fetch('https://usercount.awashcard0.repl.co/count')
+        .then(response => response.text())
+        .then(count => usersOnline = count);
+      if (showUsers) {document.getElementById("userThing").innerHTML = "Users online: " + usersOnline};
+    }, 5000);
+
+
