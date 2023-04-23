@@ -24,23 +24,24 @@
           <h2>Menu</h2>
           <input type="text" id="mySearch" onkeyup="myFunction()" placeholder="Search.." title="Type in a category">
           <ul id="myMenu">
-            <li><a href="#awashio">Awashcard0.github.io</a></li>
-            <li><a href="#quick-edit">Quick edit</a></li>
-            <li><a href="#mtimer">Multiplayer timer</a></li>
-            <li><a href="#type-dash-1">Typewriter clock</a></li>
-            <li><a href="#Fake">Fake person generator</a></li>
-            <li><a href="#cg">Criticism generator</a></li>
-            <li><a href="#nmc">Natro macro control</a></li>
-            <li><a href="#biab">Browser in a browser</a></li>
-            <li><a href="#Sd">School directory</a></li>
-            <li><a href="#Cc">Cool clock </a></li>
-            <li><a href="#htp">How to ping</a></li>
-            <li><a href="#qec">Quick edit code</a></li>
+            <li><a href="#awashio" onclick="updatePage();">Awashcard0.github.io</a></li>
+            <li><a href="#quick-edit" onclick="updatePage();">Quick edit</a></li>
+            <li><a href="#mtimer" onclick="updatePage();">Multiplayer timer</a></li>
+            <li><a href="#type-dash-1" onclick="updatePage();">Typewriter clock</a></li>
+            <li><a href="#Fake" onclick="updatePage();">Fake person generator</a></li>
+            <li><a href="#cg" onclick="updatePage();">Criticism generator</a></li>
+            <li><a href="#nmc" onclick="updatePage();">Natro macro control</a></li>
+            <li><a href="#biab" onclick="updatePage();">Browser in a browser</a></li>
+            <li><a href="#Sd" onclick="updatePage();">School directory</a></li>
+            <li><a href="#Cc" onclick="updatePage();">Cool clock </a></li>
+            <li><a href="#htp" onclick="updatePage();">How to ping</a></li>
+            <li><a href="#qec" onclick="updatePage();">Quick edit code</a></li>
           </ul>
         </div>
         <div class="right" style="background-color:#ddd;">
-            <h2>Main page</h2>
-            <p>Click on a link on the side to explore</p>
+            <h2 id="title">Main page</h2>
+            <a id="link" href="/leaving?"></a>
+            <div id="main">Click on a link on the side to explore</div>
           </div>
         </div>
 </body>
@@ -62,7 +63,24 @@
     }
 
     function updatePage() {
-        
+        var url = window.location.href
+        var selectEd = url.includes("#")
+
+if (selectEd) {
+    let pageFinder = url.split("#");
+    let page = pageFinder[1];
+    let title = document.getElementById("title");
+    let main = document.getElementById("main");
+    let link = document.getElementById("link");
+    link.innerText = "Open"
+    if (page == "awashio") {
+        title.innerText = "Awashcard0.github.io";
+        main.innerHTML = "<p>My first everything</p><br><p>Some of my things are there but its mostly other sites</p><br><p>This is where I started getting into web development</p>";
+        link.href = "/leaving?https://awashcard0.github.io";
+    }
+} else {
+
+}
     }
     </script>
 <style>
