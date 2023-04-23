@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<!-- This is a WIP and will be updated with more cams (mabey) on my website (http://awashcard0.pages.dev) Awashcard0#0001 on discord -->
+<title>Ship cam</title>
+<body>
+<h1>Ship cam</h1>
+<img id="img" src="https://www.ncl.com/shipcams/getawaycam/fullsize.jpg?browser_popup=320x240"></img>
+<p id="time">This page will reload every minute</p>
+<p>The cams updates about every 5 mins</p>
+<p>Made by <a href="http://awashcard0.pages.dev">Awashcard0</a></p>
+<button id="full" onclick="document.getElementById('img').requestFullscreen()">Fullscreen</button>
+<select id="select-ships" onchange="pick();">
+                        <option disabled="">All cams</option>
+                    
+                        <option value="blisscam" data-url="/cruise-ship/bliss">Norwegian Bliss</option>
+                    
+                        <option value="bawaycam" data-url="/cruise-ship/breakaway">Norwegian Breakaway</option>
+                    
+                       <!-- needs uppercase F and I dont want to code that <option value="dawn" data-url="/cruise-ship/dawn">Norwegian Dawn</option>  -->
+                    
+                        <option value="encorecam" data-url="/cruise-ship/encore">Norwegian Encore</option>
+                    
+                        <option value="epiccam" data-url="/cruise-ship/epic">Norwegian Epic</option>
+                    
+                        <option value="escapecam" data-url="/cruise-ship/escape">Norwegian Escape</option>
+                    
+                        <option value="gemcam" data-url="/cruise-ship/gem">Norwegian Gem</option>
+                    
+                        <option selected value="getawaycam" data-url="/cruise-ship/getaway">Norwegian Getaway</option>
+                    
+                        <option value="jadecam" data-url="/cruise-ship/jade">Norwegian Jade</option>
+                    
+                        <option value="jewelcam" data-url="/cruise-ship/jewel">Norwegian Jewel</option>
+                    
+                        <option value="joycam" data-url="/cruise-ship/joy">Norwegian Joy</option>
+                    
+                        <option value="pearlcam" data-url="/cruise-ship/pearl">Norwegian Pearl</option>
+                    
+                        <option value="primacam" data-url="/cruise-ship/prima">Norwegian Prima</option>
+                    
+                        <option value="skycam2" data-url="/cruise-ship/sky">Norwegian Sky</option>
+                    
+                        <option value="spiritcam" data-url="/cruise-ship/spirit">Norwegian Spirit</option>
+                    
+                        <option value="starcam" data-url="/cruise-ship/star">Norwegian Star</option>
+                    
+                        <option value="suncam" data-url="/cruise-ship/sun">Norwegian Sun</option>
+                    
+                       <!-- ship has no webcam as of 4/3/2023 (Has not even sailed yet) <option value="vivacam" data-url="/cruise-ship/viva">Norwegian Viva</option>  -->
+                    
+                        <option value="americam" data-url="/cruise-ship/pride_amer">Pride of America</option>
+                    
+                    </select>
+<br><p><input title="Auto change the ships every 5 sec" onclick="time = 5;" type="checkbox" id="as" name="Auto change" title="Auto change the ships every 5 sec">Auto change every 5 sec</p>
+</body>
+<script>
+var time = 5;
+var slship = -1
+var ship = document.getElementById("select-ships").value
+var ships = ["blisscam", "bawaycam", "encorecam", "epiccam", "escapecam", "gemcam", "getawaycam", "jadecam", "jewelcam", "joycam", "pearlcam", "primacam", "skycam2", "spiritcam", "starcam", "suncam", "americam"]
+setInterval(function () {
+	if (!document.getElementById("as").checked) {
+		document.getElementById("full").innerHTML = "Fullscreen"
+		document.getElementById("select-ships").disabled = false
+		time = time - 1;
+		document.getElementById("time").innerHTML = "This page will reload in: " + time;
+		if (time == 0) {
+			var rand = Math.random();
+			var rand2 = Math.random();
+			var rand3 = Math.random();
+			document.getElementById("img").src="https://www.ncl.com/shipcams/" + ship + "/fullsize.jpg?browser_popup=320x240&randomCode=" + rand + "&forSkipingTheCache=" + rand2 + rand3;
+			time = 60;
+		}
+	} else {
+		document.getElementById("select-ships").disabled = true
+		document.getElementById("select-ships").value = ship
+		document.getElementById("full").innerHTML = "Slideshow"
+		time = time - 1
+		var shipnum = slship + 1
+		document.getElementById("time").innerHTML = "This cam will change in: " + time + " Cam: " + shipnum + " (" + ship + ")";
+		if (time == 0) {
+		time = 5
+		slship = slship + 1
+		ship = ships[slship]
+			if (slship == 16) {
+				setTimeout(function () {
+					slship = -1
+				}, 4500);
+			}
+		var rand = Math.random();
+		var rand2 = Math.random();
+		var rand3 = Math.random();
+		document.getElementById("img").src="https://www.ncl.com/shipcams/" + ship + "/fullsize.jpg?browser_popup=320x240&randomCode=" + rand + "&forSkipingTheCache=" + rand2 + rand3; rand2;
+		}
+	}
+}, 1000);
+
+function update() {
+	var rand = Math.random();
+	var rand2 = Math.random();
+	var rand3 = Math.random();
+	document.getElementById("img").src="https://www.ncl.com/shipcams/" + ship + "/fullsize.jpg?browser_popup=320x240&randomCode=" + rand + "&forSkipingTheCache=" + rand2 + rand3;
+	time = 60;
+}
+
+function pick() {
+	ship = document.getElementById("select-ships").value
+	update();
+}
+</script>
+<style>
+body {
+	text-align: center;
+	background-color:#a8a8a8;
+}
+</style>
