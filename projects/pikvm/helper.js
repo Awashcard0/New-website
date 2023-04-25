@@ -26,7 +26,7 @@ function timeanddate() {
     h=12;
     }
 
-time = h+":"+m+":"+s+ampm+" "+date+" Logged in as: "+user+" Time left: "+remainingMinutes;
+time = h+":"+m+":"+s+ampm+" "+date+" Logged in as: "+user+" Time left: "+Math.floor((3600 - elapsedSeconds) / 60);
 document.getElementById("time").innerHTML = time
 }
 
@@ -42,6 +42,7 @@ setInterval(function(){
 
 let startTime = sessionStorage.getItem('sessionTime') || Date.now();
 let elapsedSeconds = Math.floor((Date.now() - startTime) / 1000);
+sessionStorage.setItem('sessionTime', startTime);
 
 if (elapsedSeconds < 1800) {
   let remainingSeconds = 1800 - elapsedSeconds;
