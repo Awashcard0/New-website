@@ -40,6 +40,10 @@ setInterval(function(){
     timeanddate();
 }, 500);
 
+setInterval(function(){
+    remainingMinutes=remainingMinutes-1
+}, 60000);
+
 let startTime = sessionStorage.getItem('sessionTime') || Date.now();
 let elapsedSeconds = Math.floor((Date.now() - startTime) / 1000);
 sessionStorage.setItem('sessionTime', startTime);
