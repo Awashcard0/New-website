@@ -26,7 +26,7 @@ function timeanddate() {
     h=12;
     }
 
-time = h+":"+m+":"+s+ampm+" "+date+" Logged in as: "+ user;
+time = h+":"+m+":"+s+ampm+" "+date+" Logged in as: "+user+" Time left: "+remainingMinutes;
 document.getElementById("time").innerHTML = time
 }
 
@@ -39,3 +39,20 @@ function checkTime(i) {
 setInterval(function(){
     timeanddate();
 }, 500);
+
+let startTime = sessionStorage.getItem('sessionTime') || Date.now();
+let elapsedSeconds = Math.floor((Date.now() - startTime) / 1000);
+
+if (elapsedSeconds < 1800) {
+  let remainingSeconds = 1800 - elapsedSeconds;
+  setTimeout(() => {
+    //  time over
+    console.log("time done");
+    sessionStorage.setItem('sessionTime', startTime);
+    sessionStorage.removeItem("name");
+    location.reload();
+  }, remainingSeconds * 1000);
+}
+
+let remainingMinutes = Math.floor((3600 - elapsedSeconds) / 60);
+let remainingSecondsDisplay = (3600 - elapsedSeconds) % 60;
