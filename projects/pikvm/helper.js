@@ -26,7 +26,7 @@ function timeanddate() {
     h=12;
     }
 
-time = h+":"+m+":"+s+ampm+" "+date+" Logged in as: "+user+" Time left: "+Math.floor((3600 - elapsedSeconds) / 60);
+time = h+":"+m+":"+s+ampm+" "+date+" Logged in as: "+user+" Time left: "+Math.floor((1800 - elapsedSeconds) / 60);
 document.getElementById("time").innerHTML = time
 }
 
