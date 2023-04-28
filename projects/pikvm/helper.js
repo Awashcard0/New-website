@@ -62,3 +62,13 @@ if (elapsedSeconds < 1800) {
 
 let remainingMinutes = Math.floor((3600 - elapsedSeconds) / 60);
 let remainingSecondsDisplay = (3600 - elapsedSeconds) % 60;
+
+setTimeout(() => {
+if (remainingMinutes < 0) {
+    console.log("time done");
+    sessionStorage.setItem('sessionTime', startTime);
+    sessionStorage.removeItem("name");
+    sessionStorage.removeItem("sessionTime");
+    location.reload();
+}
+}, 5000)
