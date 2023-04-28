@@ -41,7 +41,7 @@ setInterval(function(){
 }, 500);
 
 setInterval(function(){
-    remainingMinutes=remainingMinutes-1
+    remainingMinutes = remainingMinutes - 1;
 }, 60000);
 
 let startTime = sessionStorage.getItem('sessionTime') || Date.now();
