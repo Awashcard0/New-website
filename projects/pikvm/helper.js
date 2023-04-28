@@ -53,9 +53,9 @@ if (elapsedSeconds < 1800) {
   setTimeout(() => {
     //  time over
     console.log("time done");
-    sessionStorage.setItem('sessionTime', startTime);
-    sessionStorage.removeItem("name");
+    // sessionStorage.setItem('sessionTime', startTime);
     sessionStorage.removeItem("sessionTime");
+    sessionStorage.removeItem("name");
     location.reload();
   }, remainingSeconds * 1000);
 }
