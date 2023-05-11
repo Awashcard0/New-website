@@ -36,6 +36,7 @@
             <li><a onclick="updatePage('Cc');">Cool clock </a></li>
             <li><a onclick="updatePage('htp');">How to ping</a></li>
             <li><a onclick="updatePage('qec');">Quick edit code</a></li>
+            <li><a onclick="updatePage('sc');">Ship cam</a></li>
           </ul>
         </div>
         <div class="right" style="background-color:#ddd;">
@@ -115,6 +116,10 @@
         title.innerText = "Quick edit code";
         main.innerHTML = "<p>Quick edit IDE for html</p><p>Made to be a better W3 schools editer because I use it a lot</p><p>This would use ace IDE but I coudnt get it to work. If you know how to make it work make a PR.</p>";
         link.href = "/leaving?https://quickedit.ga/code/";
+    } else if (thing == "sc") {
+        title.innerText = "Ship cam";
+        main.innerHTML = "<p>Something I made on a cruse</p><p>This shows the camera of almost every Norwegian Cruse Line ship</p>";
+        link.href = "/projects/ship-cam/";
     }
     }
     </script>
