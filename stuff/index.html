@@ -24,23 +24,25 @@
           <h2>Menu</h2>
           <input type="text" id="mySearch" onkeyup="myFunction()" placeholder="Search.." title="Type in a category">
           <ul id="myMenu">
-            <li><a href="./awashio">Awashcard0.github.io</a></li>
-            <li><a href="./quick-edit">Quick edit</a></li>
-            <li><a href="./mtimer">Multiplayer timer</a></li>
-            <li><a href="./type-dash-1">Typewriter clock</a></li>
-            <li><a href="./Fake">Fake person generator</a></li>
-            <li><a href="./cg">Criticism generator</a></li>
-            <li><a href="./nmc">Natro macro control</a></li>
-            <li><a href="./biab">Browser in a browser</a></li>
-            <li><a href="./Sd">School directory</a></li>
-            <li><a href="./Cc">Cool clock </a></li>
-            <li><a href="./htp">How to ping</a></li>
-            <li><a href="./qec">Quick edit code</a></li>
+            <li><a onclick="updatePage('awashio');">Awashcard0.github.io</a></li>
+            <li><a onclick="updatePage('quick-edit');">Quick edit</a></li>
+            <li><a onclick="updatePage('mtimer');">Multiplayer timer</a></li>
+            <li><a onclick="updatePage('type-dash-1');">Typewriter clock</a></li>
+            <li><a onclick="updatePage('Fake');">Fake person generator</a></li>
+            <li><a onclick="updatePage('cg');">Criticism generator</a></li>
+            <li><a onclick="updatePage('nmc');">Natro macro control</a></li>
+            <li><a onclick="updatePage('biab');">Browser in a browser</a></li>
+            <li><a onclick="updatePage('Sd');">School directory</a></li>
+            <li><a onclick="updatePage('Cc');">Cool clock </a></li>
+            <li><a onclick="updatePage('htp');">How to ping</a></li>
+            <li><a onclick="updatePage('qec');">Quick edit code</a></li>
+            <li><a onclick="updatePage('sc');">Ship cam</a></li>
           </ul>
         </div>
         <div class="right" style="background-color:#ddd;">
-            <h2>Main page</h2>
-            <p>Click on a link on the side to explore</p>
+            <h2 id="title">Main page</h2>
+            <a id="link" href="/leaving?"></a>
+            <div id="main">Click on a link on the side to explore</div>
           </div>
         </div>
 </body>
@@ -59,6 +61,66 @@
           li[i].style.display = "none";
         }
       }
+    }
+
+    function updatePage(thing) {
+    let title = document.getElementById("title");
+    let main = document.getElementById("main");
+    let link = document.getElementById("link");
+    link.innerText = "Open"
+    if (thing == "awashio") {
+        title.innerText = "Awashcard0.github.io";
+        main.innerHTML = "<p>My first everything</p><p>Some of my things are there but its mostly other sites</p><p>This is where I started getting into web development</p>";
+        link.href = "/leaving?https://awashcard0.github.io";
+    } else if (thing == "quick-edit") {
+        title.innerText = "Quick edit";
+        main.innerHTML = "<p>My text editer and try at doing a lot of js</p><p>Also my bad try at electron</p>";
+        link.href = "/leaving?https://quickedit.ga";
+    } else if (thing == "mtimer") {
+        title.innerText = "M timer";
+        main.innerHTML = '<a href="/leaving?https://mtimer.ga/host.php">Open host</a><p>My try at php. Im still bad at it</p><p>Based on <a href="/leaving?https://replit.com/@VertexStudioOfficial/VT-Chat">"VT Chat"</a></p>';
+        link.href = "/leaving?https://mtimer.ga";
+    } else if (thing == "type-dash-1") {
+        title.innerText = "Typewriter clock";
+        main.innerHTML = "<p>Just random thing</p>";
+        link.href = "/leaving?https://awashcard0.github.io/web-stuff/dash.html";      
+    } else if (thing == "Fake") {
+        title.innerText = "Fake person generator";
+        main.innerHTML = "<p>Cool thing from the faker api</p>";
+        link.href = "/leaving?https://fake-person.pages.dev/";      
+    } else if (thing == "cg") {
+        title.innerText = "Criticism generator";
+        main.innerHTML = "<p>Asked chat gpt for list of criticism</p>";
+        link.href = "/leaving?https://criticism-generator.pages.dev/";      
+    } else if (thing == "nmc") {
+        title.innerText = "Natro macro control";
+        main.innerHTML = "<p>This is a discord bot for natro macro</p><p>Natro is a macro for the roblox game, bee swarm simulator</p><p>Made in node js</p>";
+        link.href = "/leaving?https://github.com/Awashcard0/Natro-macro-control";      
+    } else if (thing == "biab") {
+        title.innerText = "Browser in a browser";
+        main.innerHTML = "<p>Browser in a browser with iframes</p><p>Broken</p>";
+        link.href = "/leaving?https://biab.pages.dev/";      
+    } else if (thing == "Sd") {
+        title.innerText = "School directory";
+        main.innerHTML = "<p>Made for my google docs</p>";
+        link.href = "/leaving?https://myschoolwork.ga";      
+    } else if (thing == "Cc") {
+        title.innerText = "Cool clock";
+        main.innerHTML = "<p>Better typewriter clock</p>";
+        link.href = "/leaving?https://cool-clock.pages.dev/";      
+    } else if (thing == "htp") {
+        title.innerText = "How to ping";
+        main.innerHTML = "<p>I hate when people ping without there message</p>";
+        link.href = "/projects/how-to-ping/";      
+    } else if (thing == "qec") {
+        title.innerText = "Quick edit code";
+        main.innerHTML = "<p>Quick edit IDE for html</p><p>Made to be a better W3 schools editer because I use it a lot</p><p>This would use ace IDE but I coudnt get it to work. If you know how to make it work make a PR.</p>";
+        link.href = "/leaving?https://quickedit.ga/code/";
+    } else if (thing == "sc") {
+        title.innerText = "Ship cam";
+        main.innerHTML = "<p>Something I made on a cruse</p><p>This shows the camera of almost every Norwegian Cruse Line ship</p>";
+        link.href = "/projects/ship-cam/";
+    }
     }
     </script>
 <style>
