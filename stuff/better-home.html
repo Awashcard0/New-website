@@ -30,12 +30,12 @@
             <li><a onclick="updatePage('type-dash-1');">Typewriter clock</a></li>
             <li><a onclick="updatePage('Fake');">Fake person generator</a></li>
             <li><a onclick="updatePage('cg');">Criticism generator</a></li>
-            <li><a onclick="updatePage();">Natro macro control</a></li>
-            <li><a onclick="updatePage();">Browser in a browser</a></li>
-            <li><a onclick="updatePage();">School directory</a></li>
-            <li><a onclick="updatePage();">Cool clock </a></li>
-            <li><a onclick="updatePage();">How to ping</a></li>
-            <li><a onclick="updatePage();">Quick edit code</a></li>
+            <li><a onclick="updatePage('nmc');">Natro macro control</a></li>
+            <li><a onclick="updatePage('biab');">Browser in a browser</a></li>
+            <li><a onclick="updatePage('Sd');">School directory</a></li>
+            <li><a onclick="updatePage('Cc');">Cool clock </a></li>
+            <li><a onclick="updatePage('htp');">How to ping</a></li>
+            <li><a onclick="updatePage('qec');">Quick edit code</a></li>
           </ul>
         </div>
         <div class="right" style="background-color:#ddd;">
@@ -81,16 +81,40 @@
         link.href = "/leaving?https://mtimer.ga";
     } else if (thing == "type-dash-1") {
         title.innerText = "Typewriter clock";
-        main.innerHTML = "Just random thing";
+        main.innerHTML = "<p>Just random thing</p>";
         link.href = "/leaving?https://awashcard0.github.io/web-stuff/dash.html";      
     } else if (thing == "Fake") {
         title.innerText = "Fake person generator";
-        main.innerHTML = "Cool thing from the faker api";
+        main.innerHTML = "<p>Cool thing from the faker api</p>";
         link.href = "/leaving?https://fake-person.pages.dev/";      
     } else if (thing == "cg") {
         title.innerText = "Criticism generator";
-        main.innerHTML = "Asked chat gpt for list of criticism";
+        main.innerHTML = "<p>Asked chat gpt for list of criticism</p>";
         link.href = "/leaving?https://criticism-generator.pages.dev/";      
+    } else if (thing == "nmc") {
+        title.innerText = "Natro macro control";
+        main.innerHTML = "<p>This is a discord bot for natro macro</p><p>Natro is a macro for the roblox game, bee swarm simulator</p><p>Made in node js</p>";
+        link.href = "/leaving?https://github.com/Awashcard0/Natro-macro-control";      
+    } else if (thing == "biab") {
+        title.innerText = "Browser in a browser";
+        main.innerHTML = "<p>Browser in a browser with iframes</p><p>Broken</p>";
+        link.href = "/leaving?https://biab.pages.dev/";      
+    } else if (thing == "Sd") {
+        title.innerText = "School directory";
+        main.innerHTML = "<p>Made for my google docs</p>";
+        link.href = "/leaving?https://myschoolwork.ga";      
+    } else if (thing == "Cc") {
+        title.innerText = "Cool clock";
+        main.innerHTML = "<p>Better typewriter clock</p>";
+        link.href = "/leaving?https://cool-clock.pages.dev/";      
+    } else if (thing == "htp") {
+        title.innerText = "How to ping";
+        main.innerHTML = "<p>I hate when people ping without there message</p>";
+        link.href = "/projects/how-to-ping/";      
+    } else if (thing == "qec") {
+        title.innerText = "Quick edit code";
+        main.innerHTML = "<p>Quick edit IDE for html</p><p>Made to be a better W3 schools editer because I use it a lot</p><p>This would use ace IDE but I coudnt get it to work. If you know how to make it work make a PR.</p>";
+        link.href = "/leaving?https://quickedit.ga/code/";
     }
     }
     </script>
