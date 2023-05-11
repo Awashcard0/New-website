@@ -28,8 +28,8 @@
             <li><a onclick="updatePage('quick-edit');">Quick edit</a></li>
             <li><a onclick="updatePage('mtimer');">Multiplayer timer</a></li>
             <li><a onclick="updatePage('type-dash-1');">Typewriter clock</a></li>
-            <li><a onclick="updatePage();">Fake person generator</a></li>
-            <li><a onclick="updatePage();">Criticism generator</a></li>
+            <li><a onclick="updatePage('Fake');">Fake person generator</a></li>
+            <li><a onclick="updatePage('cg');">Criticism generator</a></li>
             <li><a onclick="updatePage();">Natro macro control</a></li>
             <li><a onclick="updatePage();">Browser in a browser</a></li>
             <li><a onclick="updatePage();">School directory</a></li>
@@ -83,6 +83,14 @@
         title.innerText = "Typewriter clock";
         main.innerHTML = "Just random thing";
         link.href = "/leaving?https://awashcard0.github.io/web-stuff/dash.html";      
+    } else if (thing == "Fake") {
+        title.innerText = "Fake person generator";
+        main.innerHTML = "Cool thing from the faker api";
+        link.href = "/leaving?https://fake-person.pages.dev/";      
+    } else if (thing == "cg") {
+        title.innerText = "Criticism generator";
+        main.innerHTML = "Asked chat gpt for list of criticism";
+        link.href = "/leaving?https://criticism-generator.pages.dev/";      
     }
     }
     </script>
