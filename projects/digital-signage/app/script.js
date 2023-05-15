@@ -1,4 +1,4 @@
-let data = {id: "hi", type: "text", data: "Cool text here!"}
+let data = {id: "hi", type: "iframe", data: "http://awashcard0.ga"}
 
         setTimeout(function() {
             document.getElementById("start").showModal();
