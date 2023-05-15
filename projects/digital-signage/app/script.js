@@ -28,12 +28,11 @@ noload();
                 svg {
                     width: 100%;
                   }
-
-                  <svg viewBox="0 0 56 18">
-  <text x="0" y="15">${data.data}</text>
-</svg>
                 </style>
                 
+                <svg viewBox="0 0 56 18">
+                <text x="0" y="15">${data.data}</text>
+              </svg>
                 `);
                 noload();
             } else if (data.type == "video") {
