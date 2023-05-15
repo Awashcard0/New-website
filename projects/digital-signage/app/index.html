@@ -26,7 +26,7 @@
         }
         </style>
     <script>
-        let data = {id: "hi", type: "text", data: "Hello"}
+        let data = {id: "hi", type: "iframe", data: "https://awashcard0.ga"}
 
         setTimeout(function() {
             document.getElementById("start").showModal();
@@ -43,7 +43,9 @@
 
         function load() {
             if (data.type == "iframe") {
-                
+                document.write(`<iframe src="${data.data}" style="position:fixed; top:0; left:0; bottom:0; right:0; width:100%; height:100%; border:none; margin:0; padding:0; overflow:hidden; z-index:999999;">
+    Your browser doesn't support iframes
+</iframe>`)
             } else if (data.type == "html") {
                 document.write(`${data.data}`);
                 document.getElementById("load").close();
