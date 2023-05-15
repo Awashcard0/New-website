@@ -26,7 +26,7 @@
         }
         </style>
     <script>
-        let data = {id: "hi", type: "text", date: "Hello"}
+        let data = {id: "hi", type: "text", data: "Hello"}
 
         setTimeout(function() {
             document.getElementById("start").showModal();
@@ -35,11 +35,28 @@
         setTimeout(function() {
             document.getElementById("start").close();
             document.getElementById("load").showModal();
-            load();
+            
+            setTimeout(function() {
+                load();
+        }, 1000);
         }, 5000);
 
         function load() {
-            alert(data.type)
+            if (data.type == "iframe") {
+                
+            } else if (data.type == "html") {
+                document.write(`${data.data}`);
+                document.getElementById("load").close();
+            } else if (data.type == "text") {
+                document.write(`<h1>${data.data}</h1>`);
+                document.getElementById("load").close();
+            } else if (data.type == "video") {
+                
+            } else if (data.type == "image") {
+                
+            } else {
+                document.getElementById("error").innerHTML = "Error getting data"
+            }
         }
     </script>
 </head>
@@ -51,7 +68,7 @@
         <p>awashcard0.pages.dev</p>
     </dialog>
     <dialog id="load" style="text-align: center;">
-        <h1>Loading data...</h1>
+        <h1 id="error">Loading data...</h1>
         <div class="loader"></div>
         </dialog>
 </body>
