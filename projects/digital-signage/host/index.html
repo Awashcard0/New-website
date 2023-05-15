@@ -18,22 +18,53 @@
           'opsz' 48
         }
     </style>
+    <script>
+//alert(document.getElementById("display").elements[2].checked);
+var mode = null
+
+function update() {
+  let raido = document.getElementById('display').elements
+  if (raido[0].checked == true) {
+var mode = "iframe"
+// iframe
+} else if (raido[1].checked == true) {
+var mode = "html"
+// html
+} else if (raido[2].checked == true) {
+var mode = "text"
+// text
+} else if (raido[3].checked == true) {
+var mode = "video"
+// video
+} else if (raido[4].checked == true) {
+var mode = "image"
+// Image
+}
+
+alert(mode)
+}
+    </script>
     <title>Host - Digital signage</title>
-    <form id="display" onclick="alert('hello')">
-       <p>Select a display:</p>
-       <input type="radio" id="iframe" name="fav_language" value="iframe">
-       <label for="iframe"><span class="material-symbols-outlined">iframe</span>iframe</label><br>
-       <input type="radio" id="html" name="fav_language" value="html">
-       <label for="html"><span class="material-symbols-outlined">html</span>Html</label><br>
-       <input type="radio" id="text" name="fav_language" value="text">
-       <label for="text"><span class="material-symbols-outlined">text_fields</span>Text</label><br>
-       <input type="radio" id="video" name="fav_language" value="video">
-       <label for="video"><span class="material-symbols-outlined">movie</span>Video</label><br>
-       <input type="radio" id="img" name="fav_language" value="img">
-       <label for="img"><span class="material-symbols-outlined">image</span>Image</label>
-      </form>
 </head>
 <body>
-    
+<h1>Set the Id</h1>
+<p>Not done</p>
+<h1>Set the type</h1>
+        <form id="display" onclick="update()">
+       <p>Select a display:</p>
+       <input type="radio" id="iframe" name="type" value="iframe">
+       <label for="iframe"><span class="material-symbols-outlined">iframe</span>iframe</label><br>
+       <input type="radio" id="html" name="type" value="html">
+       <label for="html"><span class="material-symbols-outlined">html</span>Html</label><br>
+       <input type="radio" id="text" name="type" value="text">
+       <label for="text"><span class="material-symbols-outlined">text_fields</span>Text</label><br>
+       <input type="radio" id="video" name="type" value="video">
+       <label for="video"><span class="material-symbols-outlined">movie</span>Video</label><br>
+       <input type="radio" id="img" name="type" value="img">
+       <label for="img"><span class="material-symbols-outlined">image</span>Image</label>
+      </form>
+
+      <h1>Config</h1>
+
 </body>
 </html>
