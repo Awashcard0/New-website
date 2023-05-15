@@ -74,14 +74,16 @@ body {
         </style>`)
         document.getElementById("load").close();
             } else if (data.type == "image") {
-                document.write(`body {
+                document.write(`
                 <style>
+                    * {
     background-image: url('${data.data}');
     background-repeat: no-repeat;
     background-attachment: fixed; 
     background-size: 100% 100%;
-</style>
-}`)
+                    }
+                    
+</style>`)
             } else {
                 document.getElementById("error").innerHTML = "Error getting data"
             }
