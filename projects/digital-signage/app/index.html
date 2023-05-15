@@ -4,10 +4,6 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Home thing -->
-    <link rel="stylesheet" href="https://awashcard0.pages.dev/home-thing/style.css">
-    <script src='https://awashcard0.pages.dev/home-thing/script.js'></script>
-    <!-- End home thing -->
     <title>App - Digital signage</title>
     <style>
         .loader {
@@ -26,7 +22,7 @@
         }
         </style>
     <script>
-        let data = {id: "hi", type: "iframe", data: "https://awashcard0.ga"}
+        let data = {id: "hi", type: "image", data: "https://andydigsohio.ga/media/34a7a7af-12b8-482d-8607-0bac2e31a7dc.jpg"}
 
         setTimeout(function() {
             document.getElementById("start").showModal();
@@ -53,9 +49,39 @@
                 document.write(`<h1>${data.data}</h1>`);
                 document.getElementById("load").close();
             } else if (data.type == "video") {
-                
+                document.write(`<video autoplay loop id="myVideo">
+  <source src="${data.data}">
+  Your browser does not support HTML5 video.
+</video>
+<style>
+            * {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial;
+  font-size: 17px;
+}
+
+#myVideo {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  min-width: 100%; 
+  min-height: 100%;
+}
+        </style>`)
+        document.getElementById("load").close();
             } else if (data.type == "image") {
-                
+                document.write(`body {
+                <style>
+    background-image: url('${data.data}');
+    background-repeat: no-repeat;
+    background-attachment: fixed; 
+    background-size: 100% 100%;
+</style>
+}`)
             } else {
                 document.getElementById("error").innerHTML = "Error getting data"
             }
