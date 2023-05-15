@@ -23,7 +23,9 @@
     <script>
         const start = document.getElementById("start");
 
-        start.showModal();
+        setTimeout(function() {
+            start.showModal();
+        }, 100);
 
         setTimeout(function() {
             start.close();
