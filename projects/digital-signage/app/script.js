@@ -25,9 +25,15 @@ noload();
             } else if (data.type == "text") {
                 document.write(`
                 <style>
+                @import url('https://fonts.googleapis.com/css?family=Bowlby+One+SC');
+
+                text {
+                  font-family: 'Bowlby One SC', cursive;
+                }
+                
                 svg {
-                    width: 100%;
-                  }
+                  width: 100%;
+                }
                 </style>
                 
                 <svg viewBox="0 0 56 18">
