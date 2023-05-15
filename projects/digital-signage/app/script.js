@@ -27,18 +27,14 @@ noload();
                 <style>
                 @import url('https://fonts.googleapis.com/css?family=Bowlby+One+SC');
 
-                text {
+                h1 {
+                  text-align: center;
                   font-family: 'Bowlby One SC', cursive;
-                }
-                
-                svg {
-                  width: 100%;
+                  font-size: 25.5vw;
                 }
                 </style>
                 
-                <svg viewBox="0 0 56 18">
-                <text x="0" y="15">${data.data}</text>
-              </svg>
+                <h1 x="0" y="15">${data.data}</h1>
                 `);
                 noload();
             } else if (data.type == "video") {
