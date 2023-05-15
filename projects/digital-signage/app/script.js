@@ -1,4 +1,4 @@
-let data = {id: "hi", type: "text", data: "Cool text"}
+let data = {id: "hi", type: "text", data: "Cool text here"}
 
         setTimeout(function() {
             document.getElementById("start").showModal();
