@@ -21,17 +21,19 @@
         }
         </style>
     <script>
-        document.getElementById("creddits").showModal();
+        const start = document.getElementById("start");
+
+        start.showModal();
 
         setTimeout(function() {
-            document.getElementById("creddits").close();
+            start.close();
             document.getElementById("load").showModal();
         }, 5000);
     </script>
 </head>
 <body>
 
-    <dialog id="creddits" style="text-align: center;">
+    <dialog id="start" style="text-align: center;">
         <h1>Digital signage by Awashcard0</h1>
         <h2>This is in beta and will brake</h2>
         <p>awashcard0.pages.dev</p>
