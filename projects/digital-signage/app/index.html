@@ -25,6 +25,8 @@
         }
         </style>
     <script>
+        let data = {id: "hi", type: "text", date: "Hello"}
+
         setTimeout(function() {
             document.getElementById("start").showModal();
         }, 100);
@@ -32,7 +34,12 @@
         setTimeout(function() {
             document.getElementById("start").close();
             document.getElementById("load").showModal();
+            load();
         }, 5000);
+
+        function load() {
+            alert(data.type)
+        }
     </script>
 </head>
 <body>
@@ -43,7 +50,7 @@
         <p>awashcard0.pages.dev</p>
     </dialog>
     <dialog id="load" style="text-align: center;">
-        <h1>Loading...</h1>
+        <h1>Loading data...</h1>
         <div class="loader"></div>
         </dialog>
 </body>
