@@ -88,3 +88,7 @@ noload();
                 document.getElementById("load").close();
         }, 1000);
         }
+
+        setTimeout(function() {
+            alert('Here');
+    }, 15000);
