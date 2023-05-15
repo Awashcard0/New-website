@@ -16,8 +16,11 @@ let id = window.location.href.split("?id=")[1]
         }, 1000);
         }, 5000);
 
-        function get() {
-            
+        function get(oc) {
+            data = oc;
+                setTimeout(function() {
+                    document.getElementById("load").close();        
+            }, 1000);
         }
 
         function load() {
