@@ -34,7 +34,7 @@ noload();
                 }
                 </style>
                 
-                <h1 x="0" y="15">${data.data}</h1>
+                <h1>${data.data}</h1>
                 `);
                 noload();
             } else if (data.type == "video") {
