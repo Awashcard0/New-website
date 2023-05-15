@@ -1,4 +1,5 @@
 let data = {}
+let id = window.location.href.split("?id=")[1]
 
         setTimeout(function() {
             document.getElementById("start").showModal();
@@ -9,9 +10,15 @@ let data = {}
             document.getElementById("load").showModal();
             
             setTimeout(function() {
-                load();
+                fetch('https://84d5e4ce-6ead-46a0-a71f-01b9fce0d9f8.id.repl.co/getUpdate/?id=' + id)
+                .then(response => response.text())
+                .then(oc => get(oc));
         }, 1000);
         }, 5000);
+
+        function get() {
+            
+        }
 
         function load() {
             if (data.type == "iframe") {
