@@ -89,7 +89,7 @@ noload();
                 document.getElementById("load").showModal();
                 setTimeout(function() {
                     // for some resone location.reload() dose not work in a .js file
-                    document.write(`<script>location.reload();</script>`);
+                    reload();
             }, 1000);
             }
         }
