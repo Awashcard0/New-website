@@ -88,7 +88,8 @@ noload();
                 document.getElementById("error").innerHTML = "Error getting data<br>Reloading...";
                 document.getElementById("load").showModal();
                 setTimeout(function() {
-                    window.location.reload();
+                    // for some resone location.reload() dose not work in a .js file
+                    document.write(`<script>location.reload();</script>`);
             }, 1000);
             }
         }
