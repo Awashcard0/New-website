@@ -85,7 +85,11 @@ body {
 </style>`);
 noload();
             } else {
-                document.getElementById("error").innerHTML = "Error getting data"
+                document.getElementById("error").innerHTML = "Error getting data<br>Reloading..."
+                document.getElementById("load").showModal();
+                setTimeout(function() {
+                    location.reload();
+            }, 1000);
             }
         }
 
