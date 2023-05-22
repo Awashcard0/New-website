@@ -17,7 +17,7 @@ alert(id)
         }, 5000);
 
         function get(oc) {
-            data = oc;
+            data = oc[id];
                 setTimeout(function() {
                     load();       
             }, 1000);
