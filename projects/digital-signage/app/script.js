@@ -85,7 +85,7 @@ body {
 </style>`);
 noload();
             } else {
-                document.getElementById("error").innerHTML = "Error getting data<br>Reloading...";
+                document.getElementById("Ename").innerHTML = "Error getting data<br>Reloading...";
                 document.getElementById("load").showModal();
                 setTimeout(function() {
                     // for some resone location.reload() dose not work in a .js file
@@ -111,7 +111,7 @@ noload();
 
         function updateCheck(uc) {
             if (uc == "true") {
-                document.getElementById("error").innerHTML = "Reload requested...";
+                document.getElementById("Ename").innerHTML = "Reload requested...";
                 document.getElementById("load").showModal();
                 setTimeout(function() {
                     // for some resone location.reload() dose not work in a .js file why idk
