@@ -20,7 +20,7 @@
     </style>
     <script>
 //alert(document.getElementById("display").elements[2].checked);
-var mode = null
+var mode = "null"
 
 function update() {
     document.getElementById("conf-iframe").style.display = "none";
@@ -30,23 +30,23 @@ function update() {
     document.getElementById("conf-image").style.display = "none";
   let raido = document.getElementById('display').elements
   if (raido[0].checked == true) {
-var mode = "iframe"
+mode = "iframe"
 // iframe
 document.getElementById("conf-iframe").style.display = "";
 } else if (raido[1].checked == true) {
-var mode = "html"
+mode = "html"
 // html
 document.getElementById("conf-html").style.display = "";
 } else if (raido[2].checked == true) {
-var mode = "text"
+mode = "text"
 // text
 document.getElementById("conf-text").style.display = "";
 } else if (raido[3].checked == true) {
-var mode = "video"
+mode = "video"
 // video
 document.getElementById("conf-video").style.display = "";
 } else if (raido[4].checked == true) {
-var mode = "image"
+mode = "image"
 // Image
 document.getElementById("conf-image").style.display = "";
 }
