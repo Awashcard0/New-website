@@ -1,6 +1,5 @@
 let data = {}
 let id = window.location.href.split("?id=")[1]
-alert(id)
         setTimeout(function() {
             document.getElementById("start").showModal();
         }, 100);
@@ -18,6 +17,7 @@ alert(id)
 
         function get(oc) {
             data = oc[id];
+            alert(data);
                 setTimeout(function() {
                     load();       
             }, 1000);
