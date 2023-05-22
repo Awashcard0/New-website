@@ -111,7 +111,7 @@ noload();
 
         function updateCheck(uc) {
             if (uc == "true") {
-                document.getElementById("error").innerHTML = "Update requested...";
+                document.getElementById("error").innerHTML = "Reload requested...";
                 document.getElementById("load").showModal();
                 setTimeout(function() {
                     // for some resone location.reload() dose not work in a .js file why idk
