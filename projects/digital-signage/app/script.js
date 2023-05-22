@@ -16,23 +16,23 @@ let id = window.location.href.split("?id=")[1]
         }, 5000);
 
         function get(oc) {
-            data = oc[id];
-            alert(data);
+            data = oc;
+            alert(data[id]);
                 setTimeout(function() {
                     load();       
             }, 1000);
         }
 
         function load() {
-            if (data.type == "iframe") {
-                document.write(`<iframe src="${data.data}" style="position:fixed; top:0; left:0; bottom:0; right:0; width:100%; height:100%; border:none; margin:0; padding:0; overflow:hidden; z-index:999999;">
+            if (data[id].type == "iframe") {
+                document.write(`<iframe src="${data[id].data}" style="position:fixed; top:0; left:0; bottom:0; right:0; width:100%; height:100%; border:none; margin:0; padding:0; overflow:hidden; z-index:999999;">
     Your browser doesn't support iframes
 </iframe>`);
 noload();
-            } else if (data.type == "html") {
-                document.write(`${data.data}`);
+            } else if (data[id].type == "html") {
+                document.write(`${data[id].data}`);
                 noload()
-            } else if (data.type == "text") {
+            } else if (data[id].type == "text") {
                 document.write(`
                 <style>
                 @import url('https://fonts.googleapis.com/css?family=Bowlby+One+SC');
@@ -44,12 +44,12 @@ noload();
                 }
                 </style>
                 
-                <h1>${data.data}</h1>
+                <h1>${data[id].data}</h1>
                 `);
                 noload();
-            } else if (data.type == "video") {
+            } else if (data[id].type == "video") {
                 document.write(`<video autoplay loop id="myVideo">
-  <source src="${data.data}">
+  <source src="${data[id].data}">
   Your browser does not support HTML5 video.
 </video>
 <style>
@@ -72,11 +72,11 @@ body {
 }
         </style>`);
         noload();
-            } else if (data.type == "image") {
+            } else if (data[id].type == "image") {
                 document.write(`
                 <style>
                     * {
-    background-image: url('${data.data}');
+    background-image: url('${data[id].data}');
     background-repeat: no-repeat;
     background-attachment: fixed; 
     background-size: 100% 100%;
