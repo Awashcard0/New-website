@@ -9,9 +9,7 @@ let id = window.location.href.split("?id=")[1]
             document.getElementById("load").showModal();
             
             setTimeout(function() {
-                fetch('https://84d5e4ce-6ead-46a0-a71f-01b9fce0d9f8.id.repl.co/getUpdate?id=' + id, {
-                    mode: 'no-cors'
-                    })
+                fetch('https://84d5e4ce-6ead-46a0-a71f-01b9fce0d9f8.id.repl.co/getUpdate?id=' + id)
                 .then(response => response.text())
                 .then(oc => get(oc));
         }, 1000);
