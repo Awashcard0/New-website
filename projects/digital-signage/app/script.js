@@ -1,6 +1,6 @@
 let data = {}
 let id = window.location.href.split("?id=")[1]
-
+alert(id)
         setTimeout(function() {
             document.getElementById("start").showModal();
         }, 100);
