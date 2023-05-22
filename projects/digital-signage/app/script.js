@@ -48,7 +48,7 @@ noload();
                 `);
                 noload();
             } else if (data.type == "video") {
-                document.write(`<video autoplay loop id="myVideo">
+                document.write(`<video onload="document.getElementById('myVideo').play();" autoplay loop id="myVideo">
   <source src="${data.data}">
   Your browser does not support HTML5 video.
 </video>
@@ -110,7 +110,7 @@ noload();
         }, 5000);
 
         function updateCheck(uc) {
-            if (uc) {
+            if (ucn == "true") {
                 document.getElementById("error").innerHTML = "Update requested...";
                 document.getElementById("load").showModal();
                 setTimeout(function() {
