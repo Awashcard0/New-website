@@ -1,5 +1,6 @@
 let data = {}
 let id = window.location.href.split("?id=")[1]
+let done = false;
         setTimeout(function() {
             document.getElementById("start").showModal();
         }, 100);
@@ -17,7 +18,6 @@ let id = window.location.href.split("?id=")[1]
 
         function get(oc) {
             data = JSON.parse(oc);
-            alert("oc: " + oc + "\ndata: " + data);
                 setTimeout(function() {
                     load();       
             }, 1000);
@@ -97,5 +97,25 @@ noload();
         function noload() {
             setTimeout(function() {
                 document.getElementById("load").close();
+                done = true
         }, 1000);
+        }
+
+        setInterval(function() {
+            if (done) {
+                fetch('https://84d5e4ce-6ead-46a0-a71f-01b9fce0d9f8.id.repl.co/checkForUpdate?id=' + id)
+                .then(response => response.text())
+                .then(uc => updateCheck(uc));
+            }
+        }, 5000);
+
+        function updateCheck(uc) {
+            if (uc) {
+                document.getElementById("error").innerHTML = "Relo";
+                document.getElementById("load").showModal();
+                setTimeout(function() {
+                    // for some resone location.reload() dose not work in a .js file
+                    reload();
+            }, 1000);
+            }
         }
