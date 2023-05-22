@@ -23,32 +23,48 @@
 var mode = null
 
 function update() {
+    document.getElementById("conf-iframe").style.display = "none";
+    document.getElementById("conf-html").style.display = "none";
+    document.getElementById("conf-text").style.display = "none";
+    document.getElementById("conf-video").style.display = "none";
+    document.getElementById("conf-image").style.display = "none";
   let raido = document.getElementById('display').elements
   if (raido[0].checked == true) {
 var mode = "iframe"
 // iframe
+document.getElementById("conf-iframe").style.display = "";
 } else if (raido[1].checked == true) {
 var mode = "html"
 // html
+document.getElementById("conf-html").style.display = "";
 } else if (raido[2].checked == true) {
 var mode = "text"
 // text
+document.getElementById("conf-text").style.display = "";
 } else if (raido[3].checked == true) {
 var mode = "video"
 // video
+document.getElementById("conf-video").style.display = "";
 } else if (raido[4].checked == true) {
 var mode = "image"
 // Image
+document.getElementById("conf-image").style.display = "";
 }
 
 document.getElementById("showState").innerHTML = mode;
+}
+
+function save() {
+    fetch('https://84d5e4ce-6ead-46a0-a71f-01b9fce0d9f8.id.repl.co/update?id=' + document.getElementById("id").value + "&type=" + mode + "&data=" + document.getElementById("data-" + mode).value)
+                .then(response => response.text())
+                .then(oc => alert(oc));
 }
     </script>
     <title>Host - Digital signage</title>
 </head>
 <body>
 <h1>Set the Id</h1>
-<p>Not done</p>
+<input type="text" id="id" placeholder="Enter a id">
 <h1>Set the type</h1>
         <form id="display" onclick="update()">
        <p>Select a display:</p>
@@ -67,19 +83,21 @@ document.getElementById("showState").innerHTML = mode;
       <h1>Config</h1>
       <p id="showState"></p>
       <div id="conf-iframe">
-
+        <input type="text" id="data-iframe" placeholder="https://example.com" value="https://awashcard0.pages.dev">
       </div>
       <div id="conf-html">
-
+        <p>Still working on</p>
       </div>
       <div id="conf-text">
-        <p>Broken try not to use</p>
+        <input type="text" id="data-text" placeholder="Cool text here">
       </div>
       <div id="conf-video">
-
+        <input type="text" id="data-video" placeholder="https://example.com/video.mp4">
       </div>
       <div id="conf-image">
-
+        <input type="text" id="data-image" placeholder="https://example.com/image.png">
       </div>
+      <h1>Save</h1>
+      <button onclick="save()">Save</button>
 </body>
 </html>
