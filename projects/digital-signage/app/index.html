@@ -28,8 +28,7 @@
             }
 
             function up() {
-                document.getElementById("Ename").innerHTML = "Reload requested...";
-                document.getElementById("load").showModal();
+                document.getElementById("re").showModal();
                 setTimeout(function() {
                     // for some resone location.reload() dose not work in a .js file why idk
                     reload();
@@ -48,5 +47,9 @@
         <h1 id="Ename">Loading data...</h1>
         <div class="loader"></div>
         </dialog>
+        <dialog id="re" style="text-align: center;">
+            <h1>Reload requested...</h1>
+            <div class="loader"></div>
+            </dialog>
 </body>
 </html>
