@@ -16,7 +16,7 @@ let id = window.location.href.split("?id=")[1]
         }, 5000);
 
         function get(oc) {
-            data = oc;
+            data = JSON.parse(oc);
             alert("oc: " + oc + "\ndata: " + data);
                 setTimeout(function() {
                     load();       
