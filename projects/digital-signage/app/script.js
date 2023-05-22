@@ -95,9 +95,9 @@ noload();
         }
 
         function noload() {
+            done = true
             setTimeout(function() {
                 document.getElementById("load").close();
-                done = true
         }, 1000);
         }
 
