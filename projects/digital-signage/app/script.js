@@ -114,7 +114,7 @@ noload();
                 document.getElementById("error").innerHTML = "Update requested...";
                 document.getElementById("load").showModal();
                 setTimeout(function() {
-                    // for some resone location.reload() dose not work in a .js file
+                    // for some resone location.reload() dose not work in a .js file why idk
                     reload();
             }, 1000);
             }
