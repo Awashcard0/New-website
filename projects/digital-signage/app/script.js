@@ -110,7 +110,7 @@ noload();
         }, 5000);
 
         function updateCheck(uc) {
-            if (ucn == "true") {
+            if (uc == "true") {
                 document.getElementById("error").innerHTML = "Update requested...";
                 document.getElementById("load").showModal();
                 setTimeout(function() {
