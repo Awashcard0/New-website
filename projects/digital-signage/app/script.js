@@ -17,7 +17,7 @@ let id = window.location.href.split("?id=")[1]
 
         function get(oc) {
             data = oc;
-            alert(data.hi);
+            alert("oc: " + oc + "\ndata: " + data);
                 setTimeout(function() {
                     load();       
             }, 1000);
