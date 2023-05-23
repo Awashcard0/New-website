@@ -37,11 +37,12 @@
             <li><a onclick="updatePage('htp');">How to ping</a></li>
             <li><a onclick="updatePage('qec');">Quick edit code</a></li>
             <li><a onclick="updatePage('sc');">Ship cam</a></li>
+            <li><a onclick="updatePage('ds');">Digital signage</a></li>
           </ul>
         </div>
         <div class="right" style="background-color:#ddd;">
             <h2 id="title">Main page</h2>
-            <a id="link" href="/leaving?"></a>
+            <a id="link" href="./old-home.html">Go to old slow thing finder</a>
             <div id="main">Click on a link on the side to explore</div>
           </div>
         </div>
@@ -120,6 +121,10 @@
         title.innerText = "Ship cam";
         main.innerHTML = "<p>Something I made on a cruse</p><p>This shows the camera of almost every Norwegian Cruse Line ship</p>";
         link.href = "/projects/ship-cam/";
+    } else if (thing == "ds") {
+        title.innerText = "Digital signage";
+        main.innerHTML = "<p>I just felt like makeing this but its still cool</p><p>If you have displays that can run html this might be useful</p><p>If you do use it dont use a easy to find id</p>";
+        link.href = "/projects/digital-signage/";
     }
     }
     </script>
