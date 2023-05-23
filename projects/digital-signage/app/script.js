@@ -29,9 +29,6 @@ let done = false;
     Your browser doesn't support iframes
 </iframe>`);
 noload();
-            } else if (data.type == "html") {
-                document.write(`${data.data}`);
-                noload()
             } else if (data.type == "text") {
                 document.write(`
                 <style>

@@ -34,18 +34,14 @@ mode = "iframe"
 // iframe
 document.getElementById("conf-iframe").style.display = "";
 } else if (raido[1].checked == true) {
-mode = "html"
-// html
-document.getElementById("conf-html").style.display = "";
-} else if (raido[2].checked == true) {
 mode = "text"
 // text
 document.getElementById("conf-text").style.display = "";
-} else if (raido[3].checked == true) {
+} else if (raido[2].checked == true) {
 mode = "video"
 // video
 document.getElementById("conf-video").style.display = "";
-} else if (raido[4].checked == true) {
+} else if (raido[3].checked == true) {
 mode = "image"
 // Image
 document.getElementById("conf-image").style.display = "";
@@ -70,8 +66,6 @@ function save() {
        <p>Select a display:</p>
        <input type="radio" id="iframe" name="type" value="iframe">
        <label for="iframe"><span class="material-symbols-outlined">iframe</span>iframe</label><br>
-       <input type="radio" id="html" name="type" value="html">
-       <label for="html"><span class="material-symbols-outlined">html</span>Html</label><br>
        <input type="radio" id="text" name="type" value="text">
        <label for="text"><span class="material-symbols-outlined">text_fields</span>Text</label><br>
        <input type="radio" id="video" name="type" value="video">
@@ -85,10 +79,8 @@ function save() {
       <div id="conf-iframe">
         <input type="text" id="data-iframe" placeholder="https://example.com" value="https://awashcard0.pages.dev">
       </div>
-      <div id="conf-html">
-        <p>Still working on</p>
-      </div>
       <div id="conf-text">
+        <p>Try not to use</p>
         <input type="text" id="data-text" placeholder="Cool text here">
       </div>
       <div id="conf-video">
