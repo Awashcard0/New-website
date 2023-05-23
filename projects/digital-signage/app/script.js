@@ -34,14 +34,14 @@ noload();
                 <style>
                 @import url('https://fonts.googleapis.com/css?family=Bowlby+One+SC');
 
-                h1 {
+                .text {
                   text-align: center;
                   font-family: 'Bowlby One SC', cursive;
                   font-size: 25.5vw;
                 }
                 </style>
                 
-                <h1>${data.data}</h1>
+                <h1 class="text">${data.data}</h1>
                 `);
                 noload();
             } else if (data.type == "video") {
