@@ -4,10 +4,24 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Error with id</title>
 </head>
 <body>
     <h1>Error with id</h1>
-    <h2>Make sure there is a id is in the url and the id is set from the admin page</h2>
+    <h2 id="text">Make sure there is a id is in the url and the id is set from the admin page</h2>
+
+    <script>
+        let url = parent.document.location;
+        let id = url.split("?id=")[1];
+
+        document.getElementById("text").innerText = `This page is listening for updates on "${id}". Go to https://awashcard0.pages.dev/projects/digital-signage/host to update this page`
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Nunito&display=swap');
+
+        * {
+            font-family: 'Nunito', sans-serif;
+        }
+    </style>
 </body>
 </html>
