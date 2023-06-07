@@ -12,6 +12,7 @@
 
     <script>
         let url = window.parent.location;
+        alert(url);
         let id = url.split("?id=")[1];
 
         document.getElementById("text").innerText = `This page is listening for updates on "${id}". Go to https://awashcard0.pages.dev/projects/digital-signage/host to update this page`
