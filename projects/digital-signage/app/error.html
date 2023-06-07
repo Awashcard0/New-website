@@ -11,6 +11,8 @@
     <h2 id="text">Make sure there is a id is in the url and the id is set from the admin page</h2>
 
     <script>
+        alert(window.parent.location);
+        alert(window.parent.location.split("?id=")[1]);
         let ide = window.parent.location.split("?id=")[1];
 
         document.getElementById("text").innerText = `This page is listening for updates on "${ide}". Go to https://awashcard0.pages.dev/projects/digital-signage/host to update this page`
