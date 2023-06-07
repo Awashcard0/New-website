@@ -11,7 +11,7 @@
     <h2 id="text">Make sure there is a id is in the url and the id is set from the admin page</h2>
 
     <script>
-        let idep = window.parent.location;
+        let idep = window.parent.location.href;
         let ide = idep.split("?id=")[1];
 
         alert(ide);
