@@ -1,0 +1,3 @@
+Sitemap: https://awashcard0.pages.dev/sitemap.xml
+User-agent: *
+Allow: *
