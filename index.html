@@ -4,15 +4,14 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="google-site-verification" content="y0mgvDJ26LcHGs5D61JCy_7_7x7EWCw7EdGTEmgKgGo" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Awashcard0's website where I put all of my projects"> 
+    <meta name="description" content="This is where I put my projects. The main pages look bad but I might fix that at some point."> 
     <meta name="keywords" content="Awashcard0, Awashcard0 projects , awash, wash card, wash card0">
     <meta name="author" content="Awashcard0">
     <meta property="og:title" content="Awashcard0" />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://awashcard0.pages.dev/" />
     <meta property="og:image" content="https://awashcard0.pages.dev/icon.png" />
-    <meta property="og:description" content="Awashcard0's website where I put all of my projects" />
+    <meta property="og:description" content="This is where I put my projects. The main pages look bad but I might fix that at some point." />
     <meta property="og:site_name" content="Awashcard0's website" />
     <link href="favicon.ico" type="image/x-icon" rel="shortcut icon"><link href="favicon.ico" type="image/x-icon" rel="icon">
     <!-- Home thing -->
@@ -32,13 +31,65 @@
     </div>
 
     <div class="main">
-      <h1>Hello! You found my humble website if you coudnt tell im very bad at this computer thing</h1>
-      <p><b>New!</b> Digital signage is my newest addition to my website</p>
+        <div class="gettocenter">
+            <div class="center">
+                <h1 class="text">Awashcard0</h1>
+                    <div class="button-a">
+                        <p style="color: white;"><b>New!</b> Digital signage is my newest addition to my website</p>
+                        <a href="/stuff" class="button">See my work</a>
+                    </div>
+            </div>
+        </div>
     </div>
 </body>
 <style>
+    .gettocenter {
+        display: flex;
+        align-items: center;
+        box-sizing: content-box;
+        justify-content: center;
+        min-height: 90vh;
+    }
+
+    .center {
+        padding: 0!important;
+        display: flex;
+        flex-wrap: wrap;
+        margin-right: auto;
+        margin-left: auto;
+    }
+
+    .center h1.text {
+        padding: 0!important;
+        font-size: 4rem;
+        color: cornflowerblue;
+    }
+
+    .center .button-a {
+        padding: 0!important;
+    }
+
+    .center .button {
+        border-radius: .25rem;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        font-weight: 500;
+        text-decoration: none!important;
+        box-shadow: inset 0 0 0 2px rgb(65, 225, 145);
+        color: rgb(65, 225, 145);
+        padding: 0.5rem 0.75rem;
+        min-width: 3rem;
+        min-height: 3rem;
+    }
+
     .main {
         text-align: center;
+    }
+
+    * {
+        background-color: rgb(75, 75, 75);
     }
   </style>
 </html>
