@@ -40,7 +40,7 @@
   <button onclick="document.getElementById('settings').close()">Close</button>
 </dialog>
       <div class="row">
-        <div class="left" style="background-color:#bbb;">
+        <div class="left" style="background-color: rgb(92, 92, 92);">
           <h2>Menu</h2>
           <input type="text" id="mySearch" onkeyup="search()" placeholder="Search.." title="Type in a projects name">
           <ul id="myMenu">
@@ -60,7 +60,7 @@
             <li><a onclick="updatePage('ds');">Digital signage</a></li>
           </ul>
         </div>
-        <div class="right" style="background-color:#ddd;">
+        <div class="right" style="background-color:#7c7a7a;">
             <h2 id="title">Main page</h2>
             <a id="link"></a>
             <div id="main">Click on a link on the side to explore</div>
@@ -169,11 +169,13 @@
 }
 
 .left h2 {
+  color: #000;
   padding-left: 8px;
 }
 
 /* Right column (page content) */
 .right {
+  color: black;
   flex: 65%;
   padding: 15px;
 }
@@ -201,7 +203,7 @@
 }
 
 #myMenu li a:hover {
-  background-color: #eee;
+  background-color: #b6b6b6;
 }
 </style>
 </html>
