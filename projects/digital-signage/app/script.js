@@ -90,8 +90,9 @@ noload();
         }
 
         function noload() {
-            done = true
+            done = true;
             setTimeout(function() {
+                // document.write removes the modal so this is useless
                 document.getElementById("load").close();
         }, 1000);
         }
