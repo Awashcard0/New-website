@@ -14,13 +14,19 @@
     <title>Games - Awashcard0</title>
 </head>
 <body>
-    <div class="topnav">
-        <a href="/">Home</a>
-        <a href="/stuff">What I have made</a>
-        <a class="active" href="/games">Games</a>
-        <a href="/about">About</a>
-        <span class="material-symbols-outlined">settings</span>
-      </div>
+  <div class="topnav">
+    <a class="active" href="/">Home</a>
+    <a href="/stuff">What I have made</a>
+    <a href="/games">Games</a>
+    <a href="/about">About</a>
+    <span class="material-symbols-outlined" onclick="document.getElementById('settings').showModal()">settings</span>
+</div>
+
+<dialog class="settings" id="settings">
+    <h1>Site settings</h1>
+    <h2>I made this and dont know what to put here</h2>
+    <button onclick="document.getElementById('settings').close()">Close</button>
+</dialog>
 
       <div class="main">
         <h1>Trash games here</h1>
