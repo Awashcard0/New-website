@@ -32,22 +32,22 @@
 
     <section id="projects">
       <h2>My Projects</h2>
+
       <div class="projects-container">
-        <div class="project">
+        <div class="project" style="background-image: url('./QE.png')">
           <h3>Quick edit</h3>
-          <img src="./QE.png" alt="Quick edit">
           <div class="project-details">
             <p>My text editer and try at doing a lot of js</p>
             <a href="https://quick-edit.pages.dev/">View Project</a>
           </div>
         </div>
-        <div class="project">
+        <div class="project" style="background-image: url('ShipCam.png')">
           <h3>Ship cam</h3>
-          <img src="ShipCam.png" alt="Ship cam">
           <div class="project-details">
             <p>Something I made on a cruse<br>This shows the camera of almost every Norwegian Cruse Line ship</p>
             <a href="/projects/ship-cam/">View Project</a>
           </div>
+        </div>
         </div>
       </div>
     </section>
@@ -284,6 +284,42 @@ input.dark-mode:checked + .slider:before {
   text-decoration: none;
   border-radius: 4px;
 }
+
+.projects-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.project {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  background-size: cover;
+  background-position: center;
+  transition: transform 0.3s ease-in-out;
+}
+
+.project h3,
+.project a {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  color: #fff;
+  text-align: center;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.project:hover {
+  transform: scale(1.05);
+}
+
+.project:hover h3,
+.project:hover a {
+  opacity: 1;
+}
   </style>
   
 <script>
@@ -335,7 +371,7 @@ const closeBtn = document.querySelector('.close');
 
 // Function to display the project details in the modal
 function displayProjectDetails(project) {
-  const imageSrc = project.querySelector('img').src;
+  const imageSrc = project.style.backgroundImage.slice(5, -2);
   const title = project.querySelector('h3').textContent;
   const description = project.querySelector('.project-details p').textContent;
   const link = project.querySelector('.project-details a').href;
