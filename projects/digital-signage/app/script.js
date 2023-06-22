@@ -32,12 +32,8 @@ noload();
             } else if (data.type == "text") {
                 document.write(`
                 <style>
-                @import url('https://fonts.googleapis.com/css?family=Bowlby+One+SC');
-
                 .text {
-                  text-align: center;
-                  font-family: 'Bowlby One SC', cursive;
-                  font-size: 25.5vw;
+                    font-size:50vw
                 }
                 </style>
                 
