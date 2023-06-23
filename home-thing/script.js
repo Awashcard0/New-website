@@ -63,32 +63,32 @@ homeButton.addEventListener("mouseleave", function(e) {
     }
   }
 
-  function updateusers() {
-    if (showUsers) {
-      var usersCount = document.createElement("span");
-      usersCount.setAttribute('tabindex', 0);
-      usersCount.setAttribute('aria-label', 'Go to main directory');
-      usersCount.setAttribute('id', 'userThing');
-      document.body.appendChild(usersCount);
-      document.getElementById("userThing").innerHTML = "Users online: " + usersOnline;
-    } else {
-      document.getElementById("userThing").remove();
-    }
-  }
+  // function updateusers() {
+  //   if (showUsers) {
+  //     var usersCount = document.createElement("span");
+  //     usersCount.setAttribute('tabindex', 0);
+  //     usersCount.setAttribute('aria-label', 'Go to main directory');
+  //     usersCount.setAttribute('id', 'userThing');
+  //     document.body.appendChild(usersCount);
+  //     document.getElementById("userThing").innerHTML = "Users online: " + usersOnline;
+  //   } else {
+  //     document.getElementById("userThing").remove();
+  //   }
+  // }
 
   var usersOnline = 1;
 
-   setInterval(() => {
-      fetch('https://usercount.awashcard0.repl.co/')
-        .then(response => response.text())
-        .catch(error => console.error(error));
-    }, 4500);
+  //  setInterval(() => {
+  //     fetch('https://usercount.awashcard0.repl.co/')
+  //       .then(response => response.text())
+  //       .catch(error => console.error(error));
+  //   }, 4500);
 
-    setInterval(() => {
-      fetch('https://usercount.awashcard0.repl.co/count')
-        .then(response => response.text())
-        .then(count => usersOnline = count);
-      if (showUsers) {document.getElementById("userThing").innerHTML = "Users online: " + usersOnline};
-    }, 5000);
+  //   setInterval(() => {
+  //     fetch('https://usercount.awashcard0.repl.co/count')
+  //       .then(response => response.text())
+  //       .then(count => usersOnline = count);
+  //     if (showUsers) {document.getElementById("userThing").innerHTML = "Users online: " + usersOnline};
+  //   }, 5000);
 
 
