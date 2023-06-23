@@ -4,6 +4,8 @@ const nameElement = document.querySelector('.loader__name');
 
 // Function to hide the loader and show the content
 function showContent() {
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
   loader.classList.add('hidden');
 }
 
