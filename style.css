@@ -253,6 +253,17 @@ transform: scale(1.05);
 opacity: 1;
 }
 
+#contact a {
+display: inline-block;
+margin-top: 10px;
+background-color: #2196F3;
+color: #fff;
+padding: 8px 16px;
+text-decoration: none;
+border-radius: 4px;
+}
+
+
 #screensaver {
   position: fixed;
   top: 0;
