@@ -73,3 +73,28 @@ projectsContainer.addEventListener('click', (event) => {
 closeBtn.addEventListener('click', () => {
   modal.classList.remove('show');
 });
+
+var fadeScreen = document.getElementById('screensaver');
+        var fadeTimer;
+        
+        function fadeToBlack() {
+            fadeScreen.style.opacity = '1';
+            fadeScreen.style.pointerEvents = 'auto';
+        }
+        
+        function unfade() {
+            fadeScreen.style.opacity = '0';
+            fadeScreen.style.pointerEvents = 'none';
+            resetFadeTimer();
+        }
+        
+        function resetFadeTimer() {
+            clearTimeout(fadeTimer);
+            fadeTimer = setTimeout(fadeToBlack, 60000);
+        }
+        
+        document.addEventListener('mousemove', function() {
+            unfade();
+        });
+        
+        resetFadeTimer();
