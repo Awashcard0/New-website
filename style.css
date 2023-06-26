@@ -253,6 +253,20 @@ transform: scale(1.05);
 opacity: 1;
 }
 
+.project:hover h3 {
+  color: white;
+  justify-content:center;
+  align-items:center;
+position:absolute;
+background:rgba(0,0,0,0.4);
+box-shadow:rgb(0 0 0 / 37%) 0px 3.2px 7.2px 0px,rgb(0 0 0 / 35%) 0px 0.6px 1.8px 0px;
+border-radius:8px;
+display:flex;
+flex-direction:column;
+overflow:hidden;
+height:50%;
+}
+
 #contact a {
 display: inline-block;
 margin-top: 10px;
