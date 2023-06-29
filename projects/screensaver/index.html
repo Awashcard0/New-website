@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.xz.style/serve/inter.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@exampledev/new.css@1.1.2/new.min.css">
+    <title>Screensavers</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <style>
+        .material-symbols-outlined {
+          font-variation-settings:
+          'FILL' 0,
+          'wght' 400,
+          'GRAD' 0,
+          'opsz' 48
+        }
+    </style>
+    <script>
+    var mode = "null"
+
+    function update() {
+        document.getElementById("conf-bonceing").style.display = "none";
+      let raido = document.getElementById('display').elements
+      if (raido[0].checked == true) {
+    mode = "bonceing"
+    // Iframe
+    document.getElementById("conf-bonceing").style.display = "";
+    }
+
+    }
+    
+    function save() {
+        let data = `type=${mode}&data=${document.getElementById("data-" + mode).value}`
+        alert(data);
+    }
+    
+    setTimeout(function () {
+      update();
+    }, 1);
+</script>
+</head>
+<body>
+    <h1>Screensavers</h1>
+    <p>Screensavers of random things. For some reason I like screensavers. </p>
+    <h1>Set the type</h1>
+        <form id="display" onclick="update()">
+       <p>Select a display:</p>
+       <input type="radio" id="bonceing" name="type" value="bonceing" checked>
+       <label for="bonceing"></label>Bonceing text</label><br>
+      </form>
+
+      <h1>Config</h1>
+      <div id="conf-bonceing">
+        <p>Set the text</p>
+        <input type="text" id="data-bonceing" placeholder="Cool text">
+      </div>
+      <h1>Open</h1>
+      <button onclick="save()">Save and open</button>
+</body>
+</html>

@@ -55,6 +55,10 @@ function save() {
                 .then(response => response.text())
                 .then(oc => alert(oc));
 }
+
+setTimeout(function () {
+  update();
+}, 1);
     </script>
     <title>Host - Digital signage</title>
 </head>
@@ -64,7 +68,7 @@ function save() {
 <h1>Set the type</h1>
         <form id="display" onclick="update()">
        <p>Select a display:</p>
-       <input type="radio" id="iframe" name="type" value="iframe">
+       <input type="radio" id="iframe" name="type" value="iframe" checked>
        <label for="iframe"><span class="material-symbols-outlined">iframe</span>iframe</label><br>
        <input type="radio" id="text" name="type" value="text">
        <label for="text"><span class="material-symbols-outlined">text_fields</span>Text</label><br>
