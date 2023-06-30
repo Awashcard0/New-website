@@ -17,13 +17,13 @@
         }
     </style>
     <script>
-    var mode = "null"
+    var mode = "null";
 
     function update() {
         document.getElementById("conf-bonceing").style.display = "none";
-      let raido = document.getElementById('display').elements
+      let raido = document.getElementById('display').elements;
       if (raido[0].checked == true) {
-    mode = "bonceing"
+    mode = "bonceing";
     // Iframe
     document.getElementById("conf-bonceing").style.display = "";
     }
@@ -31,8 +31,8 @@
     }
     
     function save() {
-        let data = `type=${mode}&data=${document.getElementById("data-" + mode).value}`
-        alert(data);
+        let data = `type=${mode}&data=${document.getElementById("data-" + mode).value}`;
+        location.href = `./app#${data}`;
     }
     
     setTimeout(function () {
