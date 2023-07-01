@@ -3,7 +3,7 @@
     "short_name": "Awashcard0",
     "start_url": ".",
     "display": "standalone",
-    "background_color": "#00000",
+    "background_color": "#000",
     "description": "A website of Awashcard0's projects",
     "icons": [
       {
