@@ -182,9 +182,6 @@ opacity: 1;
 }
 
 .close {
-position: absolute;
-top: 10px;
-right: 20px;
 font-size: 24px;
 font-weight: bold;
 cursor: pointer;
@@ -264,7 +261,8 @@ border-radius:8px;
 display:flex;
 flex-direction:column;
 overflow:hidden;
-height:50%;
+height: 50%;
+width: 93%;
 }
 
 #contact a {
