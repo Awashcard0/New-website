@@ -109,7 +109,10 @@ fetch('/info.json')
       title.innerText = "My website is in development mode"
       callout.appendChild(title);
 
-
+      var title = document.createElement("div");
+      title.setAttribute('tabindex', 0);
+      title.innerText = "This means that I am currently working on my website and stuff may change. If you notice something that is wrong I'm probably working on it"
+      callout.appendChild(title);
       
     }
   }
