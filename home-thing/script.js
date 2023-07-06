@@ -21,6 +21,8 @@ let homeThingOpen = false;
         <a href="https://awashcard0.pages.dev/" class="homeLink">Go home</a>
         <button onclick="askForDarkMode()">Ask for dark mode</button>
         `;
+      } else {
+        location.href = "/"
       }
 
       homeThingOpen = true;
