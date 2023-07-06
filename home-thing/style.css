@@ -141,3 +141,8 @@ padding: 8px 16px;
 text-decoration: none;
 border-radius: 4px;
 }
+
+.full-page-dark-mode {
+  background-color: black;
+  color: white;
+}

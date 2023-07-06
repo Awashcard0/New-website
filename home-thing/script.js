@@ -19,6 +19,7 @@ let homeThingOpen = false;
         <h1>Settings</h1>
         <span class="close" onclick="closeHomeThing(this.parentElement)">×</span>
         <a href="https://awashcard0.pages.dev/" class="homeLink">Go home</a>
+        <button onclick="askForDarkMode()">Ask for dark mode</button>
         `;
       }
 
@@ -147,4 +148,9 @@ fetch('https://awashcard0.pages.dev/info.json')
   function closeHomeThing(element) {
     homeThingOpen = false;
     document.body.removeChild(element);
+  }
+
+  function askForDarkMode() {
+    var element = document.body;
+    element.classList.toggle("full-page-dark-mode"); 
   }
