@@ -91,4 +91,25 @@ homeButton.addEventListener("mouseleave", function(e) {
   //     if (showUsers) {document.getElementById("userThing").innerHTML = "Users online: " + usersOnline};
   //   }, 5000);
 
+fetch('/info.json')
+  .then(response => response.json())
+  .then(info => gotInfo(info))
+  .catch(error => console.error(error));
 
+  function gotInfo(info) {
+    // Check if in dev mode
+    if (info.devMode) {
+      var callout = document.createElement("div");
+      callout.setAttribute('tabindex', 0);
+      callout.setAttribute('class', 'callout');
+      document.body.appendChild(callout);
+
+      var title = document.createElement("h1");
+      title.setAttribute('tabindex', 0);
+      title.innerText = "My website is in development mode"
+      callout.appendChild(title);
+
+
+      
+    }
+  }

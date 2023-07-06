@@ -71,3 +71,37 @@ btn {
     transition: all 0.2s ease 0s;
     color: white;
 }
+
+.callout {
+  position: fixed;
+  bottom: 35px;
+  right: 20px;
+  margin-left: 20px;
+  max-width: 300px;
+}
+
+.callout h1 {
+  padding: 25px 15px;
+  background: #555;
+  font-size: 30px;
+  color: white;
+}
+
+.callout div {
+  padding: 15px;
+  background-color: #ccc;
+  color: black
+}
+
+.callout-closebtn {
+  position: absolute;
+  top: 5px;
+  right: 15px;
+  color: white;
+  font-size: 30px;
+  cursor: pointer;
+}
+
+.callout-closebtn:hover {
+  color: lightgrey;
+}
