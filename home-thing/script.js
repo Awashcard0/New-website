@@ -22,7 +22,7 @@ let homeThingOpen = false;
         <button onclick="askForDarkMode()">Ask for dark mode</button>
         `;
       } else {
-        location.href = "/"
+        location.href = "https://awashcard0.pages.dev/"
       }
 
       homeThingOpen = true;
