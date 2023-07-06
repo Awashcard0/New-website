@@ -106,6 +106,7 @@ fetch('/info.json')
 
       var calloutTitle = document.createElement("h1");
       calloutTitle.setAttribute('tabindex', 0);
+      calloutTitle.setAttribute('class', 'callout-title');
       calloutTitle.innerText = "My website is in development mode"
       callout.appendChild(calloutTitle);
 
