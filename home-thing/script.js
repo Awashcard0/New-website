@@ -104,15 +104,16 @@ fetch('/info.json')
       callout.setAttribute('class', 'callout');
       document.body.appendChild(callout);
 
-      var title = document.createElement("h1");
-      title.setAttribute('tabindex', 0);
-      title.innerText = "My website is in development mode"
-      callout.appendChild(title);
+      var calloutTitle = document.createElement("h1");
+      calloutTitle.setAttribute('tabindex', 0);
+      calloutTitle.innerText = "My website is in development mode"
+      callout.appendChild(calloutTitle);
 
-      var title = document.createElement("div");
-      title.setAttribute('tabindex', 0);
-      title.innerText = "This means that I am currently working on my website and stuff may change. If you notice something that is wrong I'm probably working on it"
-      callout.appendChild(title);
+      var calloutText = document.createElement("div");
+      calloutText.setAttribute('tabindex', 0);
+      calloutText.setAttribute('class', 'callout-main');
+      calloutText.innerText = "This means that I am currently working on my website and stuff may change. If you notice something that is wrong I'm probably working on it"
+      callout.appendChild(calloutText);
       
     }
   }
