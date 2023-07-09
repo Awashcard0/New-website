@@ -176,6 +176,7 @@
     <input type="checkbox" id="mending">
     <label for="mending">Add Mending</label>
     <button onclick="done()">Done</button>
+    <div id="notification"></div>
     <script>
       const doneBtn = document.getElementById("done");
       const item = document.getElementById("type");
@@ -193,6 +194,87 @@
         thing = enchantment1 + enchantment2
         // alert(`/give @p ${thing}`);
       }
+
+      function notification(notaName, notaTime) {
+  var x = document.getElementById("notification");
+  x.innerHTML = notaName
+  x.className = "show";
+  setTimeout(function() {
+    x.className = x.className.replace("show", "");
+  }, notaTime);
+}
     </script>
+    <style>
+    @-webkit-keyframes fadein {
+      from {
+        bottom: 0;
+        opacity: 0;
+      }
+
+      to {
+        bottom: 30px;
+        opacity: 1;
+      }
+    }
+
+    @keyframes fadein {
+      from {
+        bottom: 0;
+        opacity: 0;
+      }
+
+      to {
+        bottom: 30px;
+        opacity: 1;
+      }
+    }
+
+    @-webkit-keyframes fadeout {
+      from {
+        bottom: 30px;
+        opacity: 1;
+      }
+
+      to {
+        bottom: 0;
+        opacity: 0;
+      }
+    }
+
+    @keyframes fadeout {
+      from {
+        bottom: 30px;
+        opacity: 1;
+      }
+
+      to {
+        bottom: 0;
+        opacity: 0;
+      }
+    }
+
+    #notification {
+      visibility: hidden;
+      min-width: 100px;
+      margin-left: -100px;
+      background-color: #333;
+      color: #fff;
+      text-align: center;
+      border-radius: 2px;
+      padding: 16px;
+      position: fixed;
+      z-index: 1;
+      left: 50%;
+      bottom: 30px;
+      font-size: 35px;
+    }
+
+    #notification.show {
+      border-radius: 25px;
+      visibility: visible;
+      -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+      animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    }
+    </style>
   </body>
 </html>
