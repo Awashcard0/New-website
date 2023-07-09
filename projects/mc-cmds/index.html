@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Home thing -->
+    <link rel="stylesheet" href="https://awashcard0.pages.dev/home-thing/style.css">
+    <script src='https://awashcard0.pages.dev/home-thing/script.js'></script>
+    <!-- End home thing -->
+    <link rel="stylesheet" href="https://fonts.xz.style/serve/inter.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@exampledev/new.css@1.1.2/new.min.css">
+    <title>Minecraft give commands</title>
+</head>
+<body>
+    <h1>Minecraft give commands</h1>
+    <h2>Item to give:
+    <select id="type" name="type" title="Item to give">
+        <option disabled>------------------------------</option>
+
+        <option value="netherite_sword">Netherite Sword</option>
+        <option value="diamond_sword">Diamond Sword</option>
+        <option value="golden_sword">Golden Sword</option>
+        <option value="iron_sword">Iron Sword</option>
+        <option value="stone_sword">Stone Sword</option>
+        <option value="wooded_sword">Wooden Sword</option>
+
+        <option disabled>------------------------------</option>
+        
+        <option value="netherite_axe">Netherite Axe</option>
+        <option value="diamond_axe">Diamond Axe</option>
+        <option value="golden_axe">Golden Axe</option>
+        <option value="iron_axe">Iron Axe</option>
+        <option value="stone_axe">Stone Axe</option>
+        <option value="wooden_axe">Wooden Axe</option>
+
+        <option disabled>------------------------------</option>
+        
+        <option value="netherite_pickaxe">Netherite Pickaxe</option>
+        <option value="diamond_pickaxe">Diamond Pickaxe</option>
+        <option value="golden_pickaxe">Golden Pickaxe</option>
+        <option value="iron_pickaxe">Iron Pickaxe</option>
+        <option value="stone_pickaxe">Stone Pickaxe</option>
+        <option value="wooden_pickaxe">Wooden Pickaxe</option>
+
+        <option disabled>------------------------------</option>
+        
+        <option value="netherite_shovel">Netherite Shovel</option>
+        <option value="diamond_shovel">Diamond Shovel</option>
+        <option value="golden_shovel">Golden Shovel</option>
+        <option value="iron_shovel">Iron Shovel</option>
+        <option value="stone_shovel">Stone Shovel</option>
+        <option value="wooden_shovel">Wooden Shovel</option>
+
+        <option disabled>------------------------------</option>
+        
+        <option value="netherite_hoe">Netherite Hoe</option>
+        <option value="diamond_hoe">Diamond Hoe</option>
+        <option value="golden_hoe">Golden Hoe</option>
+        <option value="iron_hoe">Iron Hoe</option>
+        <option value="stone_hoe">Stone Hoe</option>
+        <option value="wooden_hoe">Wooden Hoe</option>
+
+        <option disabled>------------------------------</option>
+
+        <option value="trident">Trident</option>
+        <option value="bow">Bow</option>
+        <option value="crossbow">Crossbow</option>
+        <option value="stick">Stick</option>
+    </select>
+    <br>
+    <h2>Enchantments: </h2>
+    <h3>Enchantment 1: </h3>
+    <select id="enchantment1name">
+        <option value="none">None</option>
+        <option value="bane_of_arthropods">Bane of Arthropods</option>
+        <option value="fire_aspect">Fire Aspect</option>
+        <option value="knockback">Knockback</option>
+        <option value="looting">Looting</option>
+        <option value="sharpness">Sharpness</option>
+        <option value="smite">Smite</option>
+        <option value="sweeping">Sweeping Edge</option>
+        <option value="unbreaking">Unbreaking</option>
+        <option value="vanishing_curse">Curse of Vanishing</option>
+        <option value="efficiency">Efficiency</option>
+        <option value="fortune">Fortune</option>
+        <option value="silk_touch">Silk Touch</option>
+        <option value="flame">Flame</option>
+        <option value="infinity">Infinity</option>
+        <option value="power">Power</option>
+        <option value="punch">punch</option>
+        <option value="multishot">Multishot</option>
+        <option value="piercing">Piercing</option>
+        <option value="quick_charge">Quick Charge</option>
+        <option value="channeling">Channeling</option>
+        <option value="impaling">Impaling</option>
+        <option value="loyalty">Loyalty</option>
+        <option value="riptide">Riptide</option>
+    </select>
+    <p>Level: <input id="enchantment1level" type="number" max="255" min="1" value="1">
+    <br>
+    <h3>Enchantment 2: </h3>
+    <select id="enchantment2name">
+        <option value="none">None</option>
+        <option value="bane_of_arthropods">Bane of Arthropods</option>
+        <option value="fire_aspect">Fire Aspect</option>
+        <option value="knockback">Knockback</option>
+        <option value="looting">Looting</option>
+        <option value="sharpness">Sharpness</option>
+        <option value="smite">Smite</option>
+        <option value="sweeping">Sweeping Edge</option>
+        <option value="unbreaking">Unbreaking</option>
+        <option value="vanishing_curse">Curse of Vanishing</option>
+        <option value="efficiency">Efficiency</option>
+        <option value="fortune">Fortune</option>
+        <option value="silk_touch">Silk Touch</option>
+        <option value="flame">Flame</option>
+        <option value="infinity">Infinity</option>
+        <option value="power">Power</option>
+        <option value="punch">punch</option>
+        <option value="multishot">Multishot</option>
+        <option value="piercing">Piercing</option>
+        <option value="quick_charge">Quick Charge</option>
+        <option value="channeling">Channeling</option>
+        <option value="impaling">Impaling</option>
+        <option value="loyalty">Loyalty</option>
+        <option value="riptide">Riptide</option>
+    </select>
+    <p>Level: <input id="enchantment2level" type="number" max="255" min="1" value="1">
+    <br><br>
+    <input type="number" max="255" min="1" value="1">
+    <input type="checkbox" id="mending"><label for="mending">Add Mending</label>
+    <button onclick="done()">Done</button>
+    <script>
+        const doneBtn = document.getElementById("done");
+        const item = document.getElementById("type");
+        let thing = "";
+        let enchantment1 = "";
+        let enchantment2 = "";
+
+        function done() {
+            if (document.getElementById("enchantment1name").value == "none") {} else {
+                enchantment1 = `{id:${document.getElementById("enchantment1name").value},lvl:${document.getElementById("enchantment1level").value}}`
+            }
+            if (document.getElementById("enchantment2name").value == "none") {} else {
+                enchantment2 = `,{id:${document.getElementById("enchantment2name").value},lvl:${document.getElementById("enchantment2level").value}}`
+            }
+            thing = enchantment1 + enchantment2
+            // alert(`/give @p ${thing}`);
+        }
+    </script>
+</body>
+</html>
