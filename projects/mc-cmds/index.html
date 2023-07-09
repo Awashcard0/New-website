@@ -13,6 +13,7 @@
 </head>
 <body>
     <h1>Minecraft give commands</h1>
+    <div>
     <h2>Item to give:
     <select id="type" name="type" title="Item to give">
         <option disabled>------------------------------</option>
@@ -62,13 +63,49 @@
 
         <option disabled>------------------------------</option>
 
+        <option value="netherite_helmet">Netherite Helmet</option>
+        <option value="diamond_helmet">Diamond Helmet</option>
+        <option value="golden_helmet">Golden Helmet</option>
+        <option value="iron_helmet">Iron Helmet</option>
+        <option value="leather_helmet">Leather Helmet</option>
+
+        <option disabled>------------------------------</option>
+
+        <option value="netherite_chestplate">Netherite Chestplate</option>
+        <option value="diamond_chestplate">Diamond Chestplate</option>
+        <option value="golden_chestplate">Golden Chestplate</option>
+        <option value="iron_chestplate">Iron Chestplate</option>
+        <option value="leather_chestplate">Leather Chestplate</option>
+
+        <option disabled>------------------------------</option>
+        
+        <option value="netherite_leggings">Netherite Leggings</option>
+        <option value="diamond_leggings">Diamond Leggings</option>
+        <option value="golden_leggings">Golden Leggings</option>
+        <option value="iron_leggings">Iron Leggings</option>
+        <option value="leather_leggings">Leather Leggings</option>
+
+        <option disabled>------------------------------</option>
+        
+        <option value="netherite_boots">Netherite Boots</option>
+        <option value="diamond_boots">Diamond Boots</option>
+        <option value="golden_boots">Golden Boots</option>
+        <option value="iron_boots">Iron Boots</option>
+        <option value="leather_boots">Leather Boots</option>
+
+        <option disabled>------------------------------</option>
+
+        <option value="shield">Shield</option>
+        <option value="elytra">Elytra</option>
+        <option value="totem_of_undying">Totem of Undying</option>
         <option value="trident">Trident</option>
         <option value="bow">Bow</option>
         <option value="crossbow">Crossbow</option>
         <option value="stick">Stick</option>
     </select>
-    <br>
+</div>
     <h2>Enchantments: </h2>
+    <div>
     <h3>Enchantment 1: </h3>
     <select id="enchantment1name">
         <option value="none">None</option>
@@ -95,9 +132,26 @@
         <option value="impaling">Impaling</option>
         <option value="loyalty">Loyalty</option>
         <option value="riptide">Riptide</option>
+        <option value="aqua_affinity">Aqua Affinity</option>
+        <option value="blast_protection">Blast Protection</option>
+        <option value="binding_curse">Curse of Binding</option>
+        <option value="fire_protection">Fire Protection</option>
+        <option value="projectile_protection">Projectile Protection</option>
+        <option value="protection">Protection</option>
+        <option value="respiration">Respiration</option>
+        <option value="thorns">Thorns</option>
+        <option value="swift_sneak">Swift Sneak</option>
+        <option value="soul_speed">Soul Speed</option>
+        <option value="feather_falling">Feather Falling</option>
+        <option value="depth_strider">Depth Strider</option>
+        <option value="frost_walker">Frost Walker</option>
+        <option value=""></option>
+        <option value=""></option>
+        <option value=""></option>
     </select>
     <p>Level: <input id="enchantment1level" type="number" max="255" min="1" value="1">
-    <br>
+    </div>
+    <div>
     <h3>Enchantment 2: </h3>
     <select id="enchantment2name">
         <option value="none">None</option>
@@ -126,7 +180,8 @@
         <option value="riptide">Riptide</option>
     </select>
     <p>Level: <input id="enchantment2level" type="number" max="255" min="1" value="1">
-    <br><br>
+    </div>
+    <br>
     <input type="number" max="255" min="1" value="1">
     <input type="checkbox" id="mending"><label for="mending">Add Mending</label>
     <button onclick="done()">Done</button>
