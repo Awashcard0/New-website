@@ -321,6 +321,7 @@
       let enchantment3 = "";
       let enchantment4 = "";
       let enchantment5 = "";
+      let mending = ""
 
       function done() {
         if (document.getElementById("enchantment1name").value == "none") {} else {
@@ -343,7 +344,18 @@
           enchantment5 = `,{id:${document.getElementById("enchantment5name").value},lvl:${document.getElementById("enchantment5level").value}}`;
           amount++
         }
-        thing = enchantment1 + enchantment2 + enchantment3 + enchantment4 + enchantment5;
+        if (document.getElementById("mending").checked) {
+            if (amount == 0) {
+                mending = `{id:mending,lvl:1}`;
+                amount++
+            } else {
+                mending = `,{id:mending,lvl:1}`;
+                amount++
+            }
+        } else {
+            mending = "";
+        }
+        thing = enchantment1 + enchantment2 + enchantment3 + enchantment4 + enchantment5 + mending;
         // alert(`/give @p ${thing}`);
         if (amount == 0) {
             document.getElementById("output").value = `/give @p ${document.getElementById("type").value} 1`
@@ -377,48 +389,48 @@
     <style>
     @-webkit-keyframes fadein {
       from {
-        bottom: 0;
+        top: 0;
         opacity: 0;
       }
 
       to {
-        bottom: 30px;
+        top: 30px;
         opacity: 1;
       }
     }
 
     @keyframes fadein {
       from {
-        bottom: 0;
+        top: 0;
         opacity: 0;
       }
 
       to {
-        bottom: 30px;
+        top: 30px;
         opacity: 1;
       }
     }
 
     @-webkit-keyframes fadeout {
       from {
-        bottom: 30px;
+        top: 30px;
         opacity: 1;
       }
 
       to {
-        bottom: 0;
+        top: 0;
         opacity: 0;
       }
     }
 
     @keyframes fadeout {
       from {
-        bottom: 30px;
+        top: 30px;
         opacity: 1;
       }
 
       to {
-        bottom: 0;
+        top: 0;
         opacity: 0;
       }
     }
@@ -435,7 +447,7 @@
       position: fixed;
       z-index: 1;
       left: 50%;
-      bottom: 30px;
+      top: 30px;
       font-size: 35px;
     }
 
