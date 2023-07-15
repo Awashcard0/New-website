@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Home thing -->
+    <link rel="stylesheet" href="https://awashcard0.pages.dev/home-thing/style.css">
+    <script src='https://awashcard0.pages.dev/home-thing/script.js'></script>
+    <!-- End home thing -->
+<link rel="stylesheet" href="https://fonts.xz.style/serve/inter.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@exampledev/new.css@1.1.2/new.min.css">
+<title>Cps test</title>
+<style>
+
+</style>
+<script>
+let clicks = 0;
+
+setInterval(function() {
+    document.getElementById("show").innerHTML = "Clicks: " + clicks;
+}, 10);
+
+function thing() {
+    clicks = clicks + 1;
+    setTimeout(function() {
+        clicks = clicks - 1;
+}, 1000);
+}
+</script>
+</head>
+<body>
+    <h1>CPS test</h1>
+    <button onclick="thing()" oncontextmenu="thing()">Click</button>
+    <p id="show">ya</p>
+</body>
+</html>
