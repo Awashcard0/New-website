@@ -2,6 +2,15 @@
 const loader = document.querySelector('.loader');
 const nameElement = document.querySelector('.loader__name');
 
+const projectsContainer = document.querySelector('.projects-container');
+const modal = document.querySelector('.modal');
+const modalContent = document.querySelector('.modal-content');
+const modalImage = document.querySelector('.modal-image');
+const modalTitle = document.querySelector('.modal-title');
+const modalDescription = document.querySelector('.modal-description');
+const modalLink = document.querySelector('.modal-link');
+const closeBtn = document.querySelector('.close');
+
 // Function to hide the loader and show the content
 function showContent() {
     document.body.scrollTop = 0;
@@ -18,12 +27,14 @@ const toggleSwitch = document.getElementById('dark-mode-toggle');
 function setTheme(theme) {
   const body = document.body;
   body.className = theme;
+  modalContent.className = `modal-content ${theme}`;
 }
 
 // Function to toggle the theme between light and dark
 function toggleTheme() {
   const body = document.body;
   body.classList.toggle('dark-mode');
+  modalContent.classList.toggle('dark-mode');
 }
 
 // Event listener for the dark mode toggle switch
@@ -37,14 +48,6 @@ if (userPrefersDark) {
   toggleSwitch.checked = true;
   setTheme('dark-mode');
 }
-
-const projectsContainer = document.querySelector('.projects-container');
-const modal = document.querySelector('.modal');
-const modalImage = document.querySelector('.modal-image');
-const modalTitle = document.querySelector('.modal-title');
-const modalDescription = document.querySelector('.modal-description');
-const modalLink = document.querySelector('.modal-link');
-const closeBtn = document.querySelector('.close');
 
 // Function to display the project details in the modal
 function displayProjectDetails(project) {
