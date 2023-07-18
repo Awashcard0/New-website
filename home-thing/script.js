@@ -52,21 +52,21 @@ let homeThingOpen = false;
       //   });
       // });
       // See if on pages.dev
-      if (location.hostname == 'awashcard0.pages.dev') {
-        fetch("https://awashcard0.com/")
-        .then(response => {
-          if (response.status === 200) {
-            location.href = `https://awashcard0.com${location.pathname}`
-          }
-        }
-        );
-      }
     });
     homeButton.addEventListener('keydown', function(e) {
       if (e.keyCode === 13) homeButton.click();
     });
     document.body.appendChild(homeButton);
 
+    if (location.hostname == 'awashcard0.pages.dev') {
+      fetch("https://awashcard0.com/")
+      .then(response => {
+        if (response.status === 200) {
+          location.href = `https://awashcard0.com${location.pathname}`
+        }
+      }
+      );
+    }
 
 homeButton.addEventListener("mouseenter", function(e) {
   showUsers = true;
