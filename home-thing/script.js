@@ -52,7 +52,7 @@ let homeThingOpen = false;
       //   });
       // });
       // See if on pages.dev
-      if (location.hostname == "awashcard0.pages.dev") {
+      if (location.hostname == 'awashcard0.pages.dev') {
         fetch("https://awashcard0.com/")
         .then(response => {
           if (response.status === 200) {
