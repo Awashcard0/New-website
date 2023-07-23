@@ -1,4 +1,3 @@
-
 const loader = document.querySelector('.loader');
 const nameElement = document.querySelector('.loader__name');
 
