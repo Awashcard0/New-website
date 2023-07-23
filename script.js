@@ -54,14 +54,15 @@ function displayProjectDetails(project) {
   const imageSrc = project.style.backgroundImage.slice(5, -2);
   const title = project.querySelector('h3').textContent;
   const description = project.querySelector('.project-details p').textContent;
-  const link = project.querySelector('.project-details a').href;
+  const link = project.querySelector('.project-details a');
 
   modalImage.src = imageSrc;
   modalTitle.textContent = title;
   modalDescription.textContent = description;
-  modalLink.href = link;
+  modalLink.href = link.href;
 
   modal.classList.add('show');
+  closeBtn.focus();
 }
 
 // Event listener for project click
@@ -72,9 +73,32 @@ projectsContainer.addEventListener('click', (event) => {
   }
 });
 
+projectsContainer.addEventListener("keydown", (event) => {
+  if (event.isComposing || event.keyCode === 229) {
+    return;
+  }
+
+  if (event.keyCode === 13 || event.keyCode === 32) {
+    const project = event.target.closest('.project');
+    if (project) {
+      displayProjectDetails(project);
+    }
+  }
+});
+
 // Event listener for close button click
 closeBtn.addEventListener('click', () => {
   modal.classList.remove('show');
+});
+
+closeBtn.addEventListener("keydown", (event) => {
+  if (event.isComposing || event.keyCode === 229) {
+    return;
+  }
+
+  if (event.keyCode === 13 || event.keyCode === 32) {
+    modal.classList.remove('show');
+  }
 });
 
 var fadeScreen = document.getElementById('screensaver');
@@ -97,6 +121,10 @@ var fadeScreen = document.getElementById('screensaver');
         }
         
         document.addEventListener('mousemove', function() {
+            unfade();
+        });
+
+        document.addEventListener(`keydown`, function() {
             unfade();
         });
         
