@@ -118,7 +118,7 @@ btn {
     overflow: hidden;
     width: 75%;
     height: 75%;
-    position: absolute;
+    position: fixed;
     top: 15%;
     left: 15%;
 }
@@ -128,7 +128,7 @@ btn {
   top: 15px;
   right: 15px;
   color: white;
-  font-size: 30px;
+  font-size: 50px;
   cursor: pointer;
 }
 
