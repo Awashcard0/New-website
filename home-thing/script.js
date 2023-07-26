@@ -58,7 +58,7 @@ let homeThingOpen = false;
     });
     document.body.appendChild(homeButton);
 
-    if (location.hostname == 'awashcard0.pages.dev') {
+    if (location.hostname == 'awashcard0.pages.dev' || location.hostname == 'www.awashcard0.com') {
       fetch("https://awashcard0.com/")
       .then(response => {
         if (response.status === 200) {
