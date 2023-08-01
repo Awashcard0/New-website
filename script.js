@@ -1,3 +1,4 @@
+
 const loader = document.querySelector('.loader');
 const nameElement = document.querySelector('.loader__name');
 
@@ -19,6 +20,10 @@ function showContent() {
 
 // Add event listener for animation end
 nameElement.addEventListener('animationend', showContent);
+
+setTimeout(() => {
+  showContent();
+}, 2500);
 
 const toggleSwitch = document.getElementById('dark-mode-toggle');
 
