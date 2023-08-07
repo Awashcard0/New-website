@@ -22,7 +22,7 @@ let homeThingOpen = false;
         <button onclick="askForDarkMode()">Ask for dark mode</button>
         `;
       } else {
-        location.href = "https://awashcard0.pages.dev/"
+        startExit();
       }
 
       homeThingOpen = true;
@@ -166,3 +166,25 @@ fetch('https://awashcard0.pages.dev/info.json')
     var element = document.body;
     element.classList.toggle("full-page-dark-mode"); 
   }
+
+function startExit() {
+  let callout = document.createElement("div");
+      callout.setAttribute('class', 'exitBackground');
+      callout.setAttribute('id', 'exitBackgroundDiv')
+      document.body.appendChild(callout);
+
+      let calloutClose = document.createElement("h1");
+      calloutClose.setAttribute('class', 'exitNameElement');
+      calloutClose.innerText = "Awashcard0";
+      callout.appendChild(calloutClose);
+
+      const exitBackground = document.getElementById('exitBackgroundDiv');
+      const exitNameElement = document.querySelector('.exitNameElement');
+
+      exitBackground.style.backgroundColor = "#111";
+      exitBackground.style.opacity = "1";
+
+      exitNameElement.addEventListener('animationend', function() {
+        location.href = "https://awashcard0.pages.dev/"
+      });
+}
