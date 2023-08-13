@@ -1,0 +1,166 @@
+
+<!DOCTYPE html>
+        <html>
+        <head>
+          <meta charset="UTF-8">
+          <!-- Home thing -->
+          <link rel="stylesheet" href="https://awashcard0.pages.dev/home-thing/style.css">
+          <script src='https://awashcard0.pages.dev/home-thing/script.js'></script>
+          <!-- End home thing -->
+          <meta name="viewport" content="width=device-width, initial-scale=1.0">
+          <title>File Server</title>
+        </head>
+        <body>
+          <div class="file-explorer">
+            <h1>File Server</h1>
+            <button onclick="document.cookie = 'token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'; window.location.reload();">Logout</button>
+            <button onclick="document.getElementById('setting').showModal();">Server Settings</button>
+                  <form id="uploadForm" enctype="multipart/form-data">
+                  <input type="file" id="filetoupload" name="filetoupload"><br>
+                  <button class="upload-button" type="button" onclick="handleUploadFormSubmission()">Upload</button>
+                </form>
+            <ul class="file-list">
+          
+        <li class="file-item"><a href="\app.js">app.js</a><br><button class="delete-button" onclick="handleDeleteFile('\\app.js')">Delete</button><form class="rename-form" action="/rename" method="post" onsubmit="handleRenameFormSubmission(this); return false;">
+          <input type="hidden" name="current" value="\app.js">
+          <input type="text" name="new" placeholder="Enter new filename">
+          <button class="rename-button" type="submit">Rename</button>
+        </form></li><li class="file-item"><a href="\hello.txt">hello.txt</a><br><button class="delete-button" onclick="handleDeleteFile('\\hello.txt')">Delete</button><form class="rename-form" action="/rename" method="post" onsubmit="handleRenameFormSubmission(this); return false;">
+          <input type="hidden" name="current" value="\hello.txt">
+          <input type="text" name="new" placeholder="Enter new filename">
+          <button class="rename-button" type="submit">Rename</button>
+        </form></li><li class="file-item"><a href="\index.html">index.html</a><br><button class="delete-button" onclick="handleDeleteFile('\\index.html')">Delete</button><form class="rename-form" action="/rename" method="post" onsubmit="handleRenameFormSubmission(this); return false;">
+          <input type="hidden" name="current" value="\index.html">
+          <input type="text" name="new" placeholder="Enter new filename">
+          <button class="rename-button" type="submit">Rename</button>
+        </form></li><li class="file-item"><a href="\meme.mp4">meme.mp4</a><br><button class="delete-button" onclick="handleDeleteFile('\\meme.mp4')">Delete</button><form class="rename-form" action="/rename" method="post" onsubmit="handleRenameFormSubmission(this); return false;">
+          <input type="hidden" name="current" value="\meme.mp4">
+          <input type="text" name="new" placeholder="Enter new filename">
+          <button class="rename-button" type="submit">Rename</button>
+        </form></li><li class="file-item"><a href="\Notes.qenotebook">Notes.qenotebook</a><br><button class="delete-button" onclick="handleDeleteFile('\\Notes.qenotebook')">Delete</button><form class="rename-form" action="/rename" method="post" onsubmit="handleRenameFormSubmission(this); return false;">
+          <input type="hidden" name="current" value="\Notes.qenotebook">
+          <input type="text" name="new" placeholder="Enter new filename">
+          <button class="rename-button" type="submit">Rename</button>
+        </form></li><li class="file-item"><a href="\Screenshot.png">Screenshot.png</a><br><button class="delete-button" onclick="handleDeleteFile('\\Screenshot.png')">Delete</button><form class="rename-form" action="/rename" method="post" onsubmit="handleRenameFormSubmission(this); return false;">
+          <input type="hidden" name="current" value="\Screenshot.png">
+          <input type="text" name="new" placeholder="Enter new filename">
+          <button class="rename-button" type="submit">Rename</button>
+        </form></li><li class="file-item"><a href="\The%20fam.png">The fam.png</a><br><button class="delete-button" onclick="handleDeleteFile('\\The%20fam.png')">Delete</button><form class="rename-form" action="/rename" method="post" onsubmit="handleRenameFormSubmission(this); return false;">
+          <input type="hidden" name="current" value="\The%20fam.png">
+          <input type="text" name="new" placeholder="Enter new filename">
+          <button class="rename-button" type="submit">Rename</button>
+        </form></li> </ul>
+        </div>
+        <dialog id="setting" style="text-align: center;">
+        <h1>Settings</h1>
+        <form action="/updateSettings" method="post" onsubmit="saveSettings(this); return false;">
+      <label for="username">Username:</label>
+      <input type="text" id="username" name="username" value="admin">
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password" value="password">
+      <input type="submit" value="Save">
+    </form>
+    <button onclick="document.getElementById('setting').close();">Close</button>
+    <p>File server is made by <a href="//awashcard0.pages.dev">Awashcard0</a></p>
+    </dialog>
+        </body>
+<style>
+  body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(to right, #4151ff, #67ab45);
+}
+
+.file-explorer {
+  color: rgb(255 255 255);
+  background: rgb(0 0 0 / 80%);
+  border: 1px solid #373737;
+  border-radius: 10px;
+  width: 80%;
+  margin: 50px auto;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  animation: slide-in 0.5s forwards;
+}
+
+@keyframes slide-in {
+  0% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+h1 {
+  margin-bottom: 20px;
+}
+
+.file-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.file-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 10px;
+}
+
+.file-item a {
+  flex-grow: 1;
+  color: #007bff;
+  text-decoration: none;
+  margin-right: 10px;
+}
+
+.delete-button,
+.rename-button,
+.upload-button {
+  background-color: #dc3545;
+  border: none;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin-right: 5px;
+}
+
+.delete-button:hover,
+.rename-button:hover,
+.upload-button:hover {
+  background-color: #c82333;
+}
+
+.upload-item {
+  display: flex;
+  align-items: center;
+}
+
+.upload-button {
+  margin-top: 10px;
+}
+
+button {
+  background-color: #dc3545;
+  border: none;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin-right: 5px;
+}
+
+button:hover {
+  background-color: #c82333;
+}
+
+</style>
+        </html>

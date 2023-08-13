@@ -22,7 +22,7 @@
 
       <div class="main">
         <h1>404</h1>
-        <h2>How did you get here?</h2>
+        <h2 id="the">You shouldn't be here</h2>
         <p id="text"></p>
       </div>
       <style>
@@ -33,6 +33,28 @@
       <script>
         document.getElementById("text").innerHTML =
 window.location.pathname + " does not exist";
+
+var list = [ 
+"You wonder why people don't use apple maps", 
+"Employees only",
+"You shouldn't be here",
+"How are you here?",
+"Look I don't have any money",
+"Imagine an alleyway with nothing in it",
+"Are you lost?",
+"Do you need directions?",
+"Don't make me do it",
+"Here's your friendly reminder to drink water",
+"Was I supposed to put something here",
+"You're as lost as I am",
+"That's enough Internet for today",
+"Never gonna give you up, gonna let you down"
+]; 
+
+    const index = Math.floor(Math.random() * list.length); 
+    const thing = list[index]; 
+
+    document.getElementById("the").innerHTML = thing
       </script>
 </body>
 </html>

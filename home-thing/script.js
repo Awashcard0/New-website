@@ -20,6 +20,7 @@ let homeThingOpen = false;
         <span class="close" onclick="closeHomeThing(this.parentElement)">×</span>
         <a href="https://awashcard0.pages.dev/" class="homeLink">Go home</a>
         <button onclick="askForDarkMode()">Ask for dark mode</button>
+        <p id="HomeThingShowFPS">FPS: Loading</p>
         `;
       } else {
         startExit();
@@ -188,3 +189,20 @@ function startExit() {
         location.href = "https://awashcard0.pages.dev/"
       });
 }
+
+var FPSstartTime = Date.now();
+var FPSframe = 0;
+
+function tickFPS() {
+  let time = Date.now();
+  FPSframe++;
+  if (time - FPSstartTime > 1000) {
+    if (homeThingOpen) {
+      document.getElementById("HomeThingShowFPS").innerHTML = "FPS: " + (FPSframe / ((time - FPSstartTime) / 1000)).toFixed(1);
+    }
+      FPSstartTime = time;
+      FPSframe = 0;
+	}
+  window.requestAnimationFrame(tickFPS);
+}
+tickFPS();
