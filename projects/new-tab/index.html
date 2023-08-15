@@ -16,8 +16,7 @@
                 <button onclick="openSettings('main')">Settings</button>
             </div>
         </header>
-        <main>
-            
+        <main id="main">
         </main>
     </div>
     <dialog id="settingsPage">
@@ -36,6 +35,7 @@
     </dialog>
 </body>
 <script>
+
     let config = {"background": {"type": "staic", "data": "#0084ac"}, "links": [{"title": "Awashcard0", "url": "https://awashcard0.com"},{"title": "Youtube", "url": "https://yt.be"}]};
 
     if (localStorage.getItem("data")) {
@@ -100,11 +100,43 @@
             `;
 
             document.getElementById("settings-main").innerHTML = list
+        } else if (page == "inandout") {
+            document.getElementById("settings-main").innerHTML = `
+            <h1>Import and save</h1>
+            <p>Import and export your setting</p>
+            <h1>Import</h1>
+            <input accept=".newtab" type="file" id="json-file-input" onchange="readFileImport(event.target.files[0])">
+            <h1>Export</h1>
+            <button onclick="downloadFile()">Export as file</button>
+            `;
         } else {
             document.getElementById("settings-main").innerHTML = `
             <h1>Not found</h1>
             `;
         }
+    }
+
+    function openApp(size) {
+        let sizePrams = ""
+
+        if (size == "big") {
+            sizePrams = 'width="950px" height="600px"'
+        } else if (size == "small") {
+            sizePrams = 'width="500px" height="250px"'
+        }
+
+        let app = document.createElement("div");
+        const id = Math.floor(500 * Math.random())
+        app.setAttribute('class', 'window');
+        app.setAttribute('id', id);
+        document.getElementById("main").appendChild(app);
+
+        app.innerHTML = `
+        <div id="${id}header" class="header">Awashcard0</div>
+        <iframe ${sizePrams} src="//awashcard0.com"></iframe>
+        `
+
+        dragElement(document.getElementById(id));
     }
 
     function settingsBackgroundPicker() {
@@ -129,6 +161,37 @@
 
         updateConfig();
     }
+
+    function readFileImport(file) {
+  const reader = new FileReader();
+
+  reader.onload = event => {
+    const data = JSON.parse(event.target.result);
+    const name = file.name;
+
+    config = data;
+    updateConfig();
+
+  };
+
+  reader.onerror = error => error(`Error with reader: ${error}`);
+
+  reader.readAsText(file);
+}
+
+
+function downloadFile() {
+  const jsonData = JSON.stringify(config);
+  const blob = new Blob([jsonData], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+
+  const a = document.createElement('a');
+  a.download = `save.newtab`;
+  a.href = url;
+  a.click();
+
+  URL.revokeObjectURL(url);
+}
 
     function updateConfig() {
         localStorage.setItem("data", JSON.stringify(config))
@@ -160,6 +223,49 @@
       calloutClose.innerText = "×";
       callout.appendChild(calloutClose);
     }
+
+// code from w3schools (https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_draggable)
+
+    function dragElement(elmnt) {
+  var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+  if (document.getElementById(elmnt.id + "header")) {
+    /* if present, the header is where you move the DIV from:*/
+    document.getElementById(elmnt.id + "header").onmousedown = dragMouseDown;
+  } else {
+    /* otherwise, move the DIV from anywhere inside the DIV:*/
+    elmnt.onmousedown = dragMouseDown;
+  }
+
+  function dragMouseDown(e) {
+    e = e || window.event;
+    e.preventDefault();
+    // get the mouse cursor position at startup:
+    pos3 = e.clientX;
+    pos4 = e.clientY;
+    document.onmouseup = closeDragElement;
+    // call a function whenever the cursor moves:
+    document.onmousemove = elementDrag;
+  }
+
+  function elementDrag(e) {
+    e = e || window.event;
+    e.preventDefault();
+    // calculate the new cursor position:
+    pos1 = pos3 - e.clientX;
+    pos2 = pos4 - e.clientY;
+    pos3 = e.clientX;
+    pos4 = e.clientY;
+    // set the element's new position:
+    elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+    elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+  }
+
+  function closeDragElement() {
+    /* stop moving when mouse button is released:*/
+    document.onmouseup = null;
+    document.onmousemove = null;
+  }
+}
 </script>
 <style>
     body {
@@ -274,6 +380,22 @@
 
 .callout-closebtn:hover {
   color: lightgrey;
+}
+
+.window {
+  position: absolute;
+  z-index: 9;
+  background-color: #f1f1f1;
+  text-align: center;
+  border: 1px solid #d3d3d3;
+}
+
+.window .header {
+  padding: 10px;
+  cursor: move;
+  z-index: 10;
+  background-color: #2196F3;
+  color: #fff;
 }
 </style>
 </html>
