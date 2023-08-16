@@ -208,7 +208,7 @@
     }
 
     function linkAdd() {
-        const newLink = {"title": document.getElementById("appsAddName").value, "url": document.getElementById("linksAddURL").value};
+        const newLink = {"title": document.getElementById("linksAddName").value, "url": document.getElementById("linksAddURL").value};
         config.links.push(newLink);
 
         updateConfig();
