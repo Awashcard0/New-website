@@ -9,11 +9,18 @@
     <div class="content">
         <header>
             <div class="header-content">
-                <p style="font-size: 20px;">New Tab</p>
+                <div class="dropdown">
+                    <p class="dropbtn" style="font-size: 20px;">New Tab</p>
+                    <div class="dropdown-content" id="appList">
+                      <a onclick="openApp('small', 'http://169.254.67.120:5500/', 'men')">Small</a>
+                      <a onclick="openApp('mid', 'http://169.254.67.120:5500/', 'men')">Mid</a>
+                      <a onclick="openApp('big', 'http://169.254.67.120:5500/', 'men')">Big</a>
+                    </div>
+                  </div>
                 <div class="links" id="links">
                     
                 </div>
-                <button onclick="openSettings('main')">Settings</button>
+                <button onclick="openSettings('main')" class="settingsButton">Settings</button>
             </div>
         </header>
         <main id="main">
@@ -36,7 +43,7 @@
 </body>
 <script>
 
-    let config = {"background": {"type": "staic", "data": "#0084ac"}, "links": [{"title": "Awashcard0", "url": "https://awashcard0.com"},{"title": "Youtube", "url": "https://yt.be"}]};
+    let config = {"background": {"type": "staic", "data": "#0084ac"}, "links": [{"title": "Awashcard0", "url": "https://awashcard0.com"},{"title": "Youtube", "url": "https://yt.be"}], "apps": [{"title": "Awashcard0", "url": "https://awashcard0.com/", "size": "big"},{"title": "Quick edit", "url": "https://quick-edit.pages.dev/", "size": "mid"}]};
 
     if (localStorage.getItem("data")) {
         config = JSON.parse(localStorage.getItem("data"));
@@ -59,6 +66,13 @@
         links += `<a href="${link.url}">${link.title}</a>\n`;
     });
     document.getElementById("links").innerHTML = links;
+
+    // apps
+    let apps = "";
+    config.apps.forEach(app => {
+        apps += `<a onclick="openApp('${app.size}', '${app.url}', '${app.title}')">${app.title}</a>\n`;
+    });
+    document.getElementById("appList").innerHTML = apps;
     
 
     function openSettings(page) {
@@ -109,6 +123,35 @@
             <h1>Export</h1>
             <button onclick="downloadFile()">Export as file</button>
             `;
+        } else if (page == "apps") {
+            let index = 0
+            let list = `
+            <h1>Apps</h1>
+            <p>Apps are under the "New Tab" text in the header</p>
+            <h1>Add</h1>
+            <p>Ender a title, url and size</p>
+            <input type="text" id="appsAddName" placeholder="Enter name for this app"> 
+            <input type="url" id="appsAddURL" placeholder="Enter url for this app">
+            <select id="appsAddSize">
+            <option value="small">Small</option>
+            <option value="mid">Medium</option>
+            <option value="big">Big</option>
+            </select>
+            <button onclick="appAdd()">Save</button>
+            <h3>Remove</h3>
+            <select id="appsRemove">
+            `;
+
+            config.apps.forEach(app => {
+                list += `<option value="${index}">${app.title}</option>\n`;
+                index++
+            });
+
+            list += `</select>
+            <button onclick="appRemove()">Remove</button>
+            `;
+
+            document.getElementById("settings-main").innerHTML = list
         } else {
             document.getElementById("settings-main").innerHTML = `
             <h1>Not found</h1>
@@ -116,24 +159,26 @@
         }
     }
 
-    function openApp(size) {
+    function openApp(size, url, title) {
         let sizePrams = ""
 
         if (size == "big") {
             sizePrams = 'width="950px" height="600px"'
         } else if (size == "small") {
             sizePrams = 'width="500px" height="250px"'
+        } else if (size == "mid") {
+            sizePrams = 'width="750px" height="450px"'
         }
 
         let app = document.createElement("div");
-        const id = Math.floor(500 * Math.random())
+        const id = Math.floor(999999 * Math.random())
         app.setAttribute('class', 'window');
         app.setAttribute('id', id);
         document.getElementById("main").appendChild(app);
 
         app.innerHTML = `
-        <div id="${id}header" class="header">Awashcard0</div>
-        <iframe ${sizePrams} src="//awashcard0.com"></iframe>
+        <div id="${id}header" class="header">${title}<span class="remove" onclick="document.getElementById('${id}').remove()">×</span></div>
+        <iframe ${sizePrams} src="${url}"></iframe>
         `
 
         dragElement(document.getElementById(id));
@@ -149,8 +194,21 @@
         updateConfig();
     }
 
+    function appAdd() {
+        const newApp = {"title": document.getElementById("appsAddName").value, "url": document.getElementById("appsAddURL").value, "size": document.getElementById("appsAddSize").value};
+        config.apps.push(newApp);
+
+        updateConfig();
+    }
+
+    function appRemove() {
+        config.apps.splice(parseInt(document.getElementById("appsRemove").value))
+
+        updateConfig();
+    }
+
     function linkAdd() {
-        const newLink = {"title": document.getElementById("linksAddName").value, "url": document.getElementById("linksAddURL").value};
+        const newLink = {"title": document.getElementById("appsAddName").value, "url": document.getElementById("linksAddURL").value};
         config.links.push(newLink);
 
         updateConfig();
@@ -200,24 +258,20 @@ function downloadFile() {
 
     function alertUser(title, description) {
         var callout = document.createElement("div");
-      callout.setAttribute('tabindex', 0);
       callout.setAttribute('class', 'callout');
       document.querySelector(".content").appendChild(callout);
 
       var calloutTitle = document.createElement("h1");
-      calloutTitle.setAttribute('tabindex', 0);
       calloutTitle.setAttribute('class', 'callout-title');
       calloutTitle.innerText = title;
       callout.appendChild(calloutTitle);
 
       var calloutText = document.createElement("div");
-      calloutText.setAttribute('tabindex', 0);
       calloutText.setAttribute('class', 'callout-main');
       calloutText.innerHTML = description;
       callout.appendChild(calloutText);
 
       var calloutClose = document.createElement("span");
-      calloutClose.setAttribute('tabindex', 0);
       calloutClose.setAttribute('class', 'callout-closebtn');
       calloutClose.setAttribute('onclick', 'document.querySelector(".content").removeChild(this.parentElement)')
       calloutClose.innerText = "×";
@@ -297,7 +351,7 @@ function downloadFile() {
         align-items: center;
     }
 
-    .header-content button {
+    .header-content .settingsButton {
         position: absolute;
         right: 5px;
     }
@@ -394,8 +448,54 @@ function downloadFile() {
   padding: 10px;
   cursor: move;
   z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   background-color: #2196F3;
   color: #fff;
 }
+
+.window .header .remove {
+  font-size: 25px;
+  cursor: pointer;
+}
+
+.dropbtn {
+  background: rgba(0,0,0,0.6);
+  box-shadow: rgb(0 0 0 / 37%) 0px 3.2px 7.2px 0px, rgb(0 0 0 / 35%) 0px 0.6px 1.8px 0px;
+  padding: 5px;
+  border-radius: 5px;
+  color: white;
+  margin: auto;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 5;
+}
+
+.dropdown-content a {
+  color: black;
+  cursor: pointer;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  cursor: pointer;
+}
+
+.dropdown-content a:hover {background-color: #ddd;}
+
+.dropdown:hover .dropdown-content {display: block;}
+
+.dropdown:hover .dropbtn {background-color: rgba(255, 255, 255, 0.6);}
 </style>
 </html>
