@@ -12,9 +12,7 @@
                 <div class="dropdown">
                     <p class="dropbtn" style="font-size: 20px;">New Tab</p>
                     <div class="dropdown-content" id="appList">
-                      <a onclick="openApp('small', 'http://169.254.67.120:5500/', 'men')">Small</a>
-                      <a onclick="openApp('mid', 'http://169.254.67.120:5500/', 'men')">Mid</a>
-                      <a onclick="openApp('big', 'http://169.254.67.120:5500/', 'men')">Big</a>
+                      
                     </div>
                   </div>
                 <div class="links" id="links">
@@ -76,8 +74,6 @@
     
 
     function openSettings(page) {
-        document.getElementById("settingsPage").showModal();
-
         if (page == "main") {
             document.getElementById("settings-main").innerHTML = `
             <h1>Main</h1>
@@ -157,6 +153,8 @@
             <h1>Not found</h1>
             `;
         }
+        
+        document.getElementById("settingsPage").showModal();
     }
 
     function openApp(size, url, title) {
