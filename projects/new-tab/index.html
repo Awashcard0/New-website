@@ -1,165 +1,503 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Camera</title>
-<style>
-body {
-  margin: 0;
-}
-
-.screenshot-image {
-  width: 150px;
-  height: 90px;
-  border-radius: 4px;
-  border: 2px solid whitesmoke;
-  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1);
-  position: absolute;
-  bottom: 5px;
-  left: 10px;
-  background: white;
-}
-
-.display-cover {
-  width: 100%;
-  height: 100%;
-  position: relative;
-}
-
-canvas {
-  display: none;
-}
-
-video {
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.2);
-}
-
-.menubar {
-  background-color: #616161;
-  padding: 5px 15px;
-  display: flex;
-  align-items: center;
-}
-
-.menubar button,
-.menubar input {
-  margin-left: 2.5px;
-}
-
-</style>
-<script>
-const controls = document.querySelector(".menubar");
-const cameraOptions = document.querySelector(".menubar>select");
-const video = document.querySelector("video");
-const canvas = document.querySelector("canvas");
-const screenshotImage = document.querySelector("img");
-const buttons = [...controls.querySelectorAll("button")];
-let streamStarted = false;
-
-const [play, pause, screenshot] = buttons;
-
-const constraints = {
-  video: {
-    width: {
-      min: 1280,
-      ideal: 1920,
-      max: 2560
-    },
-    height: {
-      min: 720,
-      ideal: 1080,
-      max: 1440
-    }
-  }
-};
-
-cameraOptions.onchange = () => {
-  const updatedConstraints = {
-    ...constraints,
-    deviceId: {
-      exact: cameraOptions.value
-    }
-  };
-
-  startStream(updatedConstraints);
-};
-
-play.onclick = () => {
-  if (streamStarted) {
-    video.play();
-    play.classList.add("d-none");
-    pause.classList.remove("d-none");
-    return;
-  }
-  if ("mediaDevices" in navigator && navigator.mediaDevices.getUserMedia) {
-    const updatedConstraints = {
-      ...constraints,
-      deviceId: {
-        exact: cameraOptions.value
-      }
-    };
-    startStream(updatedConstraints);
-  }
-};
-
-const pauseStream = () => {
-  video.pause();
-  play.classList.remove("d-none");
-  pause.classList.add("d-none");
-};
-
-const doScreenshot = () => {
-  canvas.width = video.videoWidth;
-  canvas.height = video.videoHeight;
-  canvas.getContext("2d").drawImage(video, 0, 0);
-  window.open(canvas.toDataURL("image/png").replace("image/png", "image/octet-stream"));
-};
-
-pause.onclick = pauseStream;
-screenshot.onclick = doScreenshot;
-
-const startStream = async (constraints) => {
-  const stream = await navigator.mediaDevices.getUserMedia(constraints);
-  handleStream(stream);
-};
-
-const handleStream = (stream) => {
-  video.srcObject = stream;
-  play.classList.add("d-none");
-  pause.classList.remove("d-none");
-  screenshot.classList.remove("d-none");
-};
-
-const getCameraSelection = async () => {
-  const devices = await navigator.mediaDevices.enumerateDevices();
-  const videoDevices = devices.filter((device) => device.kind === "videoinput");
-  const options = videoDevices.map((videoDevice) => {
-    return `<option value="${videoDevice.deviceId}">${videoDevice.label}</option>`;
-  });
-  cameraOptions.innerHTML = options.join("");
-};
-
-getCameraSelection();
-</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Tab</title>
 </head>
 <body>
-<div class="menubar">
-  <button title="Play">Play</i></button>
-  <button title="Pause">Pause</i></button>
-  <button title="Take Photo">Photo</i></button>
-  <select name="" id="" class="custom-select">
-    <option value="">Select camera</option>
-  </select>
-</div>
-<div class="display-cover">
-  <video controls autoplay></video>
-  <canvas class="d-none"></canvas>
-
-  <img class="screenshot-image d-none" alt="">
-</div>
+    <div class="content">
+        <header>
+            <div class="header-content">
+                <div class="dropdown">
+                    <p class="dropbtn" style="font-size: 20px;">New Tab</p>
+                    <div class="dropdown-content" id="appList">
+                      
+                    </div>
+                  </div>
+                <div class="links" id="links">
+                    
+                </div>
+                <button onclick="openSettings('main')" class="settingsButton">Settings</button>
+            </div>
+        </header>
+        <main id="main">
+        </main>
+    </div>
+    <dialog id="settingsPage">
+        <div class="settings-content">
+            <div class="side">
+                <button onclick="openSettings('main')">Main</button><br>
+                <button onclick="openSettings('links')">Links</button><br>
+                <button onclick="openSettings('apps')">Apps</button>
+                <button onclick="openSettings('inandout')">Import and save</button>
+            </div>
+            <div class="main" id="settings-main">
+                main
+            </div>
+        </div>
+        <button onclick="document.getElementById('settingsPage').close()">Close without saveing</button>
+    </dialog>
 </body>
+<script>
+
+    let config = {"background": {"type": "staic", "data": "#0084ac"}, "links": [{"title": "Awashcard0", "url": "https://awashcard0.com"},{"title": "Youtube", "url": "https://yt.be"}], "apps": [{"title": "Awashcard0", "url": "https://awashcard0.com/", "size": "big"},{"title": "Quick edit", "url": "https://quick-edit.pages.dev/", "size": "mid"}]};
+
+    if (localStorage.getItem("data")) {
+        config = JSON.parse(localStorage.getItem("data"));
+    } else {
+        alertUser("No settings file was found", `Do you want to import one? <br><br> <button onclick="openSettings('inandout')">Go to settings</button>`);
+    }
+
+    // Load settings
+
+    // background
+    if (config.background["type"] == "staic") {
+        document.body.style.backgroundColor = config.background["data"];
+    } else if (config.background["type"] == "img") {
+        document.body.style.backgroundImage = `url(${config.background["data"]})`;
+    }
+
+    // links
+    let links = "";
+    config.links.forEach(link => {
+        links += `<a href="${link.url}">${link.title}</a>\n`;
+    });
+    document.getElementById("links").innerHTML = links;
+
+    // apps
+    let apps = "";
+    config.apps.forEach(app => {
+        apps += `<a onclick="openApp('${app.size}', '${app.url}', '${app.title}')">${app.title}</a>\n`;
+    });
+    document.getElementById("appList").innerHTML = apps;
+    
+
+    function openSettings(page) {
+        if (page == "main") {
+            document.getElementById("settings-main").innerHTML = `
+            <h1>Main</h1>
+            <p>Main setting for new tab</p>
+            <br>
+            <h1>Background</h1>
+            <select id="settingsBackgroundPicker">
+                <option value="staic">Color</option>
+                <option value="img">Image</option>
+            </select>
+            <input type="text" id="settingsBackgroundText" placeholder="Enter hex code or URL">
+            <button onclick="settingsBackgroundPicker()">Submit</button>
+            `;
+        } else if (page == "links") {
+            let index = 0
+            let list = `
+            <h1>Links</h1>
+            <p>Link settings</p>
+            <h3>Add</h3>
+            <input type="text" id="linksAddName" placeholder="Enter name for link"> 
+            <input type="url" id="linksAddURL" placeholder="Enter url for link">
+            <button onclick="linkAdd()">Save</button>
+            <h3>Remove</h3>
+            <select id="linksRemove">
+            `;
+
+            config.links.forEach(link => {
+                list += `<option value="${index}">${link.title}</option>\n`;
+                index++
+            });
+
+            list += `</select>
+            <button onclick="linkRemove()">Remove</button>
+            `;
+
+            document.getElementById("settings-main").innerHTML = list
+        } else if (page == "inandout") {
+            document.getElementById("settings-main").innerHTML = `
+            <h1>Import and save</h1>
+            <p>Import and export your setting</p>
+            <h1>Import</h1>
+            <input accept=".newtab" type="file" id="json-file-input" onchange="readFileImport(event.target.files[0])">
+            <h1>Export</h1>
+            <button onclick="downloadFile()">Export as file</button>
+            `;
+        } else if (page == "apps") {
+            let index = 0
+            let list = `
+            <h1>Apps</h1>
+            <p>Apps are under the "New Tab" text in the header</p>
+            <h1>Add</h1>
+            <p>Ender a title, url and size</p>
+            <input type="text" id="appsAddName" placeholder="Enter name for this app"> 
+            <input type="url" id="appsAddURL" placeholder="Enter url for this app">
+            <select id="appsAddSize">
+            <option value="small">Small</option>
+            <option value="mid">Medium</option>
+            <option value="big">Big</option>
+            </select>
+            <button onclick="appAdd()">Save</button>
+            <h3>Remove</h3>
+            <select id="appsRemove">
+            `;
+
+            config.apps.forEach(app => {
+                list += `<option value="${index}">${app.title}</option>\n`;
+                index++
+            });
+
+            list += `</select>
+            <button onclick="appRemove()">Remove</button>
+            `;
+
+            document.getElementById("settings-main").innerHTML = list
+        } else {
+            document.getElementById("settings-main").innerHTML = `
+            <h1>Not found</h1>
+            `;
+        }
+        
+        document.getElementById("settingsPage").showModal();
+    }
+
+    function openApp(size, url, title) {
+        let sizePrams = ""
+
+        if (size == "big") {
+            sizePrams = 'width="950px" height="600px"'
+        } else if (size == "small") {
+            sizePrams = 'width="500px" height="250px"'
+        } else if (size == "mid") {
+            sizePrams = 'width="750px" height="450px"'
+        }
+
+        let app = document.createElement("div");
+        const id = Math.floor(999999 * Math.random())
+        app.setAttribute('class', 'window');
+        app.setAttribute('id', id);
+        document.getElementById("main").appendChild(app);
+
+        app.innerHTML = `
+        <div id="${id}header" class="header">${title}<span class="remove" onclick="document.getElementById('${id}').remove()">×</span></div>
+        <iframe ${sizePrams} src="${url}"></iframe>
+        `
+
+        dragElement(document.getElementById(id));
+    }
+
+    function settingsBackgroundPicker() {
+        let input = document.getElementById("settingsBackgroundText").value;
+        let select = document.getElementById("settingsBackgroundPicker").value;
+
+        config.background["data"] = input;
+        config.background["type"] = select;
+
+        updateConfig();
+    }
+
+    function appAdd() {
+        const newApp = {"title": document.getElementById("appsAddName").value, "url": document.getElementById("appsAddURL").value, "size": document.getElementById("appsAddSize").value};
+        config.apps.push(newApp);
+
+        updateConfig();
+    }
+
+    function appRemove() {
+        config.apps.splice(parseInt(document.getElementById("appsRemove").value))
+
+        updateConfig();
+    }
+
+    function linkAdd() {
+        const newLink = {"title": document.getElementById("linksAddName").value, "url": document.getElementById("linksAddURL").value};
+        config.links.push(newLink);
+
+        updateConfig();
+    }
+
+    function linkRemove() {
+        config.links.splice(parseInt(document.getElementById("linksRemove").value))
+
+        updateConfig();
+    }
+
+    function readFileImport(file) {
+  const reader = new FileReader();
+
+  reader.onload = event => {
+    const data = JSON.parse(event.target.result);
+    const name = file.name;
+
+    config = data;
+    updateConfig();
+
+  };
+
+  reader.onerror = error => error(`Error with reader: ${error}`);
+
+  reader.readAsText(file);
+}
+
+
+function downloadFile() {
+  const jsonData = JSON.stringify(config);
+  const blob = new Blob([jsonData], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+
+  const a = document.createElement('a');
+  a.download = `save.newtab`;
+  a.href = url;
+  a.click();
+
+  URL.revokeObjectURL(url);
+}
+
+    function updateConfig() {
+        localStorage.setItem("data", JSON.stringify(config))
+        window.location.reload();
+    }
+
+    function alertUser(title, description) {
+        var callout = document.createElement("div");
+      callout.setAttribute('class', 'callout');
+      document.querySelector(".content").appendChild(callout);
+
+      var calloutTitle = document.createElement("h1");
+      calloutTitle.setAttribute('class', 'callout-title');
+      calloutTitle.innerText = title;
+      callout.appendChild(calloutTitle);
+
+      var calloutText = document.createElement("div");
+      calloutText.setAttribute('class', 'callout-main');
+      calloutText.innerHTML = description;
+      callout.appendChild(calloutText);
+
+      var calloutClose = document.createElement("span");
+      calloutClose.setAttribute('class', 'callout-closebtn');
+      calloutClose.setAttribute('onclick', 'document.querySelector(".content").removeChild(this.parentElement)')
+      calloutClose.innerText = "×";
+      callout.appendChild(calloutClose);
+    }
+
+// code from w3schools (https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_draggable)
+
+    function dragElement(elmnt) {
+  var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+  if (document.getElementById(elmnt.id + "header")) {
+    /* if present, the header is where you move the DIV from:*/
+    document.getElementById(elmnt.id + "header").onmousedown = dragMouseDown;
+  } else {
+    /* otherwise, move the DIV from anywhere inside the DIV:*/
+    elmnt.onmousedown = dragMouseDown;
+  }
+
+  function dragMouseDown(e) {
+    e = e || window.event;
+    e.preventDefault();
+    // get the mouse cursor position at startup:
+    pos3 = e.clientX;
+    pos4 = e.clientY;
+    document.onmouseup = closeDragElement;
+    // call a function whenever the cursor moves:
+    document.onmousemove = elementDrag;
+  }
+
+  function elementDrag(e) {
+    e = e || window.event;
+    e.preventDefault();
+    // calculate the new cursor position:
+    pos1 = pos3 - e.clientX;
+    pos2 = pos4 - e.clientY;
+    pos3 = e.clientX;
+    pos4 = e.clientY;
+    // set the element's new position:
+    elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+    elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+  }
+
+  function closeDragElement() {
+    /* stop moving when mouse button is released:*/
+    document.onmouseup = null;
+    document.onmousemove = null;
+  }
+}
+</script>
+<style>
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background-color: #0084ac;
+        color: white;
+        background-repeat: no-repeat; 
+        background-size: cover;
+    }
+    
+    .content {
+        width: 100%;
+        height: 100%;
+        position: fixed;
+        z-index: 1;
+    }
+
+    header {
+        
+        background: rgba(0,0,0,0.6);
+        box-shadow: rgb(0 0 0 / 37%) 0px 3.2px 7.2px 0px, rgb(0 0 0 / 35%) 0px 0.6px 1.8px 0px;
+    }
+
+    .header-content {
+        height: 30px;
+        padding: 5px;
+        display: flex;
+        align-items: center;
+    }
+
+    .header-content .settingsButton {
+        position: absolute;
+        right: 5px;
+    }
+
+    .header-content .links {
+        height: 30px;
+        overflow-x: hidden;
+        overflow-y: clip;
+        
+    }
+
+    .header-content .links a {
+        color: white;
+        text-decoration: none;
+        margin-left: 5px;
+        padding: 5px;
+        cursor: pointer;
+        font-size: 20px;
+        height: 20px;
+        background: rgba(0,0,0,0.6);
+        border-radius: 5px;
+        display: inline-block;
+        max-width: 175px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .header-content .links a:hover {
+        background: rgba(255, 255, 255, 0.6);
+    }
+    
+    .settings-content {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        width: 100%;
+    }
+
+    .settings-content .side {
+        flex: 25%;
+        width: 25%;
+    }
+
+    .settings-content .main {
+        flex: 75%;
+        width: 75%;
+    }
+
+    .callout {
+  position: fixed;
+  bottom: 35px;
+  right: 20px;
+  margin-left: 20px;
+  max-width: 300px;
+}
+
+.callout-title {
+  margin-bottom: 0px;
+  padding: 25px 15px;
+  background: #555;
+  font-size: 30px;
+  color: white;
+}
+
+.callout-main {
+  padding: 15px;
+  background-color: #ccc;
+  color: black
+}
+
+.callout-closebtn {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  color: white;
+  font-size: 30px;
+  cursor: pointer;
+}
+
+.callout-closebtn:hover {
+  color: lightgrey;
+}
+
+.window {
+  position: absolute;
+  z-index: 9;
+  background-color: #f1f1f1;
+  text-align: center;
+  border: 1px solid #d3d3d3;
+}
+
+.window .header {
+  padding: 10px;
+  cursor: move;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #2196F3;
+  color: #fff;
+}
+
+.window .header .remove {
+  font-size: 25px;
+  cursor: pointer;
+}
+
+.window .header .remove:hover {
+  color: #5f5f5f;
+}
+
+.dropbtn {
+  background: rgba(0,0,0,0.6);
+  box-shadow: rgb(0 0 0 / 37%) 0px 3.2px 7.2px 0px, rgb(0 0 0 / 35%) 0px 0.6px 1.8px 0px;
+  padding: 5px;
+  border-radius: 5px;
+  color: white;
+  margin: auto;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 5;
+}
+
+.dropdown-content a {
+  color: black;
+  cursor: pointer;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  cursor: pointer;
+}
+
+.dropdown-content a:hover {background-color: #ddd;}
+
+.dropdown:hover .dropdown-content {display: block;}
+
+.dropdown:hover .dropbtn {background-color: rgba(255, 255, 255, 0.6);}
+</style>
 </html>
