@@ -8,10 +8,12 @@
 </head>
 <body>
     <h1>Camera</h1>
-    <input type="file" accept="video/*;capture=camcorder">
-    <input type="file" accept="audio/*;capture=microphone">
+    <device type="media" onchange="update(this.data)"></device>
+    <video autoplay></video>
 </body>
 <script>
-    
+    function update(stream) {
+    document.querySelector('video').src = stream.url;
+    }
 </script>
 </html>
