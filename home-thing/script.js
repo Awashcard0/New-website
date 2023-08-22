@@ -1,4 +1,5 @@
 let homeThingOpen = false;
+let online = false;
 
     document.addEventListener("DOMContentLoaded", function(e) {
     var homeButton = document.createElement("btn");
@@ -186,7 +187,12 @@ function startExit() {
       exitBackground.style.opacity = "1";
 
       exitNameElement.addEventListener('animationend', function() {
-        location.href = "https://awashcard0.pages.dev/"
+        if (online) {
+            location.href = "https://awashcard0.com/"
+        } else {
+            location.href = "https://awashcard0.pages.dev/"
+        }
+        
       });
 }
 
@@ -206,3 +212,13 @@ function tickFPS() {
   window.requestAnimationFrame(tickFPS);
 }
 tickFPS();
+
+fetch("https://awashcard0.com/")
+      .then(response => {
+        if (response.status === 200) {
+          online = true;
+        } else {
+          online = false;
+        }
+      }
+      );
