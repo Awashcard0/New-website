@@ -200,7 +200,7 @@
     }
 
     function appRemove() {
-        config.apps.splice(parseInt(document.getElementById("appsRemove").value))
+        config.apps.splice(parseInt(document.getElementById("appsRemove").value), 1)
 
         updateConfig();
     }
@@ -213,7 +213,7 @@
     }
 
     function linkRemove() {
-        config.links.splice(parseInt(document.getElementById("linksRemove").value))
+        config.links.splice(parseInt(document.getElementById("linksRemove").value), 1)
 
         updateConfig();
     }
