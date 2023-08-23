@@ -1,0 +1,114 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>Search Engine Selector</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        #configButton {
+            display: block;
+            margin: 20px auto;
+        }
+
+        #searchForm {
+            text-align: center;
+            margin: 20px auto;
+        }
+
+        #searchQuery {
+            padding: 5px;
+            width: 70%;
+        }
+
+        #configModal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-content {
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            width: 50%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .close {
+            float: right;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<h1>Search Engine Selector</h1>
+<button id="configButton">Configure Search Engine</button>
+<form id="searchForm" action method="GET">
+<input type="text" id="searchQuery" name="q" placeholder="Search..." required>
+<button type="submit">Search</button>
+</form>
+<div id="configModal" class="modal">
+<div class="modal-content">
+<span class="close">&times;</span>
+<h2>Search Engine Configuration</h2>
+<label for="searchEngine">Select Search Engine:</label>
+<select id="searchEngine">
+<option value="https://www.google.com/search">Google</option>
+<option value="https://www.bing.com/search">Bing</option>
+<option value="https://duckduckgo.com/">Duck Duck Go</option>
+<option value="https://search.yahoo.com/search">Yahoo</option>
+</select>
+<button id="saveConfig">Save Configuration</button>
+</div>
+</div>
+<script type="2deb0acd9035b6e92ff797e7-text/javascript">
+        document.addEventListener("DOMContentLoaded", function () {
+            const configButton = document.getElementById("configButton");
+            const configModal = document.getElementById("configModal");
+            const closeModal = document.querySelector(".close");
+            const saveConfigButton = document.getElementById("saveConfig");
+            const searchForm = document.getElementById("searchForm");
+            const searchQuery = document.getElementById("searchQuery");
+            const searchEngineSelector = document.getElementById("searchEngine");
+
+            configButton.addEventListener("click", function () {
+                configModal.style.display = "block";
+            });
+
+            closeModal.addEventListener("click", function () {
+                configModal.style.display = "none";
+            });
+
+            saveConfigButton.addEventListener("click", function () {
+                const selectedEngine = searchEngineSelector.value;
+                localStorage.setItem("searchEngine", selectedEngine);
+                configModal.style.display = "none";
+            });
+
+            searchForm.addEventListener("submit", function (event) {
+                event.preventDefault();
+                const selectedEngine = localStorage.getItem("searchEngine") || "https://www.google.com/search";
+                const query = searchQuery.value;
+                const searchURL = `${selectedEngine}?q=${encodeURIComponent(query)}`;
+                window.location.href = searchURL;
+            });
+        });
+    </script>
+<script src="/cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="2deb0acd9035b6e92ff797e7-|49" defer></script></body>
+</html>
