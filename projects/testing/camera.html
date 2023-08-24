@@ -51,7 +51,7 @@ const canvas = document.querySelector("canvas");
 const buttons = [...controls.querySelectorAll("button")];
 let streamStarted = false;
 
-const [play, pause, screenshot, pip] = buttons;
+const [play, pause, screenshot, pip, full] = buttons;
 
 const constraints = {
   video: {
@@ -160,6 +160,15 @@ pip.onclick = () => {
   }
 }
 
+full.onclick = () => {
+  if (video.requestFullscreen) {
+    video.requestFullscreen();
+  } else if (video.webkitRequestFullscreen) { /* Safari */
+    video.webkitRequestFullscreen();
+  } else if (video.msRequestFullscreen) { /* IE11 */
+    video.msRequestFullscreen();
+  }
+}
 
 getCameraSelection();
 </script>
@@ -170,12 +179,13 @@ getCameraSelection();
   <button title="Pause">Pause</i></button>
   <button title="Take Photo">Photo</i></button>
   <button title="Show webcam video in a floating window">Picture in picture</button>
+  <button title="Show webcam video in fullscreen">Picture in picture</button>
   <select name="" id="" class="custom-select">
     <option value="">Select camera</option>
   </select>
 </div>
 <div class="display-cover">
-  <video controls autoplay></video>
+  <video autoplay></video>
   <canvas class="d-none"></canvas>
 </div>
 </body>
