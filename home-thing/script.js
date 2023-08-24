@@ -18,6 +18,7 @@ let online = false;
   
         settingsPage.innerHTML = `
         <h1>Settings</h1>
+        <p>Tip: Press the button twice to go home</p>
         <span class="close" onclick="closeHomeThing(this.parentElement)">×</span>
         <a href="https://awashcard0.pages.dev/" class="homeLink">Go home</a>
         <button onclick="askForDarkMode()">Ask for dark mode</button>
