@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<style>
+body {
+  margin: 0;
+}
+
+.display-cover {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+canvas {
+  display: none;
+}
+
+video {
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.menubar {
+  background-color: #616161;
+  padding: 5px 15px;
+  display: flex;
+  align-items: center;
+}
+
+.menubar button,
+.menubar input {
+  margin-left: 2.5px;
+}
+</style>
+<script>
+const videoElem = document.getElementById("video");
+const startElem = document.getElementById("start");
+const stopElem = document.getElementById("stop");
+const controls = document.querySelector(".menubar");
+const buttons = [...controls.querySelectorAll("button")];
+const [play, pause, screenshot, pip, full] = buttons;
+
+// Options for getDisplayMedia()
+
+const displayMediaOptions = {
+  video: {
+    displaySurface: "window",
+  },
+  audio: false,
+};
+
+// Set event listeners for the start and stop buttons
+startElem.addEventListener(
+  "click",
+  (evt) => {
+    startCapture();
+  },
+  false,
+);
+
+stopElem.addEventListener(
+  "click",
+  (evt) => {
+    stopCapture();
+  },
+  false,
+);
+
+async function startCapture() {
+  try {
+    videoElem.srcObject =
+      await navigator.mediaDevices.getDisplayMedia(displayMediaOptions);
+    dumpOptionsInfo();
+  } catch (err) {
+    console.error(err);
+  }
+}
+
+function stopCapture(evt) {
+  let tracks = videoElem.srcObject.getTracks();
+
+  tracks.forEach((track) => track.stop());
+  videoElem.srcObject = null;
+}
+
+function dumpOptionsInfo() {
+  const videoTrack = videoElem.srcObject.getVideoTracks()[0];
+}
+
+pip.onclick = () => {
+  if (document.pictureInPictureElement) {
+    document.exitPictureInPicture();
+  } else if (document.pictureInPictureEnabled) {
+    videoElem.requestPictureInPicture();
+  }
+}
+
+full.onclick = () => {
+  if (videoElem.requestFullscreen) {
+    videoElem.requestFullscreen();
+  } else if (videoElem.webkitRequestFullscreen) { /* Safari */
+    videoElem.webkitRequestFullscreen();
+  } else if (videoElem.msRequestFullscreen) { /* IE11 */
+    videoElem.msRequestFullscreen();
+  }
+}
+
+</script>
+</head>
+<body>
+<div class="menubar">
+  <button id="start">Start Capture</button>
+  <button id="stop">Stop Capture</button>
+  <button title="Take Photo">Photo</i></button>
+  <button title="Show webcam video in a floating window">Picture in picture</button>
+  <button title="Show webcam video in fullscreen">Fullscreen</button>
+</div>
+
+<div class="display-cover">
+  <video id="video" autoplay></video>
+</div>
+</body>
+</html>
