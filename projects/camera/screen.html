@@ -48,6 +48,7 @@ const startElem = document.getElementById("start");
 const stopElem = document.getElementById("stop");
 const controls = document.querySelector(".menubar");
 const buttons = [...controls.querySelectorAll("button")];
+const canvas = document.querySelector("canvas");
 const [play, pause, screenshot, pip, full] = buttons;
 
 // Options for getDisplayMedia()
@@ -115,6 +116,19 @@ full.onclick = () => {
   }
 }
 
+const doScreenshot = () => {
+  video.pause();
+  canvas.width = video.videoWidth;
+  canvas.height = video.videoHeight;
+  canvas.getContext("2d").drawImage(video, 0, 0);
+  var dataURL = canvas.toDataURL("image/png");
+  var newTab = window.open('about:blank','image from canvas');
+  newTab.document.write("<img src='" + dataURL + "' alt='from canvas'/>");
+  video.play();
+};
+
+screenshot.onclick = doScreenshot;
+
 </script>
 </head>
 <body>
@@ -128,6 +142,7 @@ full.onclick = () => {
 
 <div class="display-cover">
   <video id="video" autoplay></video>
+  <canvas></canvas>
 </div>
 </body>
 </html>
