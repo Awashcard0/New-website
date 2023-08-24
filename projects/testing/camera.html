@@ -107,7 +107,22 @@ const doScreenshot = () => {
   canvas.width = video.videoWidth;
   canvas.height = video.videoHeight;
   canvas.getContext("2d").drawImage(video, 0, 0);
-  window.open(canvas.toDataURL("image/png").replace("image/png", "image/octet-stream"));
+  var downloadLink = document.createElement("a");
+  downloadLink.download = prompt("Enter file name\nMust end in .png");
+  downloadLink.innerHTML = "Download File";
+  if (window.webkitURL != null) {
+    // Chrome allows the link to be clicked
+    // without actually adding it to the DOM.
+    downloadLink.href = window.webkitURL.createObjectURL(canvas.toDataURL("image/png").replace("image/png", "image/octet-stream"));
+  } else {
+    // Firefox requires the link to be added to the DOM
+    // before it can be clicked.
+    downloadLink.href = window.URL.createObjectURL(canvas.toDataURL("image/png").replace("image/png", "image/octet-stream"));
+    downloadLink.onclick = destroyClickedElement;
+    downloadLink.style.display = "none";
+    document.body.appendChild(downloadLink);
+  }
+  downloadLink.click();
 };
 
 pause.onclick = pauseStream;
