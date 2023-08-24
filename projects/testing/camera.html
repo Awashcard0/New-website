@@ -104,6 +104,7 @@ const pauseStream = () => {
 };
 
 const doScreenshot = () => {
+  video.pause();
   let name = prompt("Enter file name\nMust end in .png");
   canvas.width = video.videoWidth;
   canvas.height = video.videoHeight;
@@ -114,16 +115,17 @@ const doScreenshot = () => {
   if (window.webkitURL != null) {
     // Chrome allows the link to be clicked
     // without actually adding it to the DOM.
-    downloadLink.href = window.webkitURL.createObjectURL(canvas.toDataURL("image/png").replace("image/png", "image/octet-stream"));
+    downloadLink.href = window.webkitURL.createObjectURL(canvas.toDataURL("image/png"));
   } else {
     // Firefox requires the link to be added to the DOM
     // before it can be clicked.
-    downloadLink.href = window.URL.createObjectURL(canvas.toDataURL("image/png").replace("image/png", "image/octet-stream"));
+    downloadLink.href = window.URL.createObjectURL(canvas.toDataURL("image/png"));
     downloadLink.onclick = destroyClickedElement;
     downloadLink.style.display = "none";
     document.body.appendChild(downloadLink);
   }
   downloadLink.click();
+  video.play();
 };
 
 pause.onclick = pauseStream;
