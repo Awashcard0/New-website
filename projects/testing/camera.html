@@ -104,11 +104,12 @@ const pauseStream = () => {
 };
 
 const doScreenshot = () => {
+  let name = prompt("Enter file name\nMust end in .png");
   canvas.width = video.videoWidth;
   canvas.height = video.videoHeight;
   canvas.getContext("2d").drawImage(video, 0, 0);
   var downloadLink = document.createElement("a");
-  downloadLink.download = prompt("Enter file name\nMust end in .png");
+  downloadLink.download = name || "download.png";
   downloadLink.innerHTML = "Download File";
   if (window.webkitURL != null) {
     // Chrome allows the link to be clicked
