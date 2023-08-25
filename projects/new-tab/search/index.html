@@ -1,21 +1,23 @@
-
 <!DOCTYPE html>
 <html>
 <head>
-<title>Search Engine Selector</title>
-<meta charset="UTF-8">
-<!-- Home thing -->
-<link rel="stylesheet" href="https://awashcard0.pages.dev/home-thing/style.css">
-<script src='https://awashcard0.pages.dev/home-thing/script.js'></script>
-<!-- End home thing -->
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<style>
+    <title>Search Engine Selector</title>
+    <style>
         body {
             font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            transition: background-color 0.3s ease;
+        }
+
+        /* Dark mode styles */
+        body.dark-mode {
+            background-color: #121212;
+            color: #ffffff;
         }
 
         h1 {
             text-align: center;
+            margin-top: 20px;
         }
 
         #configButton {
@@ -52,36 +54,56 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                top: -100%;
+            }
+            to {
+                top: 50%;
+            }
         }
 
         .close {
             float: right;
             cursor: pointer;
         }
+
+        /* Dark mode styles for the modal */
+        .modal-content.dark-mode {
+            background-color: #1f1f1f;
+            color: #ffffff;
+        }
     </style>
 </head>
 <body>
-<h1>Search Engine Selector</h1>
-<button id="configButton">Configure Search Engine</button>
-<form id="searchForm" action method="GET">
-<input type="text" id="searchQuery" name="q" placeholder="Search..." required>
-<button type="submit">Search</button>
-</form>
-<div id="configModal" class="modal">
-<div class="modal-content">
-<span class="close">&times;</span>
-<h2>Search Engine Configuration</h2>
-<label for="searchEngine">Select Search Engine:</label>
-<select id="searchEngine">
-<option value="https://www.google.com/search">Google</option>
-<option value="https://www.bing.com/search">Bing</option>
-<option value="https://duckduckgo.com/">Duck Duck Go</option>
-<option value="https://search.yahoo.com/search">Yahoo</option>
-</select>
-<button id="saveConfig">Save Configuration</button>
-</div>
-</div>
-<script>
+    <h1>Search Engine Selector</h1>
+
+    <button id="configButton">Configure Search Engine</button>
+
+    <form id="searchForm" action="" method="GET">
+        <input type="text" id="searchQuery" name="q" placeholder="Search..." required>
+        <button type="submit">Search</button>
+    </form>
+
+    <div id="configModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Search Engine Configuration</h2>
+            <label for="searchEngine">Select Search Engine:</label>
+            <select id="searchEngine">
+                <option value="https://www.google.com/search">Google</option>
+                <option value="https://www.bing.com/search">Bing</option>
+                <option value="https://duckduckgo.com/">Duck Duck Go</option>
+                <option value="https://search.yahoo.com/search">Yahoo</option>
+            </select>
+            <button id="saveConfig">Save Configuration</button>
+        </div>
+    </div>
+
+    <script>
         document.addEventListener("DOMContentLoaded", function () {
             const configButton = document.getElementById("configButton");
             const configModal = document.getElementById("configModal");
@@ -112,7 +134,25 @@
                 const searchURL = `${selectedEngine}?q=${encodeURIComponent(query)}`;
                 window.location.href = searchURL;
             });
+
+            // Toggle dark mode
+            const body = document.body;
+            const modalContent = document.querySelector(".modal-content");
+
+            function toggleDarkMode() {
+                body.classList.toggle("dark-mode");
+                modalContent.classList.toggle("dark-mode");
+            }
+
+            const darkModeToggleButton = document.createElement("button");
+            darkModeToggleButton.textContent = "Toggle Dark Mode";
+            darkModeToggleButton.addEventListener("click", toggleDarkMode);
+            darkModeToggleButton.style.position = "fixed";
+            darkModeToggleButton.style.top = "10px";
+            darkModeToggleButton.style.right = "10px";
+            darkModeToggleButton.style.zIndex = "1000";
+            document.body.appendChild(darkModeToggleButton);
         });
     </script>
-<script src="/cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="2deb0acd9035b6e92ff797e7-|49" defer></script></body>
+</body>
 </html>
