@@ -22,6 +22,7 @@
             </div>
         </header>
         <main id="main">
+            
         </main>
     </div>
     <dialog id="settingsPage">
@@ -41,7 +42,7 @@
 </body>
 <script>
 
-    let config = {"background": {"type": "staic", "data": "#0084ac"}, "links": [{"title": "Awashcard0", "url": "https://awashcard0.com"},{"title": "Youtube", "url": "https://yt.be"}], "apps": [{"title": "Search", "url": "./search", "size": "small"},{"title": "Awashcard0", "url": "https://awashcard0.com/", "size": "big"},{"title": "Quick edit", "url": "https://quick-edit.pages.dev/", "size": "mid"}]};
+    let config = {"background": {"type": "staic", "data": "#0084ac"}, "links": [{"title": "Awashcard0", "url": "https://awashcard0.com"},{"title": "Youtube", "url": "https://yt.be"}], "apps": [{"title": "Search", "url": "./search", "size": "small"},{"title": "Awashcard0", "url": "https://awashcard0.com/", "size": "big"},{"title": "Quick edit", "url": "https://quick-edit.pages.dev/", "size": "mid"}], "searchOnStart": true};
 
     if (localStorage.getItem("data")) {
         config = JSON.parse(localStorage.getItem("data"));
@@ -71,21 +72,52 @@
         apps += `<a onclick="openApp('${app.size}', '${app.url}', '${app.title}')">${app.title}</a>\n`;
     });
     document.getElementById("appList").innerHTML = apps;
-    
 
+    // search on start
+    if (config.searchOnStart) {
+        let app = document.createElement("div");
+        const id = "search"
+        app.setAttribute('class', 'window');
+        app.setAttribute('id', id);
+        app.setAttribute('style', 'position: absolute;')
+        document.getElementById("main").appendChild(app);
+
+        app.innerHTML = `
+        <div id="${id}header" style="position: absolute;" class="header">Search<span class="remove" onclick="document.getElementById('${id}').remove()">×</span></div>
+        <iframe width="500px" height="250px" src="./search"></iframe>
+        `
+
+        dragElement(document.getElementById(id));
+
+        const movingElement = document.getElementById(id);
+        const centerX = window.innerWidth / 2;
+        const centerY = window.innerHeight / 2;
+        const halfWidth = movingElement.offsetWidth / 2;
+        const halfHeight = movingElement.offsetHeight / 2;
+        const posX = centerX - halfWidth;
+        const posY = centerY - halfHeight;
+
+        // Set the element's position
+        movingElement.style.left = posX + 'px';
+        movingElement.style.top = posY + 'px';
+    }
+    
     function openSettings(page) {
         if (page == "main") {
             document.getElementById("settings-main").innerHTML = `
             <h1>Main</h1>
             <p>Main setting for new tab</p>
-            <br>
-            <h1>Background</h1>
+            <h3>Background</h3>
             <select id="settingsBackgroundPicker">
                 <option value="staic">Color</option>
                 <option value="img">Image</option>
             </select>
             <input type="text" id="settingsBackgroundText" placeholder="Enter hex code or URL">
             <button onclick="settingsBackgroundPicker()">Submit</button>
+            <h3>Search</h3>
+            <p>Search engine settings are found in the app (<button onclick="openApp('small', './search', 'Search')">Open app</button>)</p>
+            <input type="checkbox" id="showSearchOnLoad"><label for="showSearchOnLoad">Show search app on load</label>
+            <button onclick="showSearchOnLoad()">Save</button>
             `;
         } else if (page == "links") {
             let index = 0
@@ -214,6 +246,12 @@
 
     function linkRemove() {
         config.links.splice(parseInt(document.getElementById("linksRemove").value), 1)
+
+        updateConfig();
+    }
+
+    function showSearchOnLoad() {
+        config.searchOnStart = document.getElementById("showSearchOnLoad").checked;
 
         updateConfig();
     }
