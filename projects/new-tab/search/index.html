@@ -79,7 +79,7 @@
     </style>
 </head>
 <body>
-    <h1>Search Engine Selector</h1>
+    <h1>Search</h1>
 
     <button id="configButton">Configure Search Engine</button>
 
@@ -99,11 +99,14 @@
                 <option value="https://duckduckgo.com/">Duck Duck Go</option>
                 <option value="https://search.yahoo.com/search">Yahoo</option>
             </select>
+            <button style="position: fixed; top: 10px; right: 10px; z-index: 1000;" onclick="toggleDarkMode()">Toggle Dark Mode</button>
             <button id="saveConfig">Save Configuration</button>
         </div>
     </div>
 
     <script>
+            let config = JSON.parse(localStorage.getItem("searchAppConfig")) || {"eng": "https://www.google.com/search", "dark": false}
+
         document.addEventListener("DOMContentLoaded", function () {
             const configButton = document.getElementById("configButton");
             const configModal = document.getElementById("configModal");
@@ -123,36 +126,35 @@
 
             saveConfigButton.addEventListener("click", function () {
                 const selectedEngine = searchEngineSelector.value;
-                localStorage.setItem("searchEngine", selectedEngine);
+                config.eng = selectedEngine;
                 configModal.style.display = "none";
+                localStorage.setItem("searchAppConfig", JSON.stringify(config));
             });
 
             searchForm.addEventListener("submit", function (event) {
                 event.preventDefault();
-                const selectedEngine = localStorage.getItem("searchEngine") || "https://www.google.com/search";
+                const selectedEngine = config.eng || "https://www.google.com/search";
                 const query = searchQuery.value;
                 const searchURL = `${selectedEngine}?q=${encodeURIComponent(query)}`;
                 window.location.href = searchURL;
             });
+        });
 
-            // Toggle dark mode
-            const body = document.body;
+        // Toggle dark mode
+        const body = document.body;
             const modalContent = document.querySelector(".modal-content");
 
             function toggleDarkMode() {
+                config.dark = !config.dark;
+                body.classList.toggle("dark-mode");
+                modalContent.classList.toggle("dark-mode");
+                localStorage.setItem("searchAppConfig", JSON.stringify(config));
+            }
+
+            if (config.dark) {
                 body.classList.toggle("dark-mode");
                 modalContent.classList.toggle("dark-mode");
             }
-
-            const darkModeToggleButton = document.createElement("button");
-            darkModeToggleButton.textContent = "Toggle Dark Mode";
-            darkModeToggleButton.addEventListener("click", toggleDarkMode);
-            darkModeToggleButton.style.position = "fixed";
-            darkModeToggleButton.style.top = "10px";
-            darkModeToggleButton.style.right = "10px";
-            darkModeToggleButton.style.zIndex = "1000";
-            document.body.appendChild(darkModeToggleButton);
-        });
     </script>
 </body>
 </html>
