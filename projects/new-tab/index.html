@@ -32,6 +32,7 @@
                 <button onclick="openSettings('links')">Links</button><br>
                 <button onclick="openSettings('apps')">Apps</button>
                 <button onclick="openSettings('inandout')">Import and save</button>
+                <button onclick="openSettings('help')">Help</button>
             </div>
             <div class="main" id="settings-main">
                 main
@@ -180,6 +181,30 @@
             `;
 
             document.getElementById("settings-main").innerHTML = list
+        } else if (page == "help") {
+            document.getElementById("settings-main").innerHTML = `
+            <h1Help</h1>
+            <h3>Making this your default new tab</h3>
+            <p>I'm working on an extension for the Chrome Web Store I just have to figure out why Google keeps denying it</p>
+            <p>This extension is required because Chrome removed the functionality to set your own new tab page</p>
+            <h3>Links</h3>
+            <p>Try to use URL friendly characters to avoid brakeing</p>
+            <p>Links require a name and URL to go to</p>
+            <h3>Apps</h3>
+            <p>Apps only work if the website allows cros</p>
+            <p>Apps require a name, URL and size</p>
+            <p>
+                App sizes:
+                
+                Big: width="950px" height="600px"
+                Medium: = 'width="750px" height="450px"
+                Small: width="500px" height="250px"
+            </p>
+            <h3>Search app</h3>
+            <p>Settings for weather this opens when you load the page are in general</p>
+            <p>All other settings can be found within the app</p>
+            <p>Note: if you use another search website that doesn't get blocked by cross it won't be able to open on startup</p>
+            `;
         } else {
             document.getElementById("settings-main").innerHTML = `
             <h1>Not found</h1>
