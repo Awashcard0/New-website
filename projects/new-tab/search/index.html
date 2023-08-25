@@ -138,7 +138,7 @@
                 const searchURL = `${selectedEngine}?q=${encodeURIComponent(query)}`;
                 if ( window !== window.parent ) {
                     var data = searchURL;
-                    var event = new CustomEvent('leave', { detail: data });
+                    var event = new CustomEvent('leave', { "detail": data });
                     window.parent.document.dispatchEvent(event);
                 } else {     
                     window.location.href = searchURL;
