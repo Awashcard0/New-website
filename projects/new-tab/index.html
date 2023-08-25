@@ -254,6 +254,12 @@ function downloadFile() {
         window.location.reload();
     }
 
+    // Make search app work (https://stackoverflow.com/questions/9153445/how-to-communicate-between-iframe-and-the-parent-site)
+    window.document.addEventListener('leave', handleEvent, false)
+    function handleEvent(e) {
+        window.location.href = e.detail;
+    }
+
     function alertUser(title, description) {
         var callout = document.createElement("div");
       callout.setAttribute('class', 'callout');

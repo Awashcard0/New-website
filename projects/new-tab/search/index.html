@@ -136,7 +136,13 @@
                 const selectedEngine = config.eng || "https://www.google.com/search";
                 const query = searchQuery.value;
                 const searchURL = `${selectedEngine}?q=${encodeURIComponent(query)}`;
-                window.location.href = searchURL;
+                if ( window !== window.parent ) {
+                    var data = searchURL;
+                    var event = new CustomEvent('leave', { detail: data });
+                    window.parent.document.dispatchEvent(event);
+                } else {     
+                    window.location.href = searchURL;
+                }
             });
         });
 
