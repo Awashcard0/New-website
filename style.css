@@ -181,12 +181,22 @@ max-width: 500px;
 position: relative;
 transform: translate(-50%, -50%);
 animation: slideIn 0.3s ease;
+animation: slideOut 0.3s ease;
 opacity: 0;
 transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
 color: black;
 }
 
 @keyframes slideIn {
+  from {
+      top: -100%;
+  }
+  to {
+      top: 0;
+  }
+}
+
+@keyframes slideOut {
   from {
       top: -100%;
   }
