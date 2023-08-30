@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.xz.style/serve/inter.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@exampledev/new.css@1.1.2/new.min.css">
+    <!-- Home thing -->
+    <link rel="stylesheet" href="/home-thing/style.css">
+    <script src='/home-thing/script.js'></script>
+    <!-- End home thing -->
+    <title>Battery</title>
+</head>
+<body>
+    <div id="data">
+
+    </div>
+</body>
+<script>
+    // https://developer.mozilla.org/en-US/docs/Web/API/Battery_Status_API
+    navigator.getBattery().then((battery) => {
+  updateAllBatteryInfo();
+
+  battery.addEventListener("chargingchange", () => {
+    updateAllBatteryInfo();
+  });
+  battery.addEventListener("levelchange", () => {
+    updateAllBatteryInfo();
+  });
+  battery.addEventListener("chargingtimechange", () => {
+    updateAllBatteryInfo();
+  });
+  battery.addEventListener("dischargingtimechange", () => {
+    updateAllBatteryInfo();
+  });
+  function updateAllBatteryInfo() {
+    let data = "";
+
+    data =+ `Battery charging? ${battery.charging ? "Yes" : "No"}\n`;
+    data =+ `Battery level: ${battery.level * 100}%\n`;
+    data =+ `Battery charging time: ${battery.chargingTime} seconds\n`;
+    data =+ `Battery discharging time: ${battery.dischargingTime} seconds\n`;
+
+    document.getElementById("data").innerHTML = data;
+  }
+});
+
+</script>
+</html>
