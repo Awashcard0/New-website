@@ -36,10 +36,10 @@
   function updateAllBatteryInfo() {
     let data = "";
 
-    data += `Battery charging? ${battery.charging ? "Yes" : "No"}\n`;
-    data += `Battery level: ${battery.level * 100}%\n`;
-    data += `Battery charging time: ${battery.chargingTime} seconds\n`;
-    data += `Battery discharging time: ${battery.dischargingTime} seconds\n`;
+    data += `Battery charging? ${battery.charging ? "Yes" : "No"}<br>`;
+    data += `Battery level: ${battery.level * 100}%<br>`;
+    data += `Battery charging time: ${battery.chargingTime} seconds<br>`;
+    data += `Battery discharging time: ${battery.dischargingTime} seconds<br>`;
 
     document.getElementById("data").innerHTML = data;
   }
