@@ -41,6 +41,12 @@
     data += `Battery charging time: ${battery.chargingTime} seconds<br>`;
     data += `Battery discharging time: ${battery.dischargingTime} seconds<br>`;
 
+    // Check If user is on a desktop or has full power
+
+    if (battery.level * 100 == 100 && battery.chargingTime == 0) {
+        data = `You have a full battery or are useing a desktop`
+    }
+
     document.getElementById("data").innerHTML = data;
   }
 });
