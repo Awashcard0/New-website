@@ -40,9 +40,9 @@
     data += `Battery level: ${Math.round(battery.level * 100)}%<br>`;
 
     if (battery.charging) {
-      data += `Battery charging time: ${battery.chargingTime} seconds<br>`;
+      data += `Battery charging time: ${toTime(battery.chargingTime)}<br>`;
     } else {
-      data += `Battery discharging time: ${battery.dischargingTime} seconds<br>`; 
+      data += `Battery discharging time: ${toTime(battery.dischargingTime)}<br>`; 
     }
 
     // Check If user is on a desktop or has full power
@@ -54,6 +54,20 @@
     document.getElementById("data").innerHTML = data;
   }
 });
+
+// Im to lazy to figure out how to make this function myself 
+// https://sheeptester.github.io/javascripts/battery-inspection.html#:~:text=document.getElementById(%27charge%27)-,function%20toTime%20(seconds)%20%7B,%7D,-async%20function%20updateDisplay
+function toTime(seconds) {
+  if (!Number.isFinite(seconds)) {
+    return 'Some time'
+  } else if (seconds < 60) {
+    return `${seconds} second${seconds === 1 ? '' : 's'}`
+  } else if (seconds < 60 * 60) {
+    return `${seconds / 60 | 0}:${(seconds % 60).toFixed(0).padStart(2, '0')}`
+  } else {
+    return `${seconds / 60 / 60 | 0}:${(seconds / 60 % 60 | 0).toFixed(0).padStart(2, '0')}:${(seconds % 60).toFixed(0).padStart(2, '0')}`
+  }
+}
 
 </script>
 </html>
