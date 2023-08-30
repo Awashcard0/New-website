@@ -37,7 +37,7 @@
     let data = "";
 
     data += `Battery charging? ${battery.charging ? "Yes" : "No"}<br>`;
-    data += `Battery level: ${battery.level * 100}%<br>`;
+    data += `Battery level: ${Math.round(battery.level * 100)}%<br>`;
 
     if (battery.charging) {
       data += `Battery charging time: ${battery.chargingTime} seconds<br>`;
