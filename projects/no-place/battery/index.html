@@ -61,11 +61,11 @@ function toTime(seconds) {
   if (!Number.isFinite(seconds)) {
     return 'Some time'
   } else if (seconds < 60) {
-    return `${seconds} second${seconds === 1 ? '' : 's'}`
+    return `${seconds} second${seconds === 1 ? '' : 's'} (SS)`
   } else if (seconds < 60 * 60) {
-    return `${seconds / 60 | 0}:${(seconds % 60).toFixed(0).padStart(2, '0')}`
+    return `${seconds / 60 | 0}:${(seconds % 60).toFixed(0).padStart(2, '0')} (MM:SS)`
   } else {
-    return `${seconds / 60 / 60 | 0}:${(seconds / 60 % 60 | 0).toFixed(0).padStart(2, '0')}:${(seconds % 60).toFixed(0).padStart(2, '0')}`
+    return `${seconds / 60 / 60 | 0}:${(seconds / 60 % 60 | 0).toFixed(0).padStart(2, '0')}:${(seconds % 60).toFixed(0).padStart(2, '0')} (HH:MM:SS)`
   }
 }
 
