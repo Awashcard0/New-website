@@ -67,9 +67,9 @@
     `
     
     if (battery.charging) {
-      document.getElementById("chip").title = `Battery charging time: ${toTime(battery.chargingTime)}<br>`;
+      document.getElementById("chip").title = `Battery charging time: ${toTime(battery.chargingTime)}`;
     } else {
-      document.getElementById("chip").title = `Battery discharging time: ${toTime(battery.dischargingTime)}<br>`; 
+      document.getElementById("chip").title = `Battery discharging time: ${toTime(battery.dischargingTime)}`; 
     }
   }
 });
