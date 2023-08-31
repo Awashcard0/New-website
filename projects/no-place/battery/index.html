@@ -74,6 +74,44 @@ function toTime(seconds) {
   }
 }
 
+function battIcon(number, charging) {
+    if (charging) {
+        if (number >= 90) {
+            return icons["charging"]["full"];
+        } else if (number >= 80) {
+            return icons["charging"][90];
+        } else if (number >= 60) {
+            return icons["charging"][80];
+        } else if (number >= 50) {
+            return icons["charging"][60];
+        } else if (number >= 30) {
+            return icons["charging"][50];
+        } else if (number >= 20) {
+            return icons["charging"][30];
+        } else {
+            return icons["charging"][20];
+        }
+    } else {
+        if (number == 100) {
+            return icons["discharging"]["full"];
+        } else if (number >= 90) {
+            return icons["discharging"][90];
+        } else if (number >= 80) {
+            return icons["discharging"][80];
+        } else if (number >= 60) {
+            return icons["discharging"][60];
+        } else if (number >= 50) {
+            return icons["discharging"][50];
+        } else if (number >= 30) {
+            return icons["discharging"][30];
+        } else if (number >= 20) {
+            return icons["discharging"][20];
+        } else {
+            return icons["discharging"][0];
+        }
+    }
+}
+
 </script>
 <style>
   .material-symbols-outlined {
