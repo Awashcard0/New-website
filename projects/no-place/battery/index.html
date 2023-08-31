@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <link rel="stylesheet" href="https://fonts.xz.style/serve/inter.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@exampledev/new.css@1.1.2/new.min.css">
     <!-- Home thing -->
@@ -13,10 +14,14 @@
 </head>
 <body>
     <div id="data">
-
+      <span id="icon" class="material-symbols-outlined">
+        battery_unknown
+      </span>
     </div>
 </body>
 <script>
+  const icons = {"charging": {"full": "battery_charging_full", 90: "battery_charging_90", 80: "battery_charging_80", 60: "battery_charging_60", 50: "battery_charging_50", 30: "battery_charging_30", 20: "battery_charging_20"}, "discharging": {"full": "battery_full", 90: "battery_6_bar", 80: "battery_5_bar", 60: "battery_4_bar", 50: "battery_3_bar", 30: "battery_2_bar", 20: "battery_1_bar", 0: "battery_alert"}}
+
     // https://developer.mozilla.org/en-US/docs/Web/API/Battery_Status_API
     navigator.getBattery().then((battery) => {
   updateAllBatteryInfo();
@@ -70,4 +75,13 @@ function toTime(seconds) {
 }
 
 </script>
+<style>
+  .material-symbols-outlined {
+    font-variation-settings:
+    'FILL' 0,
+    'wght' 400,
+    'GRAD' 0,
+    'opsz' 24
+  }
+  </style>
 </html>
