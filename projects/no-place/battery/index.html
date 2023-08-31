@@ -65,6 +65,7 @@
     document.getElementById("chip").innerHTML = `
     <span id="icon" class="material-symbols-outlined">${battIcon(Math.round(battery.level * 100), battery.charging)}</span>${Math.round(battery.level * 100)}%
     `
+    
     if (battery.charging) {
       document.getElementById("chip").title = `Battery charging time: ${toTime(battery.chargingTime)}<br>`;
     } else {
