@@ -62,7 +62,7 @@
     document.getElementById("data").innerHTML = data;
     document.getElementById("icon").innerHTML = battIcon(Math.round(battery.level * 100), battery.charging);
 
-    document.getElementById("chip").innerHTML `
+    document.getElementById("chip").innerHTML = `
     <span id="icon" class="material-symbols-outlined">${battIcon(Math.round(battery.level * 100), battery.charging)}</span>${Math.round(battery.level * 100)}%
     `
     if (battery.charging) {
