@@ -71,4 +71,7 @@ if (remainingMinutes < 0 || elapsedSeconds < 1800) {
     sessionStorage.removeItem("sessionTime");
     location.reload();
 }
+startTime = sessionStorage.getItem('sessionTime') || Date.now();
+elapsedSeconds = Math.floor((Date.now() - startTime) / 1000);
+sessionStorage.setItem('sessionTime', startTime);
 }, 5000)
