@@ -31,6 +31,7 @@
                 <button onclick="openSettings('main')">Main</button><br>
                 <button onclick="openSettings('links')">Links</button><br>
                 <button onclick="openSettings('apps')">Apps</button>
+                <button onclick="openSettings('info')">Info chips</button>
                 <button onclick="openSettings('inandout')">Import and save</button>
                 <button onclick="openSettings('help')">Help</button>
             </div>
@@ -204,6 +205,15 @@
             <p>Settings for weather this opens when you load the page are in general</p>
             <p>All other settings can be found within the app</p>
             <p>Note: if you use another search website that doesn't get blocked by cross it won't be able to open on startup</p>
+            `;
+        } else if (page == "info") {
+            document.getElementById("settings-main").innerHTML = `
+            <h1>Info chips</h1>
+            <p>Info chips because I dont know what to call it</p>
+            <h3>Battery</h3>
+            <p>Show device battery and top bar. This will only work on chromium-based browsers. <a title="What, did you think I was going to tell you" href="https://developer.mozilla.org/en-US/docs/Web/API/Battery_Status_API#browser_compatibility">What browsers are supported?</a></p>
+            <input type="checkbox" id="showBattery"><label for="showBattery">Show battery and top bar</label>
+            <button onclick="showBattery()">Save</button>
             `;
         } else {
             document.getElementById("settings-main").innerHTML = `
