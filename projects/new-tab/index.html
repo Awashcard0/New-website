@@ -44,7 +44,7 @@
 </body>
 <script>
 
-    let config = {"background": {"type": "staic", "data": "#0084ac"}, "links": [{"title": "Awashcard0", "url": "https://awashcard0.com"},{"title": "Youtube", "url": "https://yt.be"}], "apps": [{"title": "Search", "url": "./search", "size": "small"},{"title": "Awashcard0", "url": "https://awashcard0.com/", "size": "big"},{"title": "Quick edit", "url": "https://quick-edit.pages.dev/", "size": "mid"}], "searchOnStart": true};
+    let config = {"background": {"type": "staic", "data": "#0084ac"}, "links": [{"title": "Awashcard0", "url": "https://awashcard0.com"},{"title": "Youtube", "url": "https://yt.be"}], "apps": [{"title": "Search", "url": "./search", "size": "small"},{"title": "Awashcard0", "url": "https://awashcard0.com/", "size": "big"},{"title": "Quick edit", "url": "https://quick-edit.pages.dev/", "size": "mid"}], "searchOnStart": true, "showBattery": true};
 
     if (localStorage.getItem("data")) {
         config = JSON.parse(localStorage.getItem("data"));
@@ -212,7 +212,7 @@
             <p>Info chips because I dont know what to call it</p>
             <h3>Battery</h3>
             <p>Show device battery and top bar. This will only work on chromium-based browsers. <a title="What, did you think I was going to tell you" href="https://developer.mozilla.org/en-US/docs/Web/API/Battery_Status_API#browser_compatibility">What browsers are supported?</a></p>
-            <input type="checkbox" id="showBattery"><label for="showBattery">Show battery and top bar</label>
+            <input type="checkbox" id="showBattery"><label for="showBattery">Show battery in top bar</label>
             <button onclick="showBattery()">Save</button>
             `;
         } else {
@@ -287,6 +287,12 @@
 
     function showSearchOnLoad() {
         config.searchOnStart = document.getElementById("showSearchOnLoad").checked;
+
+        updateConfig();
+    }
+
+    function showBattery() {
+        config.showBattery = document.getElementById("showBattery").checked;
 
         updateConfig();
     }
