@@ -403,6 +403,36 @@ function downloadFile() {
     document.onmousemove = null;
   }
 }
+
+if (config.showBattery) {
+    navigator.getBattery().then((battery) => {
+      updateAllBatteryInfo();
+    
+      battery.addEventListener("chargingchange", () => {
+        updateAllBatteryInfo();
+      });
+      battery.addEventListener("levelchange", () => {
+        updateAllBatteryInfo();
+      });
+      battery.addEventListener("chargingtimechange", () => {
+        updateAllBatteryInfo();
+      });
+      battery.addEventListener("dischargingtimechange", () => {
+        updateAllBatteryInfo();
+      });
+    function updateAllBatteryInfo() {
+        document.getElementById("battry").innerHTML = `
+        <span id="icon" class="material-symbols-outlined">${battIcon(Math.round(battery.level * 100), battery.charging)}</span>${Math.round(battery.level * 100)}%
+        `
+        
+        if (battery.charging) {
+          document.getElementById("battry").title = `Battery charging time: ${toTime(battery.chargingTime)}`;
+        } else {
+          document.getElementById("battry").title = `Battery discharging time: ${toTime(battery.dischargingTime)}`; 
+        }
+      }
+    });
+}
 </script>
 <style>
     body {
