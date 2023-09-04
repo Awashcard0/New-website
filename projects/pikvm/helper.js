@@ -48,7 +48,7 @@ let startTime = sessionStorage.getItem('sessionTime') || Date.now();
 let elapsedSeconds = Math.floor((Date.now() - startTime) / 1000);
 sessionStorage.setItem('sessionTime', startTime);
 
-if (elapsedSeconds < 1800) {
+if (elapsedSeconds < 1800 || remainingMinutes < 0) {
   let remainingSeconds = 1800 - elapsedSeconds;
   setTimeout(() => {
     //  time over
@@ -64,11 +64,14 @@ let remainingMinutes = Math.floor((3600 - elapsedSeconds) / 60);
 let remainingSecondsDisplay = (3600 - elapsedSeconds) % 60;
 
 setTimeout(() => {
-if (remainingMinutes < 0) {
+if (remainingMinutes < 0 || elapsedSeconds < 1800) {
     console.log("time done");
     sessionStorage.setItem('sessionTime', startTime);
     sessionStorage.removeItem("name");
     sessionStorage.removeItem("sessionTime");
     location.reload();
 }
+startTime = sessionStorage.getItem('sessionTime') || Date.now();
+elapsedSeconds = Math.floor((Date.now() - startTime) / 1000);
+sessionStorage.setItem('sessionTime', startTime);
 }, 5000)

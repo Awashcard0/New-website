@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <title>New Tab</title>
 </head>
 <body>
@@ -10,7 +11,7 @@
         <header>
             <div class="header-content">
                 <div class="dropdown">
-                    <p class="dropbtn" style="font-size: 20px;">New Tab</p>
+                    <div class="dropbtn" style="font-size: 20px;">New Tab <div class="infoChips" id="infoChips"></div></div>
                     <div class="dropdown-content" id="appList">
                       
                     </div>
@@ -30,8 +31,9 @@
             <div class="side">
                 <button onclick="openSettings('main')">Main</button><br>
                 <button onclick="openSettings('links')">Links</button><br>
-                <button onclick="openSettings('apps')">Apps</button>
-                <button onclick="openSettings('inandout')">Import and save</button>
+                <button onclick="openSettings('apps')">Apps</button><br>
+                <button onclick="openSettings('info')">Info chips</button><br>
+                <button onclick="openSettings('inandout')">Import and save</button><br>
                 <button onclick="openSettings('help')">Help</button>
             </div>
             <div class="main" id="settings-main">
@@ -43,7 +45,7 @@
 </body>
 <script>
 
-    let config = {"background": {"type": "staic", "data": "#0084ac"}, "links": [{"title": "Awashcard0", "url": "https://awashcard0.com"},{"title": "Youtube", "url": "https://yt.be"}], "apps": [{"title": "Search", "url": "./search", "size": "small"},{"title": "Awashcard0", "url": "https://awashcard0.com/", "size": "big"},{"title": "Quick edit", "url": "https://quick-edit.pages.dev/", "size": "mid"}], "searchOnStart": true};
+    let config = {"background": {"type": "staic", "data": "#0084ac"}, "links": [{"title": "Awashcard0", "url": "https://awashcard0.com"},{"title": "Youtube", "url": "https://yt.be"}], "apps": [{"title": "Search", "url": "./search", "size": "small"},{"title": "Awashcard0", "url": "https://awashcard0.com/", "size": "big"},{"title": "Quick edit", "url": "https://quick-edit.pages.dev/", "size": "mid"}], "searchOnStart": true, "infoChips": {"showBattery": true}};
 
     if (localStorage.getItem("data")) {
         config = JSON.parse(localStorage.getItem("data"));
@@ -102,7 +104,16 @@
         movingElement.style.left = posX + 'px';
         movingElement.style.top = posY + 'px';
     }
-    
+
+    // Info chips
+    let chips = ""
+    // Battery
+    if (config.infoChips.showBattery) {
+      chips += `<div id="battery"></div>`
+    }
+
+    document.getElementById("infoChips").innerHTML = chips
+
     function openSettings(page) {
         if (page == "main") {
             document.getElementById("settings-main").innerHTML = `
@@ -205,6 +216,15 @@
             <p>All other settings can be found within the app</p>
             <p>Note: if you use another search website that doesn't get blocked by cross it won't be able to open on startup</p>
             `;
+        } else if (page == "info") {
+            document.getElementById("settings-main").innerHTML = `
+            <h1>Info chips</h1>
+            <p>Info chips because I dont know what to call it</p>
+            <h3>Battery</h3>
+            <p>Show device battery and top bar. This will only work on chromium-based browsers. <a title="What, did you think I was going to tell you" href="https://developer.mozilla.org/en-US/docs/Web/API/Battery_Status_API#browser_compatibility">What browsers are supported?</a></p>
+            <input type="checkbox" id="showBatteryCheckbox"><label for="showBatteryCheckbox">Show battery in top bar</label>
+            <button onclick="showBattery()">Save</button>
+            `;
         } else {
             document.getElementById("settings-main").innerHTML = `
             <h1>Not found</h1>
@@ -277,6 +297,12 @@
 
     function showSearchOnLoad() {
         config.searchOnStart = document.getElementById("showSearchOnLoad").checked;
+
+        updateConfig();
+    }
+
+    function showBattery() {
+        config.infoChips.showBattery = document.getElementById("showBatteryCheckbox").checked;
 
         updateConfig();
     }
@@ -387,8 +413,101 @@ function downloadFile() {
     document.onmousemove = null;
   }
 }
+
+const icons = {"charging": {"full": "battery_charging_full", 90: "battery_charging_90", 80: "battery_charging_80", 60: "battery_charging_60", 50: "battery_charging_50", 30: "battery_charging_30", 20: "battery_charging_20"}, "discharging": {"full": "battery_full", 90: "battery_6_bar", 80: "battery_5_bar", 60: "battery_4_bar", 50: "battery_3_bar", 30: "battery_2_bar", 20: "battery_1_bar", 0: "battery_alert"}}
+
+if (config.infoChips.showBattery) {
+    navigator.getBattery().then((battery) => {
+      updateAllBatteryInfo();
+    
+      battery.addEventListener("chargingchange", () => {
+        updateAllBatteryInfo();
+      });
+      battery.addEventListener("levelchange", () => {
+        updateAllBatteryInfo();
+      });
+      battery.addEventListener("chargingtimechange", () => {
+        updateAllBatteryInfo();
+      });
+      battery.addEventListener("dischargingtimechange", () => {
+        updateAllBatteryInfo();
+      });
+    function updateAllBatteryInfo() {
+        document.getElementById("battery").innerHTML = `
+        <span id="icon" class="material-symbols-outlined">${battIcon(Math.round(battery.level * 100), battery.charging)}</span>${Math.round(battery.level * 100)}%
+        `
+        
+        if (battery.charging) {
+          document.getElementById("battery").title = `Battery charging time: ${toTime(battery.chargingTime)}`;
+        } else {
+          document.getElementById("battery").title = `Battery discharging time: ${toTime(battery.dischargingTime)}`; 
+        }
+      }
+    });
+}
+
+// Im to lazy to figure out how to make this function myself 
+// https://sheeptester.github.io/javascripts/battery-inspection.html#:~:text=document.getElementById(%27charge%27)-,function%20toTime%20(seconds)%20%7B,%7D,-async%20function%20updateDisplay
+function toTime(seconds) {
+  if (!Number.isFinite(seconds)) {
+    return 'Some time'
+  } else if (seconds < 60) {
+    return `${seconds} second${seconds === 1 ? '' : 's'} (SS)`
+  } else if (seconds < 60 * 60) {
+    return `${seconds / 60 | 0}:${(seconds % 60).toFixed(0).padStart(2, '0')} (MM:SS)`
+  } else {
+    return `${seconds / 60 / 60 | 0}:${(seconds / 60 % 60 | 0).toFixed(0).padStart(2, '0')}:${(seconds % 60).toFixed(0).padStart(2, '0')} (HH:MM:SS)`
+  }
+}
+
+function battIcon(number, charging) {
+    if (charging) {
+        if (number >= 90) {
+            return icons["charging"]["full"];
+        } else if (number >= 80) {
+            return icons["charging"][90];
+        } else if (number >= 60) {
+            return icons["charging"][80];
+        } else if (number >= 50) {
+            return icons["charging"][60];
+        } else if (number >= 30) {
+            return icons["charging"][50];
+        } else if (number >= 20) {
+            return icons["charging"][30];
+        } else {
+            return icons["charging"][20];
+        }
+    } else {
+        if (number == 100) {
+            return icons["discharging"]["full"];
+        } else if (number >= 90) {
+            return icons["discharging"][90];
+        } else if (number >= 80) {
+            return icons["discharging"][80];
+        } else if (number >= 60) {
+            return icons["discharging"][60];
+        } else if (number >= 50) {
+            return icons["discharging"][50];
+        } else if (number >= 30) {
+            return icons["discharging"][30];
+        } else if (number >= 20) {
+            return icons["discharging"][20];
+        } else {
+            return icons["discharging"][0];
+        }
+    }
+}
+
 </script>
 <style>
+    .material-symbols-outlined {
+      font-variation-settings:
+      'FILL' 0,
+      'wght' 400,
+      'GRAD' 0,
+      'opsz' 24
+    }
+
     body {
         margin: 0;
         font-family: Arial, sans-serif;
@@ -531,6 +650,10 @@ function downloadFile() {
   color: #5f5f5f;
 }
 
+.infoChips {
+    display: inline-block;
+}
+
 .dropbtn {
   background: rgba(0,0,0,0.6);
   box-shadow: rgb(0 0 0 / 37%) 0px 3.2px 7.2px 0px, rgb(0 0 0 / 35%) 0px 0.6px 1.8px 0px;
@@ -538,6 +661,7 @@ function downloadFile() {
   border-radius: 5px;
   color: white;
   margin: auto;
+  display: inline-block;
 }
 
 .dropdown {
