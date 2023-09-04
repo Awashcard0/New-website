@@ -222,7 +222,7 @@
             <p>Info chips because I dont know what to call it</p>
             <h3>Battery</h3>
             <p>Show device battery and top bar. This will only work on chromium-based browsers. <a title="What, did you think I was going to tell you" href="https://developer.mozilla.org/en-US/docs/Web/API/Battery_Status_API#browser_compatibility">What browsers are supported?</a></p>
-            <input type="checkbox" id="showBattery"><label for="showBattery">Show battery in top bar</label>
+            <input type="checkbox" id="showBatteryCheckbox"><label for="showBatteryCheckbox">Show battery in top bar</label>
             <button onclick="showBattery()">Save</button>
             `;
         } else {
@@ -302,7 +302,7 @@
     }
 
     function showBattery() {
-        config.infoChips.showBattery = document.getElementById("showBattery").checked;
+        config.infoChips.showBattery = document.getElementById("showBatteryCheckbox").checked;
 
         updateConfig();
     }
