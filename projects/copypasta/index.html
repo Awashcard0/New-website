@@ -13,7 +13,19 @@
 </head>
 <body>
     <header>
-        
+        <h1>Welcome to copypasta</h1>
+        <p>Copypasta is my place for goofy things you can copy for like a kahoot or something</p>
     </header>
+    <body>
+        <button onclick="copy('ඞ')">ඞ</button>
+        <button onclick="copy('ㅤ')">ㅤ</button>
+        <button onclick="copy('🙪')">🙪</button>
+        <button onclick="copy('❚')">❚</button>
+    </body>
 </body>
+<script>
+    function copy(text) {
+        navigator.clipboard.writeText(text);
+    }
+</script>
 </html>
