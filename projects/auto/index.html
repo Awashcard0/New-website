@@ -188,16 +188,15 @@ function autocomplete(inp, arr) {
 
 /*An array containing all the country names in the world:*/
 let text = ""
-var textList
+let textList
 fetch("./list.txt")
    .then(response => response.text())
    .then((response) => {
        text = response;
         textList = text.split('\n');
+        autocomplete(document.getElementById("myInput"), textList);
    });
 
-/*initiate the autocomplete function on the "myInput" element, and pass along the countries array as possible autocomplete values:*/
-autocomplete(document.getElementById("myInput"), textList);
 </script>
 
 </body>
