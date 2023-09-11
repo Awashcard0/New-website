@@ -75,6 +75,8 @@ input[type=submit] {
 
 <h2>Autocomplete</h2>
 
+<p>Your text</p>
+
 <p>Start typing:</p>
 
 <!--Make sure the form has the autocomplete function switched off:-->
@@ -186,14 +188,13 @@ function autocomplete(inp, arr) {
 
 /*An array containing all the country names in the world:*/
 let text = ""
+var textList
 fetch("./list.txt")
    .then(response => response.text())
    .then((response) => {
        text = response;
-   })
-
-var textList = text.split('\n');
-
+        textList = text.split('\n');
+   });
 
 /*initiate the autocomplete function on the "myInput" element, and pass along the countries array as possible autocomplete values:*/
 autocomplete(document.getElementById("myInput"), textList);
