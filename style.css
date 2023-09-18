@@ -134,10 +134,12 @@ border-radius: 20px;
 body.dark-mode {
 background-color: #111;
 color: #fff;
+transition: background-color 0.4s ease;
 }
 
 header.dark-mode {
 background-color: #222;
+transition: background-color 0.4s ease;
 }
 
 input.dark-mode:checked + .slider {
