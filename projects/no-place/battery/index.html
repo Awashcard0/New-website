@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="https://fonts.xz.style/serve/inter.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@exampledev/new.css@1.1.2/new.min.css">
+    <!-- Home thing -->
+    <link rel="stylesheet" href="/home-thing/style.css">
+    <script src='/home-thing/script.js'></script>
+    <!-- End home thing -->
+    <title>Battery</title>
+</head>
+<body>
+  <p>List:</p>
+    <div id="data"></div>
+    <p>Icon:</p>
+    <span id="icon" class="material-symbols-outlined">
+      battery_unknown
+    </span>
+    <p>Chip:</p>
+    <div id="chip" title="Loading..."> </div>
+</body>
+<script>
+  const icons = {"charging": {"full": "battery_charging_full", 90: "battery_charging_90", 80: "battery_charging_80", 60: "battery_charging_60", 50: "battery_charging_50", 30: "battery_charging_30", 20: "battery_charging_20"}, "discharging": {"full": "battery_full", 90: "battery_6_bar", 80: "battery_5_bar", 60: "battery_4_bar", 50: "battery_3_bar", 30: "battery_2_bar", 20: "battery_1_bar", 0: "battery_alert"}}
+
+    // https://developer.mozilla.org/en-US/docs/Web/API/Battery_Status_API
+    navigator.getBattery().then((battery) => {
+  updateAllBatteryInfo();
+
+  battery.addEventListener("chargingchange", () => {
+    updateAllBatteryInfo();
+  });
+  battery.addEventListener("levelchange", () => {
+    updateAllBatteryInfo();
+  });
+  battery.addEventListener("chargingtimechange", () => {
+    updateAllBatteryInfo();
+  });
+  battery.addEventListener("dischargingtimechange", () => {
+    updateAllBatteryInfo();
+  });
+  function updateAllBatteryInfo() {
+    let data = "";
+
+    data += `Battery charging? ${battery.charging ? "Yes" : "No"}<br>`;
+    data += `Battery level: ${Math.round(battery.level * 100)}%<br>`;
+
+    if (battery.charging) {
+      data += `Battery charging time: ${toTime(battery.chargingTime)}<br>`;
+    } else {
+      data += `Battery discharging time: ${toTime(battery.dischargingTime)}<br>`; 
+    }
+
+    // Check If user is on a desktop or has full power
+
+    if (battery.level * 100 == 100 && battery.chargingTime == 0) {
+        data = `You have a full battery or are useing a desktop`;
+    }
+
+    document.getElementById("data").innerHTML = data;
+    document.getElementById("icon").innerHTML = battIcon(Math.round(battery.level * 100), battery.charging);
+
+    document.getElementById("chip").innerHTML = `
+    <span id="icon" class="material-symbols-outlined">${battIcon(Math.round(battery.level * 100), battery.charging)}</span>${Math.round(battery.level * 100)}%
+    `
+    
+    if (battery.charging) {
+      document.getElementById("chip").title = `Battery charging time: ${toTime(battery.chargingTime)}`;
+    } else {
+      document.getElementById("chip").title = `Battery discharging time: ${toTime(battery.dischargingTime)}`; 
+    }
+  }
+});
+
+// Im to lazy to figure out how to make this function myself 
+// https://sheeptester.github.io/javascripts/battery-inspection.html#:~:text=document.getElementById(%27charge%27)-,function%20toTime%20(seconds)%20%7B,%7D,-async%20function%20updateDisplay
+function toTime(seconds) {
+  if (!Number.isFinite(seconds)) {
+    return 'Some time'
+  } else if (seconds < 60) {
+    return `${seconds} second${seconds === 1 ? '' : 's'} (SS)`
+  } else if (seconds < 60 * 60) {
+    return `${seconds / 60 | 0}:${(seconds % 60).toFixed(0).padStart(2, '0')} (MM:SS)`
+  } else {
+    return `${seconds / 60 / 60 | 0}:${(seconds / 60 % 60 | 0).toFixed(0).padStart(2, '0')}:${(seconds % 60).toFixed(0).padStart(2, '0')} (HH:MM:SS)`
+  }
+}
+
+function battIcon(number, charging) {
+    if (charging) {
+        if (number >= 90) {
+            return icons["charging"]["full"];
+        } else if (number >= 80) {
+            return icons["charging"][90];
+        } else if (number >= 60) {
+            return icons["charging"][80];
+        } else if (number >= 50) {
+            return icons["charging"][60];
+        } else if (number >= 30) {
+            return icons["charging"][50];
+        } else if (number >= 20) {
+            return icons["charging"][30];
+        } else {
+            return icons["charging"][20];
+        }
+    } else {
+        if (number == 100) {
+            return icons["discharging"]["full"];
+        } else if (number >= 90) {
+            return icons["discharging"][90];
+        } else if (number >= 80) {
+            return icons["discharging"][80];
+        } else if (number >= 60) {
+            return icons["discharging"][60];
+        } else if (number >= 50) {
+            return icons["discharging"][50];
+        } else if (number >= 30) {
+            return icons["discharging"][30];
+        } else if (number >= 20) {
+            return icons["discharging"][20];
+        } else {
+            return icons["discharging"][0];
+        }
+    }
+}
+
+</script>
+<style>
+  .material-symbols-outlined {
+    font-variation-settings:
+    'FILL' 0,
+    'wght' 400,
+    'GRAD' 0,
+    'opsz' 24
+  }
+  </style>
+</html>

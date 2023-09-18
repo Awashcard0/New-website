@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Home thing -->
+    <link rel="stylesheet" href="/home-thing/style.css">
+    <script src='/home-thing/script.js'></script>
+    <!-- End home thing -->
+    <link rel="stylesheet" href="https://fonts.xz.style/serve/inter.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@exampledev/new.css@1.1.2/new.min.css">
+    <title>Copypasta</title>
+</head>
+<body>
+    <header>
+        <h1>Welcome to copypasta</h1>
+        <p>Copypasta is my place for goofy things you can copy for like a kahoot or something</p>
+    </header>
+    <main>
+        <button onclick="copy('ඞ')">ඞ</button>
+        <button onclick="copy('ㅤ')">ㅤ</button>
+        <button onclick="copy('🙪')">🙪</button>
+        <button onclick="copy('❚')">❚</button>
+        <button onclick="copy('✪')">✪</button>
+        <button onclick="copy('❽')">❽</button>
+        <button onclick="copy('❤')">❤</button>
+        <button onclick="copy('☣')">☣</button>
+        <button onclick="copy('ಠ')">ಠ</button>
+        <button onclick="copy('ಠ_ಠ')">ಠ_ಠ</button>
+        <button onclick="copy('✈')">✈</button>
+        <button onclick="copy(' ็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็ ็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็')"> ็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็ ็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็็</button>
+        <button onclick="copy('✪')">✪</button>
+        <button onclick="copy('☃')">☃</button>
+        <button onclick="copy('–')">–</button>
+        <button onclick="copy('→')">→</button>
+        <button onclick="copy('←')">←</button>
+        <button onclick="copy('')"></button>
+        <button onclick="copy('')"></button>
+
+
+    </main>
+    <p id="notification"></p>
+</body>
+<script>
+    function copy(text) {
+        navigator.clipboard.writeText(text);
+        notification(`Copied "${text}"`, 3000)
+    }
+
+    function notification(notaName, notaTime) {
+  var x = document.getElementById("notification");
+  x.innerHTML = notaName
+  x.className = "show";
+  setTimeout(function() {
+    x.className = x.className.replace("show", "");
+  }, notaTime);
+}
+    </script>
+    <style>
+    @-webkit-keyframes fadein {
+      from {
+        top: 0;
+        opacity: 0;
+      }
+
+      to {
+        top: 30px;
+        opacity: 1;
+      }
+    }
+
+    @keyframes fadein {
+      from {
+        top: 0;
+        opacity: 0;
+      }
+
+      to {
+        top: 30px;
+        opacity: 1;
+      }
+    }
+
+    @-webkit-keyframes fadeout {
+      from {
+        top: 30px;
+        opacity: 1;
+      }
+
+      to {
+        top: 0;
+        opacity: 0;
+      }
+    }
+
+    @keyframes fadeout {
+      from {
+        top: 30px;
+        opacity: 1;
+      }
+
+      to {
+        top: 0;
+        opacity: 0;
+      }
+    }
+
+    #notification {
+      visibility: hidden;
+      min-width: 100px;
+      margin-left: -100px;
+      background-color: #333;
+      color: #fff;
+      text-align: center;
+      border-radius: 2px;
+      padding: 16px;
+      position: fixed;
+      z-index: 1;
+      left: 50%;
+      top: 30px;
+      font-size: 35px;
+    }
+
+    #notification.show {
+      border-radius: 25px;
+      visibility: visible;
+      -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+      animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    }
+</style>
+</html>

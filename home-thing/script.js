@@ -10,25 +10,7 @@ let online = false;
     // homeButton.setAttribute('title', 'Hover to see user count for every awashcard0 site');
     homeButton.addEventListener('click', function(e) {
 
-      if (!homeThingOpen) {
-        var settingsPage = document.createElement("div");
-        settingsPage.setAttribute('tabindex', 0);
-        settingsPage.setAttribute('class', "settings-background");
-        document.body.appendChild(settingsPage);
-  
-        settingsPage.innerHTML = `
-        <h1>Settings</h1>
-        <p>Tip: Press the button twice to go home</p>
-        <span class="close" onclick="closeHomeThing(this.parentElement)">×</span>
-        <a href="https://awashcard0.pages.dev/" class="homeLink">Go home</a>
-        <button onclick="askForDarkMode()">Ask for dark mode</button>
-        <p id="HomeThingShowFPS">FPS: Loading</p>
-        `;
-      } else {
-        startExit();
-      }
-
-      homeThingOpen = true;
+      openHomeThing();
       // document.body.classList.add('blockscreen');
       // homeButton.addEventListener('transitionend', function(e) {
       //   window.requestAnimationFrame(function() {
@@ -59,6 +41,13 @@ let online = false;
     homeButton.addEventListener('keydown', function(e) {
       if (e.keyCode === 13) homeButton.click();
     });
+
+    document.body.addEventListener('keydown', function(e) {
+      if (e.ctrlKey && e.key == ".") {
+        openHomeThing();
+      }
+    });
+
     document.body.appendChild(homeButton);
 
     if (location.hostname == 'awashcard0.pages.dev' || location.hostname == 'www.awashcard0.com') {
@@ -104,7 +93,7 @@ homeButton.addEventListener("mouseleave", function(e) {
       usersCount.setAttribute('id', 'userThing');
       document.body.appendChild(usersCount);
       // document.getElementById("userThing").innerHTML = "Users online: " + usersOnline;
-      document.getElementById("userThing").innerHTML = "Not working";
+      document.getElementById("userThing").innerHTML = "Press this button twice to go home";
     } else {
       document.getElementById("userThing").remove();
     }
@@ -163,6 +152,29 @@ fetch('https://awashcard0.pages.dev/info.json')
   function closeHomeThing(element) {
     homeThingOpen = false;
     document.body.removeChild(element);
+  }
+
+  function openHomeThing() {
+    if (!homeThingOpen) {
+      var settingsPage = document.createElement("div");
+      settingsPage.setAttribute('tabindex', 0);
+      settingsPage.setAttribute('class', "settings-background");
+      document.body.appendChild(settingsPage);
+
+      settingsPage.innerHTML = `
+      <h1>Settings</h1>
+      <p>Tip: Press the button twice to go home</p>
+      <p>Also tip: Press <code>Ctrl + .</code> to open this menu</p>
+      <span class="close" onclick="closeHomeThing(this.parentElement)">×</span>
+      <a href="https://awashcard0.pages.dev/" class="homeLink">Go home</a>
+      <button onclick="askForDarkMode()">Ask for dark mode</button>
+      <p id="HomeThingShowFPS">FPS: Loading</p>
+      `;
+    } else {
+      startExit();
+    }
+
+    homeThingOpen = true;
   }
 
   function askForDarkMode() {
