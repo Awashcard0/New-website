@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2 divide</title>
+</head>
+<body>
+    <label for="one">Number one:</label>
+    <input type="number" id="one">
+    <label for="two">Number two:</label>
+    <input type="number" id="two">
+    <label for="divide">Divide by:</label>
+    <input type="number" id="divide" onkeyup="update()">
+    <div id="output">
+
+    </div>
+    <script>
+        const one = parseInt(document.getElementById("one").innerText)
+        const two = parseInt(document.getElementById("two").innerText)
+        const divide = parseInt(document.getElementById("divide").innerText)
+
+        function update() {
+            document.getElementById("output").innerHTML = `
+                One: ${one / divide}
+                Two: ${two / divide}
+            `
+        }
+    </script>
+</body>
+</html>
