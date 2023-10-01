@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Home thing -->
+    <link rel="stylesheet" href="/home-thing/style.css">
+    <script src='/home-thing/script.js'></script>
+    <!-- End home thing -->
+    <title>2 divide</title>
+</head>
+<body>
+    <label for="one">Number one:</label>
+    <input type="number" id="one">
+    <label for="two">Number two:</label>
+    <input type="number" id="two">
+    <label for="divide">Divide by:</label>
+    <input type="number" id="divide" onkeyup="update()">
+    <div id="output">
+
+    </div>
+    <script>
+        const one = document.getElementById("one").innerHTML
+        const two = document.getElementById("two").innerHTML
+        const divide = document.getElementById("divide").innerHTML
+
+        function update() {
+            document.getElementById("output").innerHTML = `
+                One: ${one / divide}
+                Two: ${two / divide}
+            `
+        }
+    </script>
+</body>
+</html>
