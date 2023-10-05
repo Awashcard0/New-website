@@ -17,7 +17,6 @@
               <h1 style="color: white;">Awashcard0</h1>
             </marquee>
         </marquee>
-        <img src="/icon-big.png">
         <div style="color: white; position: absolute; top: 50%; left: 50%;">
         <h1>Your offline</h1>
         <p>This page will reload when you reconnect</p>
@@ -45,4 +44,33 @@
 
       checkNetworkAndReload();
 </script>
+<style>
+body {
+  font-family: 'Ubuntu', sans-serif;
+margin: 0;
+padding: 0;
+transition: background-color 0.4s ease;
+}
+
+#screensaver {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  opacity: 0;
+  transition: opacity 0.5s;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+marquee {
+  height: 100vh;
+}
+
+marquee h1{
+  font-size: 50px
+}
+</style>
 </html>
