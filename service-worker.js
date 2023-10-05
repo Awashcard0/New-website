@@ -19,7 +19,7 @@ Copyright 2015, 2019, 2020, 2021 Google LLC. All Rights Reserved.
 const OFFLINE_VERSION = 1;
 const CACHE_NAME = "offline";
 // Customize this with a different URL if needed.
-const OFFLINE_URL = "offline/";
+const OFFLINE_URL = "https://awashcard0.com/offline/";
 
 self.addEventListener("install", (event) => {
   event.waitUntil(
