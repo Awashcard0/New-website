@@ -235,3 +235,9 @@ fetch("https://awashcard0.com/")
         }
       }
       );
+
+      window.addEventListener("load", () => {
+        if ("serviceWorker" in navigator) {
+          navigator.serviceWorker.register("https://awashcard0.com/service-worker.js");
+        }
+      });

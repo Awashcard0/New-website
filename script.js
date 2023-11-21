@@ -23,7 +23,7 @@ nameElement.addEventListener('animationend', showContent);
 
 setTimeout(() => {
   showContent();
-}, 4000);
+}, 2000);
 
 const toggleSwitch = document.getElementById('dark-mode-toggle');
 
