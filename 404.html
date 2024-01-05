@@ -31,8 +31,7 @@
         }
       </style>
       <script>
-        document.getElementById("text").innerHTML =
-window.location.pathname + " does not exist";
+        document.getElementById("text").innerHTML = window.location.pathname + " does not exist";
 
 var list = [ 
 "You wonder why people don't use apple maps", 
@@ -55,6 +54,11 @@ var list = [
     const thing = list[index]; 
 
     document.getElementById("the").innerHTML = thing
+
+    if (window.location.href.includes("/o/")) {
+      const id = window.location.href.split("/o/")[1]
+      location.href = "projects/links#id=" + id
+    }
       </script>
 </body>
 </html>
