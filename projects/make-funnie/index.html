@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Home thing -->
+    <link rel="stylesheet" href="https://awashcard0.pages.dev/home-thing/style.css">
+    <script src='https://awashcard0.pages.dev/home-thing/script.js'></script>
+    <!-- End home thing -->
+    <link rel="stylesheet" href="https://fonts.xz.style/serve/inter.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@exampledev/new.css@1.1.2/new.min.css">
+    <title>Make Funnie</title>
+</head>
+<body>
+    <header>
+        <h1>Make Funnie</h1>
+        <p>Do goofy things with your goofy text because goofy</p>
+    </header>
+    <main>
+        <h1>Enter text:</h1>
+        <input id="text" type="text" onkeyup="update()"><button onclick="update()">Update</button>
+        <div>
+            <ul>
+                <li id="blocks">Emoji Letters: </li>
+                <li id="upside">Upside Down Letters:</li>
+            </ul>
+        </div>
+    </main>
+</body>
+<script>
+function update() {
+    const text = document.getElementById("text").value;
+
+    document.getElementById("blocks").innerHTML = `Emoji Letters: ${textToEmojiBlockLetters(text)}`;
+    document.getElementById("upside").innerHTML = `Upside Down Letters: ${textToUpsideDown(text)}`;
+}
+
+function textToEmojiBlockLetters(inputText) {
+  const letters = inputText.toUpperCase();
+  let emojiBlockLetters = '';
+
+  for (let i = 0; i < letters.length; i++) {
+    const charCode = letters.charCodeAt(i);
+
+    // Check if the character is a letter
+    if (charCode >= 65 && charCode <= 90) {
+      // Convert the character to the corresponding regional indicator symbol
+      const regionalIndicatorSymbol = String.fromCodePoint(127462 + charCode - 65);
+      emojiBlockLetters += regionalIndicatorSymbol + ' ';
+    } else {
+      // If the character is not a letter, just add it as is
+      emojiBlockLetters += letters[i] + ' ';
+    }
+  }
+
+  return emojiBlockLetters.trim();
+}
+
+function textToUpsideDown(inputText) {
+  const normalLetters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  const upsideDownLetters = 'ɐqɔpǝɟƃɥᴉɾʞlɯuodbɹsʇnʌʍxʎz∩⅄ϛ𐐒ʁƍɈϛZ⅄ϻΛMX⅁ƆϴИᄅΌᄅᴚS⊥∩ΛɯᴎXʎΛƃΛƃ';
+  
+  const upsideDownMap = {};
+  for (let i = 0; i < normalLetters.length; i++) {
+    upsideDownMap[normalLetters[i]] = upsideDownLetters[i];
+  }
+
+  const upsideDownText = inputText.toLowerCase()
+    .split('')
+    .map(char => upsideDownMap[char] || char)
+    .reverse()
+    .join('');
+
+  return upsideDownText;
+}
+</script>
+</html>
