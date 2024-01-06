@@ -11,6 +11,17 @@
     <script src='https://awashcard0.pages.dev/home-thing/script.js'></script>
     <!-- End home thing -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <style>
+        #dialogCont {
+            height: 300px;
+            width: 1000px;
+            text-align: center;
+        }
+
+        #dialogCont a, #dialogCont p {
+            font-size: 30px;
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -23,8 +34,10 @@
         <h4>Testing</h4>
         <p>Go to <code><a href="/o/test">awashcard0.com/o/test</a></code></p>
     </main>
-    <dialog style="text-align: center;" id="dialog">
-        
+    <dialog id="dialog">
+        <div id="dialogCont">
+            
+        </div>
     </dialog>
 </body>
 <script>
@@ -37,6 +50,7 @@ const crypto = window.crypto;
         const id = location.href.split("#id=")[1]
         let output = false
         const dialog = document.getElementById("dialog");
+        const dialogCont = document.getElementById("dialogCont");
 
         // check if its a public id
         if (id === "test") {
@@ -59,14 +73,16 @@ const crypto = window.crypto;
 
         if (output.type == "text") {
             dialog.showModal();
-            dialog.innerHTML = `
+            dialogCont.innerHTML = `
             <h1>This is a text link</h1>
+            <br>
             <p>${output.data}</p>
             `;
         } else if (output.type == "link") {
             dialog.showModal();
-            dialog.innerHTML = `
+            dialogCont.innerHTML = `
             <h1>This is a link</h1>
+            <br>
             <a href="${output.data}">This link goes to ${output.data} (Click to open)</a>
             `;
         }
