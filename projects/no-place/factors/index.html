@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Home thing -->
+    <link rel="stylesheet" href="/home-thing/style.css">
+    <script src='/home-thing/script.js'></script>
+    <!-- End home thing -->
+    <title>2 divide</title>
+</head>
+<body>
+    <label for="num">Number:</label>
+    <input type="number" id="num" onkeyup="update()">
+    <br>
+    <div id="output">
+
+    </div>
+    <script>
+        const num = document.getElementById("num").innerHTML.value;
+
+
+        function update() {
+            const factors = [];
+    
+            for (let i = 1; i <= Math.sqrt(num); i++) {
+                if (num % i === 0) {
+                    factors.push(i);
+                    if (num / i !== i) {
+                        factors.push(num / i);
+                    }
+                }
+            }
+
+            document.getElementById("output").innerHTML = factors.sort((a, b) => a - b);
+        }
+    </script>
+</body>
+</html>
