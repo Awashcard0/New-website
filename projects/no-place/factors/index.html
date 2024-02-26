@@ -17,11 +17,9 @@
 
     </div>
     <script>
-        const num = document.getElementById("num").innerHTML.value;
-
-
         function update() {
-            const factors = [];
+            let num = document.getElementById("num").innerHTML.value;
+            let factors = [];
     
             for (let i = 1; i <= Math.sqrt(num); i++) {
                 if (num % i === 0) {
