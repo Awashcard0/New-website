@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mouse trap car</title>
+</head>
+<body>
+    <form>
+        <label for="mass">Mass:</label>
+        <input type="text" id="mass" name="mass">
+
+        <label for="distance">Distance:</label>
+        <input type="text" id="distance" name="distance">
+
+        <label for="time">Time:</label>
+        <input type="text" id="time" name="time">
+
+        <input type="submit" value="Submit">
+    </form>
+</body>
+<script>
+    document.querySelector('form').addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    // Get the input values
+    const mass = parseFloat(document.getElementById('mass').value);
+    const distance = parseFloat(document.getElementById('distance').value);
+    const time = parseFloat(document.getElementById('time').value);
+
+    // Calculate average velocity
+    const averageVelocity = distance / time;
+
+    // Calculate final velocity
+    const finalVelocity = averageVelocity * 2;
+
+    // Calculate acceleration
+    const acceleration = averageVelocity / time;
+
+    // Calculate kinetic energy
+    const kineticEnergy = 0.5 * mass * Math.pow(finalVelocity, 2);
+
+    // Calculate force
+    const force = mass * acceleration;
+
+    // Calculate work
+    const work = force * distance;
+
+    // Calculate power
+    const power = work / time;
+
+    // Alert the user with the calculated values
+    alert(`Average Velocity: ${averageVelocity}
+    Final Velocity: ${finalVelocity}
+    Acceleration: ${acceleration}
+    Kinetic Energy: ${kineticEnergy}
+    Force: ${force}
+    Work: ${work}
+    Power: ${power}`);
+});
+</script>
+</html>
