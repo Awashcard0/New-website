@@ -75,8 +75,8 @@ const crypto = window.crypto;
             }
         } else { {
             output = {
-                "type": "text",
-                "data": "<h1>This is not an id</h1>"
+                "type": "error",
+                "data": "<h1>This is not a link</h1>"
             }
         }
     }
@@ -94,6 +94,13 @@ const crypto = window.crypto;
             <h1>This is a link</h1>
             <br>
             <a href="${output.data}">This link goes to ${output.data} (Click to open)</a>
+            `;
+        } else if (output.type == "error") {
+            dialog.showModal();
+            dialogCont.innerHTML = `
+            <h1>There was an error</h1>
+            <br>
+            ${output.data}
             `;
         }
     }
