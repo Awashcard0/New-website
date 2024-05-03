@@ -40,11 +40,15 @@ document.addEventListener("DOMContentLoaded", function() {
 
 function checkCommand(input) {
     const inputText = document.querySelector(".inputForTerm");
+    const inputBox = document.getElementById('input');
 
-    console.log(input);
-    switch (input) {
+    let Fullcmd = input.toLowerCase();
+    let cmd = Fullcmd.split(" ")[0];
+
+    switch (cmd) {
         case "echo":
-            output("Available Commands: " + commands.join(", "));
+            const out = input.split(" ").slice(1).join(" ");
+            output(out);
             break;
         case "help":
             output("Available Commands: " + commands.join(", "));
@@ -59,7 +63,7 @@ function checkCommand(input) {
     }
     
     inputText.style.display = "block";
-    input.focus();
+    inputBox.focus();
 }
 
 function output(thing) {
