@@ -10,22 +10,10 @@
     <title>Screensaver</title>
 </head>
 <body>
-    
-</body>
-<script>
-    let qury = window.location.href.split("#")[1]
-    let data = qury.split('&');
-    let type = data[0].split('=')[1];
-    let text = data[1].split('=')[1];
-
-    setTimeout(function() {
-    if (type == "bonceing") {
-        document.write(`
-        <title>Bonceing Screensaver by Awashcard0</title>
         <div id="screensaver">
     <marquee behavior="alternate" scrollamount="30">
         <marquee behavior="alternate" scrollamount="30" direction="down">
-          <h1 style="color: white;">${decodeURI(text)}</h1>
+          <h1 style="color: white;" id="text"></h1>
         </marquee>
     </marquee>
     <style>
@@ -54,14 +42,13 @@ marquee h1{
   font-family: 'Ubuntu', sans-serif;
 }
 </style>
+</body>
 <script>
-setTimeout(function() {
-alart("I'm still standing, yeah yeah yeah");
-}, 1000);
-</script>
-        `)
-    }
+    let qury = window.location.href.split("#")[1]
+    let data = qury.split('&');
+    let type = data[0].split('=')[1];
+    let text = data[1].split('=')[1];
 
-}, 10);
+   document.getElementById("text").innerHTML = decodeURI(text);
 </script>
 </html>
