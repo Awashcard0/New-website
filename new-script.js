@@ -105,21 +105,21 @@ function checkCommand(input) {
         // Tools
         case "neofetch":
             let logo = `
-            ################  ################  awash@awashpc<br>
-            ################  ################  -------------<br>
-            ################  ################  OS: ${platform.os}<br>
-            ################  ################  Browser: ${platform.name}<br>
-            ################  ################  Browser Version: ${platform.version}<br>
-            ################  ################  Browser Layout: ${platform.layout}<br>
-            ################  ################<br>
+            <span style="color: rgb(173, 216, 230);">################  ################</span>  awash@awashpc<br>
+            <span style="color: rgb(173, 216, 230);">################  ################</span>  -------------<br>
+            <span style="color: rgb(173, 216, 230);">################  ################</span>  OS: ${platform.os}<br>
+            <span style="color: rgb(173, 216, 230);">################  ################</span>  Browser: ${platform.name}<br>
+            <span style="color: rgb(173, 216, 230);">################  ################</span>  Browser Version: ${platform.version}<br>
+            <span style="color: rgb(173, 216, 230);">################  ################</span>  Browser Layout: ${platform.layout}<br>
+            <span style="color: rgb(173, 216, 230);">################  ################</span><br>
 <br>
-            ################  ################<br>
-            ################  ################<br>
-            ################  ################<br>
-            ################  ################<br>
-            ################  ################<br>
-            ################  ################<br>
-            ################  ################<br>
+            <span style="color: rgb(173, 216, 230);">################  ################</span><br>
+            <span style="color: rgb(173, 216, 230);">################  ################</span><br>
+            <span style="color: rgb(173, 216, 230);">################  ################</span><br>
+            <span style="color: rgb(173, 216, 230);">################  ################</span><br>
+            <span style="color: rgb(173, 216, 230);">################  ################</span><br>
+            <span style="color: rgb(173, 216, 230);">################  ################</span><br>
+            <span style="color: rgb(173, 216, 230);">################  ################</span><br></span>
             `;
             output(logo);
             break;
