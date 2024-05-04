@@ -76,6 +76,31 @@ function checkCommand(input) {
         case "ls":
             output(Array.from(fs.keys()).join("&nbsp;"));
             break;
+        case "neofetch":
+            let userAgent = navigator.userAgent;
+            let os = userAgent.match(/\((.*?)\)/)[1].split(';')[0];
+            let browser = userAgent.split(') ')[1];
+            let windowsLogo = `
+            ################  ################  awash@awashpc
+            ################  ################  -------------
+            ################  ################  OS: ${os}
+            ################  ################  Browser: ${browser}
+            ################  ################
+            ################  ################
+            ################  ################
+
+            ################  ################
+            ################  ################
+            ################  ################
+            ################  ################
+            ################  ################
+            ################  ################
+            ################  ################
+            `;
+            output(windowsLogo);
+            break;
+        case '':
+            break;
         default:
             output(input.split(" ")[0] + ": command not found");
             break;
