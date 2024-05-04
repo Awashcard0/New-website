@@ -62,7 +62,7 @@ function checkCommand(input) {
             list.innerHTML = "";
             break;
         case "history":
-            output(history.map((cmdinh, index) => `${index + 1}. ${cmdinh}`).join("\n"));
+            output(history.map((cmdinh, index) => `${index + 1}. ${cmdinh} <br>`).join("\n"));
             break;
         // File System Commands
         case "cat":
