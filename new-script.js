@@ -1,6 +1,6 @@
 // I Just You For My Own, More Than You Could Ever Know, Make My Wish Come True, All I Want For Christmas Is You!!
 // for proper javascript knowledge you should be listening to this playlist: https://open.spotify.com/playlist/2UvaLj0iFyLEXhKJQysYTc?si=d03e705244804068
-const commands = ["help", "echo", "cls", "clear", "history"]
+const commands = ["help", "echo", "cls", "clear", "history", "neofetch", "cat", "ls"];
 let history = [];
 const fs = new Map();
 
@@ -76,28 +76,26 @@ function checkCommand(input) {
         case "ls":
             output(Array.from(fs.keys()).join("&nbsp;"));
             break;
+        // Tools
         case "neofetch":
-            let userAgent = navigator.userAgent;
-            let os = userAgent.match(/\((.*?)\)/)[1].split(';')[0];
-            let browser = userAgent.split(') ')[1];
-            let windowsLogo = `
-            ################  ################  awash@awashpc
-            ################  ################  -------------
-            ################  ################  OS: ${os}
-            ################  ################  Browser: ${browser}
-            ################  ################
-            ################  ################
-            ################  ################
-
-            ################  ################
-            ################  ################
-            ################  ################
-            ################  ################
-            ################  ################
-            ################  ################
-            ################  ################
+            let logo = `
+            ################  ################  awash@awashpc<br>
+            ################  ################  -------------<br>
+            ################  ################  OS: ${platform.os}<br>
+            ################  ################  Browser: ${platform.name}<br>
+            ################  ################  Browser Version: ${platform.version}<br>
+            ################  ################  Browser Layout: ${platform.layout}<br>
+            ################  ################<br>
+<br>
+            ################  ################<br>
+            ################  ################<br>
+            ################  ################<br>
+            ################  ################<br>
+            ################  ################<br>
+            ################  ################<br>
+            ################  ################<br>
             `;
-            output(windowsLogo);
+            output(logo);
             break;
         case '':
             break;
