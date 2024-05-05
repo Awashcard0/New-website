@@ -14,7 +14,7 @@ let history = [];
 const fs = new Map();
 
 fs.set("aboutMe.txt", "Hello! I'm Awashard0, a self-taught developer. <br> I like gaming with my friends and coding. ");
-fs.set("controls.txt", "shift+enter autocomplete commands <br>TODO: autocomplete arguments</br>");
+fs.set("controls.txt", "tab autocomplete commands <br>TODO: autocomplete arguments</br>");
 
 document.addEventListener("DOMContentLoaded", function() {
     // Get the varibles
