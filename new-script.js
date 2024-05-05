@@ -28,39 +28,41 @@ document.addEventListener("DOMContentLoaded", function() {
     });
     
 
-    inputBox.addEventListener("keypress", function(event) {
+    inputBox.addEventListener("keydown", function (event) {
+        // Get the value of the textbox
+        let val = inputBox.value;
+        
         // If the user presses the "Enter" key on the keyboard
         if (event.key === "Enter") {
             event.preventDefault();
             // If the input is not empty
             if (inputBox.value) {
-                // Get the value of the textbox
-                let val = inputBox.value;
-                // Receive holding shift
-                if (event.shiftKey) {
-                    // find the closest command to the current input value
-                    let closest = commands.find(cmd => cmd.startsWith(val)); // TODO: if multiple commands match, cycle through
-                    // if found
-                    if (closest) {
-                        // replace the curent input value with the closest command
-                        inputBox.value = closest;
-                    } 
-                } else {
-                    // Add the input value to the list item
-                    output(`<span style="color: rgb(27, 219, 153);">awash@awashpc</span>:<span style="color: rgb(61, 173, 233);">~</span>$ ` + val);
-                    // Clear the input
-                    inputBox.value = "";
-                    // Hide the input to let the command run
-                    inputText.style.display = "none";
-                    // Check the command
-                    checkCommand(val);
-                    // Add the command to the history
-                    history.push(val);
-                }
+                                // Add the input value to the list item
+                output(`<span style="color: rgb(27, 219, 153);">awash@awashpc</span>:<span style="color: rgb(61, 173, 233);">~</span>$ ` + val);
+                // Clear the input
+                inputBox.value = "";
+                // Hide the input to let the command run
+                inputText.style.display = "none";
+                // Check the command
+                checkCommand(val);
+                // Add the command to the history
+                history.push(val);
+            } else {
+                // Add the input value to the list item
+                output(`<span style="color: rgb(27, 219, 153);">awash@awashpc</span>:<span style="color: rgb(61, 173, 233);">~</span>$ `);
             }
-        }
-    }
-);
+        } else if (event.key === "Tab") {
+            console.log("Tab");
+            event.preventDefault();
+            // find the closest command to the current input value
+            let closest = commands.find(cmd => cmd.startsWith(val)); // TODO: if multiple commands match, cycle through
+            // if found
+            if (closest) {
+                // replace the curent input value with the closest command
+                inputBox.value = closest;
+            }
+        };
+    });
 });
 
 function checkCommand(input) {
@@ -122,6 +124,8 @@ function checkCommand(input) {
 }
 
 function output(thing) {
+    const scroll = document.getElementById("scroll");
+
     // Create a new list item
     const div = document.createElement("div");
     // Add the value to the list item
@@ -129,7 +133,7 @@ function output(thing) {
     // Add the list item to the list
     list.appendChild(div);
     // AutoScroll to the newest added List Item
-    div.scrollIntoView(false);
+    scroll.scrollIntoView(false);
 }
 
 function asciiLogo(browser) {
