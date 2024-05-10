@@ -16,7 +16,7 @@ const fs = new Map();
 
 fs.set("aboutMe.txt", "Hello! I'm Awashard0, a self-taught developer. <br> I like gaming with my friends and coding. ");
 fs.set("myStuff.txt", `Type "myfetch" to see what I use. `);
-fs.set("controls.txt", "tab autocomplete commands <br>TODO: autocomplete arguments</br>");
+fs.set("controls.txt", "tab autocomplete commands and files <br>TODO: autocomplete arguments</br>");
 
 let tabMatches
 let tabIndex
@@ -41,7 +41,7 @@ document.addEventListener("DOMContentLoaded", function() {
             event.preventDefault();
             // If the input is not empty
             if (inputBox.value) {
-                                // Add the input value to the list item
+                // Add the input value to the list item
                 output(`<span style="color: rgb(27, 219, 153);">awash@awashpc</span>:<span style="color: rgb(61, 173, 233);">~</span>$ ` + val);
                 // Clear the input
                 inputBox.value = "";
@@ -57,17 +57,31 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         } else if (event.key === "Tab") {
             event.preventDefault();
+            let Fullcmd = val.toLowerCase();
+            let cmdN = Fullcmd.split(" ")[0];
             // find the closest command to the current input value
-            tabMatches = commands.filter(cmd => cmd.startsWith(val));
-            tabIndex = history.indexOf(val);
-            if (tabMatches.length > 0) {
-                if (tabIndex === -1 || tabIndex >= tabMatches.length - 1) {
-                    inputBox.value = tabMatches[0];
-                } else {
-                    inputBox.value = tabMatches[index + 1];
+            if (cmdN === "cat") {
+                tabMatches = Array.from(fs.keys()).filter(cmd => cmd.startsWith(Fullcmd.split(" ")[1]));
+                tabIndex = history.indexOf(Fullcmd.split(" ")[1]);
+                if (tabMatches.length > 0) {
+                    if (tabIndex === -1 || tabIndex >= tabMatches.length - 1) {
+                        inputBox.value = "cat " + tabMatches[0];
+                    } else {
+                        inputBox.value = "cat " + tabMatches[index + 1];
+                    }
                 }
-            }
-        };
+            } else {
+                tabMatches = commands.filter(cmd => cmd.startsWith(val));
+                tabIndex = history.indexOf(val);
+                if (tabMatches.length > 0) {
+                    if (tabIndex === -1 || tabIndex >= tabMatches.length - 1) {
+                        inputBox.value = tabMatches[0] + " ";
+                    } else {
+                        inputBox.value = tabMatches[index + 1] + " ";
+                    }
+                }
+            };
+        }  
     });
 });
 
@@ -120,7 +134,7 @@ function checkCommand(input) {
             output(fetch);
             break;
         case "myfetch":
-            const arg = input.split(" ")[1];
+            const arg = input.split(" ")[1].toLowerCase();
             
             if (arg == "-l" || arg == "--laptop") {
                 // Laptop
@@ -529,6 +543,6 @@ function asciiLogo(logo) {
     style="color:#000000;"> </span><span style="color:#000000;"> </span><span style="color:#000000;"> </span><span
     style="color:#000000;"> </span>`
     } else if (logo == "NEON") {
-        return '<span style="color:#1BDB99;">             `..---+/---..`<br>         `---.``   ``   `.---.`<br>      .--.`        ``        `-:-.<br>    `:/:     `.----//----.`     :/-<br>   .:.    `---`          `--.`    .:`<br>  .:`   `--`                .:-    `:.<br> `/    `:.      `.-::-.`      -:`   `/`<br> /.    /.     `:++++++++:`     .:    .:<br>`/    .:     `+++++++++++/      /`   `+`<br>/+`   --     .++++++++++++`     :.   .+:<br>`/    .:     `+++++++++++/      /`   `+`<br> /`    /.     `:++++++++:`     .:    .:<br></br> ./    `:.      `.:::-.`      -:`   `/`<br>  .:`   `--`                .:-    `:.<br>   .:.    `---`          `--.`    .:`<br>    `:/:     `.----//----.`     :/-<br>      .-:.`        ``        `-:-.<br>         `---.``   ``   `.---.`<br>             `..---+/---..`<br></span>'
+        return '<span style="color:#1BDB99;">             `..---+/---..`<br>         `---.``   ``   `.---.`<br>      .--.`        ``        `-:-.<br>    `:/:     `.----//----.`     :/-<br>   .:.    `---`          `--.`    .:`<br>  .:`   `--`                .:-    `:.<br> `/    `:.      `.-::-.`      -:`   `/`<br> /.    /.     `:++++++++:`     .:    .:<br>`/    .:     `+++++++++++/      /`   `+`<br>/+`   --     .++++++++++++`     :.   .+:<br>`/    .:     `+++++++++++/      /`   `+`<br> /`    /.     `:++++++++:`     .:    .:<br> ./    `:.      `.:::-.`      -:`   `/`<br>  .:`   `--`                .:-    `:.<br>   .:.    `---`          `--.`    .:`<br>    `:/:     `.----//----.`     :/-<br>      .-:.`        ``        `-:-.<br>         `---.``   ``   `.---.`<br>             `..---+/---..`<br></span>'
     }
 }
