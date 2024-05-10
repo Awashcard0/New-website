@@ -85,7 +85,7 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 });
 
-function checkCommand(input) {
+async function checkCommand(input) {
     const inputText = document.querySelector(".inputForTerm");
     const inputBox = document.getElementById('input');
 
@@ -99,7 +99,7 @@ function checkCommand(input) {
             output(out);
             break;
         case "help":
-            let helpText = "Available Commands: ";
+            let helpText = "Available Commands: <br>";
             for (let command in info) {
                 helpText += `<br>${command}: ${info[command]}</br>`;
             }
@@ -165,6 +165,9 @@ Memory: 3264MiB / 13903MiB <br><br> (As of May 9, 2024)</div>`;
             }
         case '':
             break;
+        case 'logo':
+            output(`<div style="display: inline-block; vertical-align: top"><span style="color:white; line-height: 1;"><pre>${await asciiLogo("awash")}</pre></div>`);
+            break;
         default:
             output(input.split(" ")[0] + ": command not found");
             break;
@@ -189,7 +192,7 @@ function output(thing) {
 
 function asciiLogo(logo) {
     if (logo == "Firefox") {
-        return `</span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span>
+        return `<span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span>
 <span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#FFF04C;">%</span><span style="color:#FFEE4B;">%</span><span style="color:#FFEE4A;">%</span><span style="color:#FFED4A;">%</span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span>
 <span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#FFE545;">%</span><span style="color:#FFE846;">%</span><span style="color:#FFE846;">%</span><span style="color:#FFEA48;">%</span><span style="color:#FFEA48;">%</span><span style="color:#FFE947;">%</span><span style="color:#FFE846;">%</span><span style="color:#FFE645;">%</span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span>
 <span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7B6C2619;">,</span><span style="color:#FFA215;">(</span><span style="color:#7E000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#FFD439;">#</span><span style="color:#FFD83C;">#</span><span style="color:#FFDB3E;">%</span><span style="color:#FFDE3F;">%</span><span style="color:#FFDF40;">%</span><span style="color:#FFE142;">%</span><span style="color:#FFE443;">%</span><span style="color:#FFE443;">%</span><span style="color:#FFE343;">%</span><span style="color:#FFE142;">%</span><span style="color:#FFE043;">%</span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span>
@@ -544,5 +547,15 @@ function asciiLogo(logo) {
     style="color:#000000;"> </span>`
     } else if (logo == "NEON") {
         return '<span style="color:#1BDB99;">             `..---+/---..`<br>         `---.``   ``   `.---.`<br>      .--.`        ``        `-:-.<br>    `:/:     `.----//----.`     :/-<br>   .:.    `---`          `--.`    .:`<br>  .:`   `--`                .:-    `:.<br> `/    `:.      `.-::-.`      -:`   `/`<br> /.    /.     `:++++++++:`     .:    .:<br>`/    .:     `+++++++++++/      /`   `+`<br>/+`   --     .++++++++++++`     :.   .+:<br>`/    .:     `+++++++++++/      /`   `+`<br> /`    /.     `:++++++++:`     .:    .:<br> ./    `:.      `.:::-.`      -:`   `/`<br>  .:`   `--`                .:-    `:.<br>   .:.    `---`          `--.`    .:`<br>    `:/:     `.----//----.`     :/-<br>      .-:.`        ``        `-:-.<br>         `---.``   ``   `.---.`<br>             `..---+/---..`<br></span>'
+    } else if (logo == "awash") {
+        let data = "";
+
+        fetch('./assets/asciiLogo.txt')
+            .then(response => response.text())
+            .then(datar => {
+                date = datar
+            })
+        
+        return `<span><br>${data}</span>`
     }
 }
