@@ -156,7 +156,7 @@ Icons: breeze-dark [GTK2/3] <br>
 Terminal: yakuake <br>
 CPU: AMD Ryzen 3 3200U with Radeon Vega Mobile Gfx (4) @ 2.600GHz <br>
 GPU: AMD ATI Radeon Vega Series / Radeon Vega Mobile Series <br>
-Memory: 3264MiB / 13903MiB <br><br> (As of May 9, 2024)</div>`;
+Memory: 13903MiB <br><br> (As of May 9, 2024)</div>`;
                 output(fetch);
             } else if (arg === "-d" || arg === "--desktop") {
                 // Desktop
