@@ -325,31 +325,31 @@
 
       function done() {
         if (document.getElementById("enchantment1name").value == "none") {} else {
-          enchantment1 = `{id:${document.getElementById("enchantment1name").value},lvl:${document.getElementById("enchantment1level").value}}`;
+          enchantment1 = `{'${document.getElementById("enchantment1name").value}':${document.getElementById("enchantment1level").value}`;
           amount++
         }
         if (document.getElementById("enchantment2name").value == "none") {} else {
-          enchantment2 = `,{id:${document.getElementById("enchantment2name").value},lvl:${document.getElementById("enchantment2level").value}}`;
+          enchantment2 = `,'${document.getElementById("enchantment2name").value}':${document.getElementById("enchantment2level").value}`;
           amount++
         }
         if (document.getElementById("enchantment3name").value == "none") {} else {
-          enchantment3 = `,{id:${document.getElementById("enchantment3name").value},lvl:${document.getElementById("enchantment3level").value}}`;
+          enchantment3 = `,'${document.getElementById("enchantment3name").value}':${document.getElementById("enchantment3level").value}`;
           amount++
         }
         if (document.getElementById("enchantment4name").value == "none") {} else {
-          enchantment4 = `,{id:${document.getElementById("enchantment4name").value},lvl:${document.getElementById("enchantment4level").value}}`;
+          enchantment4 = `,'${document.getElementById("enchantment4name").value}':${document.getElementById("enchantment4level").value}`;
           amount++
         }
         if (document.getElementById("enchantment5name").value == "none") {} else {
-          enchantment5 = `,{id:${document.getElementById("enchantment5name").value},lvl:${document.getElementById("enchantment5level").value}}`;
+          enchantment5 = `,'${document.getElementById("enchantment5name").value}':${document.getElementById("enchantment5level").value}`;
           amount++
         }
         if (document.getElementById("mending").checked) {
             if (amount == 0) {
-                mending = `{id:mending,lvl:1}`;
+                mending = `'mending':1`;
                 amount++
             } else {
-                mending = `,{id:mending,lvl:1}`;
+                mending = `,'mending':1`;
                 amount++
             }
         } else {
@@ -360,7 +360,7 @@
         if (amount == 0) {
             document.getElementById("output").value = `/give @p ${document.getElementById("type").value} 1`
         } else {
-            document.getElementById("output").value = `/give @p ${document.getElementById("type").value}{Enchantments:[${thing}]} 1`
+            document.getElementById("output").value = `/give @p ${document.getElementById("type").value}[enchantments={levels:${thing}}}] 1`
         }
         notification("Command made", 3000);
       }
