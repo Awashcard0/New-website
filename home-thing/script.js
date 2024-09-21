@@ -114,7 +114,7 @@ homeButton.addEventListener("mouseleave", function(e) {
   //     if (showUsers) {document.getElementById("userThing").innerHTML = "Users online: " + usersOnline};
   //   }, 5000);
 
-fetch('https://awashcard0.pages.dev/info.json')
+fetch('https://awashcard0.com/info.json')
   .then(response => response.json())
   .then(info => gotInfo(info))
   .catch(error => console.error(error));
