@@ -7,7 +7,7 @@
     "description": "A website of Awashcard0's projects",
     "icons": [
       {
-        "src": "icon-big.png",
+        "src": "/images/icon-big.png",
         "sizes": "144x144",
         "type": "image/png"
       }

@@ -1,141 +1,129 @@
 // I Just You For My Own, More Than You Could Ever Know, Make My Wish Come True, All I Want For Christmas Is You!!
 // for proper javascript knowledge you should be listening to this playlist: https://open.spotify.com/playlist/2UvaLj0iFyLEXhKJQysYTc?si=d03e705244804068
-const commands = ["help", "echo", "cls", "clear", "history", "neofetch", "fastfetch", "myfetch", "cat", "ls"];
-const info = {
-    "help": "This command will list all the commands.",
-    "echo": "This command will output whatever you type after it.",
-    "cls": "This command will clear the screen.",
-    "neofetch": "does stuff",
-    "myfetch": "My neofetches",
-    "history": "fetches your command history.",
-    "cat": "read files from the file system.",
-    "ls": "list files from the file system."
+class Command {
+	#executor;
+	constructor() {
+		this.name = "";
+		this.description = "";
+        this.aliases = [];
+		this.#executor = function () {
+			throw new Error("EXECTOR NOT SETT!!!");
+		}	
+	}
+	setDescription(description) {
+		this.description = description;
+		return this;
+	}
+	setName(name) {
+		this.name = name;
+		return this;
+	}
+	setExecution(executor) {
+		this.#executor = executor;
+		return this;
+	}
+    addAlias(alias) {
+        if (Array.isArray(alias)) {
+            this.aliases = alias;
+        } else {
+            this.aliases = [alias];
+        }
+        return this;
+    }
+	execute(input) {
+		this.#executor(input) ?? Promise.resolve();
+	}
 }
-let history = [];
-const fs = new Map();
 
-fs.set("aboutMe.txt", "Hello! I'm Awashard0, a self-taught developer. <br> I like gaming with my friends and coding. ");
-fs.set("myStuff.txt", `Type "myfetch" to see what I use. `);
-fs.set("controls.txt", "tab autocomplete commands and files <br>TODO: autocomplete arguments</br>");
 
-let tabMatches
-let tabIndex
-
-document.addEventListener("DOMContentLoaded", function() {
-    // Get the varibles
-    const list = document.getElementById('list');
-    const inputBox = document.getElementById('input');
-    const inputText = document.querySelector(".inputForTerm");
-    
-    document.addEventListener("click", function(event) {
-        inputBox.focus();
-    });
-    
-
-    inputBox.addEventListener("keydown", function (event) {
-        // Get the value of the textbox
-        let val = inputBox.value;
-        
-        // If the user presses the "Enter" key on the keyboard
-        if (event.key === "Enter") {
-            event.preventDefault();
-            // If the input is not empty
-            if (inputBox.value) {
-                // Add the input value to the list item
-                output(`<span style="color: rgb(27, 219, 153);">awash@awashpc</span>:<span style="color: rgb(61, 173, 233);">~</span>$ ` + val);
-                // Clear the input
-                inputBox.value = "";
-                // Hide the input to let the command run
-                inputText.style.display = "none";
-                // Check the command
-                checkCommand(val);
-                // Add the command to the history
-                history.push(val);
-            } else {
-                // Add the input value to the list item
-                output(`<span style="color: rgb(27, 219, 153);">awash@awashpc</span>:<span style="color: rgb(61, 173, 233);">~</span>$ `);
-            }
-        } else if (event.key === "Tab") {
-            event.preventDefault();
-            let Fullcmd = val.toLowerCase();
-            let cmdN = Fullcmd.split(" ")[0];
-            // find the closest command to the current input value
-            if (cmdN === "cat") {
-                tabMatches = Array.from(fs.keys()).filter(cmd => cmd.startsWith(Fullcmd.split(" ")[1]));
-                tabIndex = history.indexOf(Fullcmd.split(" ")[1]);
-                if (tabMatches.length > 0) {
-                    if (tabIndex === -1 || tabIndex >= tabMatches.length - 1) {
-                        inputBox.value = "cat " + tabMatches[0];
-                    } else {
-                        inputBox.value = "cat " + tabMatches[index + 1];
-                    }
-                }
-            } else {
-                tabMatches = commands.filter(cmd => cmd.startsWith(val));
-                tabIndex = history.indexOf(val);
-                if (tabMatches.length > 0) {
-                    if (tabIndex === -1 || tabIndex >= tabMatches.length - 1) {
-                        inputBox.value = tabMatches[0] + " ";
-                    } else {
-                        inputBox.value = tabMatches[index + 1] + " ";
-                    }
-                }
-            };
-        }  
-    });
-});
-
-async function checkCommand(input) {
-    const inputText = document.querySelector(".inputForTerm");
-    const inputBox = document.getElementById('input');
-
-    let Fullcmd = input.toLowerCase();
-    let cmd = Fullcmd.split(" ")[0];
-
-    switch (cmd) {
-        // General Commands
-        case "echo":
-            const out = input.split(" ").slice(1).join(" ");
-            output(out);
-            break;
-        case "help":
+const commands = [
+    new Command()
+        .setName("help")
+        .setDescription("Lists all of the commands available. (this command)")
+        .setExecution(async() => {
             let helpText = "Available Commands: <br>";
-            for (let command in info) {
-                helpText += `<br>${command}: ${info[command]}</br>`;
+            for (let cmd of commands) {
+                helpText += `<br>${cmd.name}: ${cmd.description}</br>`;
             }
             output(helpText);
-            break;
-        case "cls":
-        case "clear":
-            list.innerHTML = "";
-            break;
-        case "history":
-            output(history.map((cmdinh, index) => `${index + 1}. ${cmdinh} <br>`).join("\n")); 
-            break;
-        // File System Commands
-        case "cat":
+        }),
+
+    new Command()
+        .setName("echo")
+        .setDescription("Will output whatever you type after it.")
+        .setExecution(async (input) => {
+            let match = input.match(/echo\s+("[^"]+"|\S+)/); // regex for catching the first arg
+        if (match) {
+            let out = match[1];
+            if (out.startsWith('"') && out.endsWith('"')) {
+                out = out.slice(1, -1);
+            }
+            output(out);
+        } else {
+            output(""); // output nothing
+        }
+        }),
+
+    new Command()
+        .setName("cls")
+            .setDescription("will clear the screen.")
+            .addAlias([
+                "clear"
+            ])
+            .setExecution(async () => {
+                list.innerHTML = "";
+            }),
+
+    new Command()
+        .setName("history")
+        .setDescription("fetches your command history")
+        .setExecution(async () => {
+            output(history.map((cmdinh, index) => `${index + 1}. ${cmdinh} <br>`).join("\n"));
+        }),
+
+    new Command()
+        .setName("cat")
+        .setDescription("read files from the file system.")
+        .setExecution(async (input) => {
             const file = input.split(" ").slice(1).join(" ");
             if (fs.has(file)) {
                 output(fs.get(file));
             } else {
                 output("cat: " + file + ": No such file or directory");
             }
-            break;
-        case "ls":
+        }),
+
+    new Command()
+        .setName("ls")
+        .setDescription("list files from the file system.")
+        .setExecution(async () => {
             output(Array.from(fs.keys()).join("&nbsp;"));
-            break;
-        // Tools
-        case "neofetch":
-        case "fastfetch":
+        }),
+
+    new Command()
+        .setName("neofetch")
+        .setDescription("does cool crap")
+        .addAlias([
+            "fastfetch"
+        ])
+        .setExecution(async () => {
             const ascii = asciiLogo(platform.name);
             
             let fetch = `<div style="display: inline-block; vertical-align: top"><span style="color:#7F000000;"><pre>${ascii}</pre></div>`;
             fetch += `<div style="display: inline-block; vertical-align: top">OS: ${platform.os}<br>Browser: ${platform.name}<br>Browser Version: ${platform.version}<br>Browser Layout: ${platform.layout}<br></div>`;
             output(fetch);
-            break;
-        case "myfetch":
-            const arg = input.split(" ")[1].toLowerCase();
+        }),
 
+    new Command()
+        .setName("myfetch")
+        .setDescription("Will output whatever you type after it.")
+        .setExecution(async (input) => {
+            const args = input.split(" ");
+            if (args.length <= 1) {
+                output("myfetch: invalid argument<br><br>Usage: myfetch [option]<br><br>Options:\n-l, --laptop\t\tShow laptop setup\n-d, --desktop\t\tShow desktop setup");
+                return;
+            }
+            const arg = input.split(" ")[1].toLowerCase();
             if (arg == "-l" || arg == "--laptop") {
                 // Laptop
                 const ascii = asciiLogo("NEON");
@@ -181,21 +169,120 @@ Memory: 13903MiB <br><br> (As of May 9, 2024)</div>`;
    GPU: NVIDIA Geforce RTX 3050 <br>
    Memory: 15886MiB  <br><br> (As of May 10, 2024)</div>`;
                 output(fetch);
-            } else {
-                output("myfetch: invalid argument<br><br>Usage: myfetch [option]<br><br>Options:\n-l, --laptop\t\tShow laptop setup\n-d, --desktop\t\tShow desktop setup");
             }
-        case '':
-            break;
-        case 'logo':
+        }),
+
+    new Command()
+        .setName("logo")
+        .setDescription("No Description set yet.")
+        .setExecution(async () => {
             output(`<div style="display: inline-block; vertical-align: top"><span style="color:white; line-height: 1;"><pre>${await asciiLogo("awash")}</pre></div>`);
-            break;
-        default:
-            output(input.split(" ")[0] + ": command not found");
-            break;
-    }
+        })
+        
+]
+const info = {
+    "help": "This command will list all the commands.",
+    "echo": "This command will output whatever you type after it.",
+    "cls": "This command will clear the screen.",
+    "neofetch": "does stuff",
+    "myfetch": "My neofetches",
+    "history": "fetches your command history.",
+    "cat": "read files from the file system.",
+    "ls": "list files from the file system."
+}
+
+let history = [];
+const fs = new Map();
+
+fs.set("aboutMe.txt", "Hello! I'm Awashard0, a self-taught developer. <br> I like gaming with my friends and coding. ");
+fs.set("myStuff.txt", `Type "myfetch" to see what I use. `);
+fs.set("controls.txt", "tab autocomplete commands and files <br>TODO: autocomplete arguments</br>");
+
+document.addEventListener("DOMContentLoaded", function() {
+    // Get the varibles
+    const list = document.getElementById('list');
+    const inputBox = document.getElementById('input');
+    const inputText = document.querySelector(".inputForTerm");
+    
+    document.addEventListener("click", function(event) {
+        inputBox.focus();
+    });
+    let tabMatches = []
+    let tabIndex = -1;
+
+    inputBox.addEventListener("keydown", function (event) {
+        // Get the value of the textbox
+        let val = inputBox.value;
+        // If the user presses the "Enter" key on the keyboard
+        if (event.key === "Enter") {
+            event.preventDefault();
+            // If the input is not empty
+            if (inputBox.value) {
+                // Add the input value to the list item
+                output(`<span style="color: rgb(27, 219, 153);">awash@awashpc</span>:<span style="color: rgb(61, 173, 233);">~</span>$ ` + val);
+                // Clear the input
+                inputBox.value = "";
+                // Hide the input to let the command run
+                inputText.style.display = "none";
+                // Check the command
+                checkCommand(val);
+                // Add the command to the history
+                history.push(val);
+            } else {
+                // Add the input value to the list item
+                output(`<span style="color: rgb(27, 219, 153);">awash@awashpc</span>:<span style="color: rgb(61, 173, 233);">~</span>$ `);
+            }
+            tabMatches = []
+            tabIndex = -1;
+        } else if (event.key === "Tab") {
+            event.preventDefault();
+            let Fullcmd = val.toLowerCase();
+            let cmdParts = Fullcmd.split(" ");
+            let cmdN = cmdParts[0];
+            if (tabMatches.length === 0) {
+                if (cmdN === "cat" && cmdParts.length > 1) {
+                    tabMatches = Array.from(fs.keys()).filter(cmd => cmd.startsWith(cmdParts[1]));
+                } else {
+                    tabMatches = commands
+                        .filter(cmd => cmd.name.toLowerCase().startsWith(val.toLowerCase()))
+                        .map(cmd => cmd.name);
+                }
+                tabIndex = -1;
+            }
+            if (tabMatches.length > 0) {
+                tabIndex = (tabIndex + 1) % tabMatches.length;
+                if (cmdN === "cat" && cmdParts.length > 1) {
+                    inputBox.value = "cat " + tabMatches[tabIndex];
+                } else {
+                    inputBox.value = tabMatches[tabIndex];
+                }
+            }
+        } else {
+            tabMatches = [];
+            tabIndex = -1;
+        }
+    });
+});
+
+async function checkCommand(input) {
+    const inputText = document.querySelector(".inputForTerm");
+    const inputBox = document.getElementById('input');
+
+    let Fullcmd = input.toLowerCase();
+    let cmd = Fullcmd.split(" ")[0];
+    let fd = false;
+    commands.forEach((command) => {
+        if (command.name === cmd || command.aliases.includes(cmd) ) {
+            command.execute(input);
+            fd = true
+        }
+    });
     
     inputText.style.display = "block";
     inputBox.focus();
+    if (!fd) {
+        output(`bash: ${cmd}: command not found`);
+    }
 }
 
 function output(thing) {
@@ -211,6 +298,13 @@ function output(thing) {
     scroll.scrollIntoView(false);
 }
 
+function focusInput() {
+    if(!window.getSelection().isCollapsed) return;
+    
+    const input = getInput();
+    input.focus();
+    input.scrollIntoView();
+}
 function asciiLogo(logo) {
     if (logo == "Firefox") {
         return `<span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span>
@@ -402,170 +496,99 @@ function asciiLogo(logo) {
     style="color:#7E000000;"> </span><span style="color:#7E000000;"> </span>`
 
     } else if (logo == "Opera") {
-        return `<span style="color:#000000;"> </span><span style="color:#000000;"> </span><span style="color:#000000;"> </span><span
-    style="color:#000000;"> </span><span style="color:#000000;"> </span><span style="color:#000000;"> </span><span
-    style="color:#000000;"> </span><span style="color:#000000;"> </span><span style="color:#000000;"> </span><span
-    style="color:#000000;"> </span><span style="color:#000000;"> </span><span style="color:#000000;"> </span><span
-    style="color:#000000;"> </span><span style="color:#000000;"> </span><span style="color:#000000;"> </span><span
-    style="color:#000000;"> </span><span style="color:#73150203;"> </span><span style="color:#AE81728;">*</span><span
-    style="color:#DE21626;">*</span><span style="color:#79060000;"> </span><span style="color:#000000;"> </span><span
-    style="color:#000000;"> </span><span style="color:#000000;"> </span><span style="color:#000000;"> </span><span
-    style="color:#000000;"> </span><span style="color:#000000;"> </span><span style="color:#000000;"> </span><span
-    style="color:#000000;"> </span><span style="color:#000000;"> </span><span style="color:#000000;"> </span><span
-    style="color:#000000;"> </span><span style="color:#000000;"> </span><span style="color:#000000;"> </span><span
-    style="color:#000000;"> </span><span style="color:#000000;"> </span><br><span style="color:#000000;"> </span><span
-    style="color:#000000;"> </span><span style="color:#000000;"> </span><span style="color:#000000;"> </span><span
-    style="color:#000000;"> </span><span style="color:#000000;"> </span><span style="color:#000000;"> </span><span
-    style="color:#000000;"> </span><span style="color:#000000;"> </span><span style="color:#FD1A2C;">/</span><span
-    style="color:#FD1A2C;">/</span><span style="color:#FD1A2C;">/</span><span style="color:#FF1B2D;">/</span><span
-    style="color:#FD1A2C;">/</span><span style="color:#FD1A2C;">/</span><span style="color:#FD1A2C;">/</span><span
-    style="color:#FF1B2D;">/</span><span style="color:#FD1A2C;">/</span><span style="color:#FD1A2C;">/</span><span
-    style="color:#FD1A2C;">/</span><span style="color:#AF040A;">,</span><span style="color:#9A0000;">,</span><span
-    style="color:#9A0000;">,</span><span style="color:#9A0000;">,</span><span style="color:#9C0000;">,</span><span
-    style="color:#FD1A2C;">/</span><span style="color:#FD1A2C;">/</span><span style="color:#000000;"> </span><span
-    style="color:#000000;"> </span><span style="color:#000000;"> </span><span style="color:#000000;"> </span><span
-    style="color:#000000;"> </span><span style="color:#000000;"> </span><span style="color:#000000;"> </span><span
-    style="color:#000000;"> </span><br><span style="color:#000000;"> </span><span style="color:#000000;"> </span><span
-    style="color:#000000;"> </span><span style="color:#000000;"> </span><span style="color:#000000;"> </span><span
-    style="color:#000000;"> </span><span style="color:#FF1B2D;">/</span><span style="color:#FD1A2C;">/</span><span
-    style="color:#FF1B2D;">/</span><span style="color:#FD1A2C;">/</span><span style="color:#FF1B2D;">/</span><span
-    style="color:#FD1A2C;">/</span><span style="color:#FF1B2D;">/</span><span style="color:#FD1A2C;">/</span><span
-    style="color:#FF1B2D;">/</span><span style="color:#A50808;">,</span><span style="color:#000000;"> </span><span
-    style="color:#000000;"> </span><span style="color:#000000;"> </span><span style="color:#000000;"> </span><span
-    style="color:#425A060B;">.</span><span style="color:#A50808;">,</span><span style="color:#A70909;">,</span><span
-    style="color:#A50808;">,</span><span style="color:#A70909;">,</span><span style="color:#A50808;">,</span><span
-    style="color:#A70909;">,</span><span style="color:#A50808;">,</span><span style="color:#A70909;">,</span><span
-    style="color:#A50808;">,</span><span style="color:#000000;"> </span><span style="color:#000000;"> </span><span
-    style="color:#000000;"> </span><span style="color:#000000;"> </span><span style="color:#000000;"> </span><br><span
-    style="color:#000000;"> </span><span style="color:#000000;"> </span><span style="color:#000000;"> </span><span
-    style="color:#000000;"> </span><span style="color:#FF1B2D;">/</span><span style="color:#FD1A2C;">/</span><span
-    style="color:#FD1A2C;">/</span><span style="color:#FD1A2C;">/</span><span style="color:#FF1B2D;">/</span><span
-    style="color:#FD1A2C;">/</span><span style="color:#FD1A2C;">/</span><span style="color:#FD1A2C;">/</span><span
-    style="color:#000000;"> </span><span style="color:#000000;"> </span><span style="color:#000000;"> </span><span
-    style="color:#000000;"> </span><span style="color:#000000;"> </span><span style="color:#000000;"> </span><span
-    style="color:#000000;"> </span><span style="color:#000000;"> </span><span style="color:#000000;"> </span><span
-    style="color:#000000;"> </span><span style="color:#000000;"> </span><span style="color:#000000;"> </span><span
-    style="color:#B41111;">,</span><span style="color:#B31111;">,</span><span style="color:#B31111;">,</span><span
-    style="color:#B31111;">,</span><span style="color:#B41111;">,</span><span style="color:#B31111;">,</span><span
-    style="color:#B31111;">,</span><span style="color:#B31111;">,</span><span style="color:#000000;"> </span><span
-    style="color:#000000;"> </span><span style="color:#000000;"> </span><br><span style="color:#000000;"> </span><span
-    style="color:#000000;"> </span><span style="color:#FF1B2D;">/</span><span style="color:#FF1B2D;">/</span><span
-    style="color:#FF1B2D;">/</span><span style="color:#FF1B2D;">/</span><span style="color:#FF1B2D;">/</span><span
-    style="color:#FF1B2D;">/</span><span style="color:#FF1B2D;">/</span><span style="color:#FF1B2D;">/</span><span
-    style="color:#FF1B2D;">/</span><span style="color:#000000;"> </span><span style="color:#000000;"> </span><span
-    style="color:#000000;"> </span><span style="color:#000000;"> </span><span style="color:#000000;"> </span><span
-    style="color:#000000;"> </span><span style="color:#000000;"> </span><span style="color:#000000;"> </span><span
-    style="color:#000000;"> </span><span style="color:#000000;"> </span><span style="color:#000000;"> </span><span
-    style="color:#000000;"> </span><span style="color:#000000;"> </span><span style="color:#000000;"> </span><span
-    style="color:#000000;"> </span><span style="color:#BF1A1A;">*</span><span style="color:#BF1A1A;">*</span><span
-    style="color:#BF1A1A;">*</span><span style="color:#BF1A1A;">*</span><span style="color:#BF1A1A;">*</span><span
-    style="color:#BF1A1A;">*</span><span style="color:#BF1A1A;">*</span><span style="color:#BF1A1A;">*</span><span
-    style="color:#000000;"> </span><br><span style="color:#000000;"> </span><span style="color:#FB192B;">/</span><span
-    style="color:#FB192B;">/</span><span style="color:#FB192B;">/</span><span style="color:#FD1A2C;">/</span><span
-    style="color:#FB192B;">/</span><span style="color:#FB192B;">/</span><span style="color:#FB192B;">/</span><span
-    style="color:#FD1A2C;">/</span><span style="color:#FB192B;">/</span><span style="color:#000000;"> </span><span
-    style="color:#000000;"> </span><span style="color:#000000;"> </span><span style="color:#000000;"> </span><span
-    style="color:#000000;"> </span><span style="color:#000000;"> </span><span style="color:#000000;"> </span><span
-    style="color:#000000;"> </span><span style="color:#000000;"> </span><span style="color:#000000;"> </span><span
-    style="color:#000000;"> </span><span style="color:#000000;"> </span><span style="color:#000000;"> </span><span
-    style="color:#000000;"> </span><span style="color:#000000;"> </span><span style="color:#000000;"> </span><span
-    style="color:#000000;"> </span><span style="color:#C92222;">*</span><span style="color:#CB2323;">*</span><span
-    style="color:#CA2323;">*</span><span style="color:#C92222;">*</span><span style="color:#C92222;">*</span><span
-    style="color:#CB2323;">*</span><span style="color:#C92222;">*</span><span style="color:#C92222;">*</span><br><span
-    style="color:#000000;"> </span><span style="color:#F8192B;">/</span><span style="color:#FA1A2C;">/</span><span
-    style="color:#F8192B;">/</span><span style="color:#FA1A2C;">/</span><span style="color:#F8192B;">/</span><span
-    style="color:#FA1A2C;">/</span><span style="color:#F8192B;">/</span><span style="color:#FA1A2C;">/</span><span
-    style="color:#000000;"> </span><span style="color:#000000;"> </span><span style="color:#000000;"> </span><span
-    style="color:#000000;"> </span><span style="color:#000000;"> </span><span style="color:#000000;"> </span><span
-    style="color:#000000;"> </span><span style="color:#000000;"> </span><span style="color:#000000;"> </span><span
-    style="color:#000000;"> </span><span style="color:#000000;"> </span><span style="color:#000000;"> </span><span
-    style="color:#000000;"> </span><span style="color:#000000;"> </span><span style="color:#000000;"> </span><span
-    style="color:#000000;"> </span><span style="color:#000000;"> </span><span style="color:#000000;"> </span><span
-    style="color:#D52C2C;">*</span><span style="color:#D62C2C;">*</span><span style="color:#D52C2C;">*</span><span
-    style="color:#D62C2C;">*</span><span style="color:#D52C2C;">*</span><span style="color:#D62C2C;">*</span><span
-    style="color:#D52C2C;">*</span><span style="color:#D62C2C;">*</span><br><span style="color:#F11629;">*</span><span
-    style="color:#F21729;">*</span><span style="color:#F21729;">*</span><span style="color:#F21729;">*</span><span
-    style="color:#F4182A;">/</span><span style="color:#F21729;">*</span><span style="color:#F21729;">*</span><span
-    style="color:#F21729;">*</span><span style="color:#F4182A;">/</span><span style="color:#000000;"> </span><span
-    style="color:#000000;"> </span><span style="color:#000000;"> </span><span style="color:#000000;"> </span><span
-    style="color:#000000;"> </span><span style="color:#000000;"> </span><span style="color:#000000;"> </span><span
-    style="color:#000000;"> </span><span style="color:#000000;"> </span><span style="color:#000000;"> </span><span
-    style="color:#000000;"> </span><span style="color:#000000;"> </span><span style="color:#000000;"> </span><span
-    style="color:#000000;"> </span><span style="color:#000000;"> </span><span style="color:#000000;"> </span><span
-    style="color:#000000;"> </span><span style="color:#000000;"> </span><span style="color:#E13334;">/</span><span
-    style="color:#E23435;">/</span><span style="color:#E13334;">/</span><span style="color:#E13334;">/</span><span
-    style="color:#E13334;">/</span><span style="color:#E23435;">/</span><span style="color:#E13334;">/</span><span
-    style="color:#E13334;">/</span><br><span style="color:#000000;"> </span><span style="color:#EE1528;">*</span><span
-    style="color:#EE1528;">*</span><span style="color:#EE1528;">*</span><span style="color:#EE1528;">*</span><span
-    style="color:#EE1528;">*</span><span style="color:#EE1528;">*</span><span style="color:#EE1528;">*</span><span
-    style="color:#EE1528;">*</span><span style="color:#000000;"> </span><span style="color:#000000;"> </span><span
-    style="color:#000000;"> </span><span style="color:#000000;"> </span><span style="color:#000000;"> </span><span
-    style="color:#000000;"> </span><span style="color:#000000;"> </span><span style="color:#000000;"> </span><span
-    style="color:#000000;"> </span><span style="color:#000000;"> </span><span style="color:#000000;"> </span><span
-    style="color:#000000;"> </span><span style="color:#000000;"> </span><span style="color:#000000;"> </span><span
-    style="color:#000000;"> </span><span style="color:#000000;"> </span><span style="color:#000000;"> </span><span
-    style="color:#000000;"> </span><span style="color:#EE3E3E;">/</span><span style="color:#EE3E3E;">/</span><span
-    style="color:#EE3E3E;">/</span><span style="color:#EE3E3E;">/</span><span style="color:#EE3E3E;">/</span><span
-    style="color:#EE3E3E;">/</span><span style="color:#EE3E3E;">/</span><span style="color:#EE3E3E;">/</span><br><span
-    style="color:#000000;"> </span><span style="color:#E31124;">*</span><span style="color:#E31124;">*</span><span
-    style="color:#E31124;">*</span><span style="color:#E51225;">*</span><span style="color:#E31124;">*</span><span
-    style="color:#E31124;">*</span><span style="color:#E31124;">*</span><span style="color:#E51225;">*</span><span
-    style="color:#E31124;">*</span><span style="color:#000000;"> </span><span style="color:#000000;"> </span><span
-    style="color:#000000;"> </span><span style="color:#000000;"> </span><span style="color:#000000;"> </span><span
-    style="color:#000000;"> </span><span style="color:#000000;"> </span><span style="color:#000000;"> </span><span
-    style="color:#000000;"> </span><span style="color:#000000;"> </span><span style="color:#000000;"> </span><span
-    style="color:#000000;"> </span><span style="color:#000000;"> </span><span style="color:#000000;"> </span><span
-    style="color:#000000;"> </span><span style="color:#000000;"> </span><span style="color:#000000;"> </span><span
-    style="color:#F84646;">(</span><span style="color:#FA4747;">(</span><span style="color:#F84646;">(</span><span
-    style="color:#F84646;">(</span><span style="color:#F84646;">(</span><span style="color:#FA4747;">(</span><span
-    style="color:#F84646;">(</span><span style="color:#F84646;">(</span><br><span style="color:#000000;"> </span><span
-    style="color:#000000;"> </span><span style="color:#DA0F22;">*</span><span style="color:#D80E21;">*</span><span
-    style="color:#DA0F22;">*</span><span style="color:#D80E21;">*</span><span style="color:#DA0F22;">*</span><span
-    style="color:#D80E21;">*</span><span style="color:#DA0F22;">*</span><span style="color:#D80E21;">*</span><span
-    style="color:#DA0F22;">*</span><span style="color:#000000;"> </span><span style="color:#000000;"> </span><span
-    style="color:#000000;"> </span><span style="color:#000000;"> </span><span style="color:#000000;"> </span><span
-    style="color:#000000;"> </span><span style="color:#000000;"> </span><span style="color:#000000;"> </span><span
-    style="color:#000000;"> </span><span style="color:#000000;"> </span><span style="color:#000000;"> </span><span
-    style="color:#000000;"> </span><span style="color:#000000;"> </span><span style="color:#000000;"> </span><span
-    style="color:#000000;"> </span><span style="color:#FF4B4B;">(</span><span style="color:#FD4A4A;">(</span><span
-    style="color:#FF4B4B;">(</span><span style="color:#FD4A4A;">(</span><span style="color:#FF4B4B;">(</span><span
-    style="color:#FD4A4A;">(</span><span style="color:#FF4B4B;">(</span><span style="color:#FD4A4A;">(</span><span
-    style="color:#000000;"> </span><br><span style="color:#000000;"> </span><span style="color:#000000;"> </span><span
-    style="color:#000000;"> </span><span style="color:#000000;"> </span><span style="color:#CF0C1F;">*</span><span
-    style="color:#CD0B1E;">*</span><span style="color:#CD0B1E;">*</span><span style="color:#CD0B1E;">*</span><span
-    style="color:#CF0C1F;">*</span><span style="color:#CD0B1E;">*</span><span style="color:#CD0B1E;">*</span><span
-    style="color:#CD0B1E;">*</span><span style="color:#000000;"> </span><span style="color:#000000;"> </span><span
-    style="color:#000000;"> </span><span style="color:#000000;"> </span><span style="color:#000000;"> </span><span
-    style="color:#000000;"> </span><span style="color:#000000;"> </span><span style="color:#000000;"> </span><span
-    style="color:#000000;"> </span><span style="color:#000000;"> </span><span style="color:#000000;"> </span><span
-    style="color:#000000;"> </span><span style="color:#FF4B4B;">(</span><span style="color:#FD4A4A;">(</span><span
-    style="color:#FD4A4A;">(</span><span style="color:#FD4A4A;">(</span><span style="color:#FF4B4B;">(</span><span
-    style="color:#FD4A4A;">(</span><span style="color:#FD4A4A;">(</span><span style="color:#FD4A4A;">(</span><span
-    style="color:#000000;"> </span><span style="color:#000000;"> </span><span style="color:#000000;"> </span><br><span
-    style="color:#000000;"> </span><span style="color:#000000;"> </span><span style="color:#000000;"> </span><span
-    style="color:#000000;"> </span><span style="color:#000000;"> </span><span style="color:#000000;"> </span><span
-    style="color:#C1071B;">,</span><span style="color:#C1071B;">,</span><span style="color:#C1071B;">,</span><span
-    style="color:#C1071B;">,</span><span style="color:#C1071B;">,</span><span style="color:#C1071B;">,</span><span
-    style="color:#C1071B;">,</span><span style="color:#C1071B;">,</span><span style="color:#C1071B;">,</span><span
-    style="color:#FF4B4B;">(</span><span style="color:#000000;"> </span><span style="color:#000000;"> </span><span
-    style="color:#000000;"> </span><span style="color:#000000;"> </span><span style="color:#14D43D3D;">/</span><span
-    style="color:#FF4B4B;">(</span><span style="color:#FF4B4B;">(</span><span style="color:#FF4B4B;">(</span><span
-    style="color:#FF4B4B;">(</span><span style="color:#FF4B4B;">(</span><span style="color:#FF4B4B;">(</span><span
-    style="color:#FF4B4B;">(</span><span style="color:#FF4B4B;">(</span><span style="color:#FF4B4B;">(</span><span
-    style="color:#000000;"> </span><span style="color:#000000;"> </span><span style="color:#000000;"> </span><span
-    style="color:#000000;"> </span><span style="color:#000000;"> </span><br><span style="color:#000000;"> </span><span
-    style="color:#000000;"> </span><span style="color:#000000;"> </span><span style="color:#000000;"> </span><span
-    style="color:#000000;"> </span><span style="color:#000000;"> </span><span style="color:#000000;"> </span><span
-    style="color:#000000;"> </span><span style="color:#000000;"> </span><span style="color:#B20317;">,</span><span
-    style="color:#B20317;">,</span><span style="color:#B20317;">,</span><span style="color:#B40317;">,</span><span
-    style="color:#B20317;">,</span><span style="color:#B20317;">,</span><span style="color:#B20317;">,</span><span
-    style="color:#B40317;">,</span><span style="color:#B20317;">,</span><span style="color:#B20317;">,</span><span
-    style="color:#B20317;">,</span><span style="color:#DB2931;">/</span><span style="color:#FD4A4A;">(</span><span
-    style="color:#FD4A4A;">(</span><span style="color:#FD4A4A;">(</span><span style="color:#F03C40;">/</span><span
-    style="color:#B20317;">,</span><span style="color:#B20317;">,</span><span style="color:#000000;"> </span><span
-    style="color:#000000;"> </span><span style="color:#000000;"> </span><span style="color:#000000;"> </span><span
-    style="color:#000000;"> </span><span style="color:#000000;"> </span><span style="color:#000000;"> </span><span
-    style="color:#000000;"> </span>`
+        return `<span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span>
+        <span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span>
+        <span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span>
+        <span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span>
+        <span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span>
+        <span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#65CCCCCC;">&amp;</span>
+        <span style="color:#5BCECECE;">&amp;</span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span>
+        <span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span>
+        <span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span>
+        <span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span>
+        <span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7F000000;"> </span>
+        <br><span style="color:#7F000000;"> </span><span style="color:#7E000000;"> </span><span style="color:#7E000000;"> </span>
+        <span style="color:#7E000000;"> </span><span style="color:#7E000000;"> </span><span style="color:#7E000000;"> </span>
+        <span style="color:#7E000000;"> </span><span style="color:#7E000000;"> </span><span style="color:#7E000000;"> </span>
+        <span style="color:#F8F8F8;">@</span><span style="color:#F8F8F8;">@</span><span style="color:#F8F8F8;">@</span>
+        <span style="color:#1B83F2;">(</span><span style="color:#1D83F5;">(</span><span style="color:#1E84F7;">(</span>
+        <span style="color:#1D87F6;">(</span><span style="color:#F2F0F1;">@</span><span style="color:#1C89F6;">(</span>
+        <span style="color:#1C89F6;">(</span><span style="color:#F2F0F1;">@</span><span style="color:#1D87F6;">(</span>
+        <span style="color:#1E85F7;">(</span><span style="color:#1D84F5;">(</span><span style="color:#1C83F3;">(</span>
+        <span style="color:#F8F8F8;">@</span><span style="color:#F8F8F8;">@</span><span style="color:#F8F8F8;">@</span>
+        <span style="color:#7E000000;"> </span><span style="color:#7E000000;"> </span><span style="color:#7E000000;"> </span>
+        <span style="color:#7E000000;"> </span><span style="color:#7E000000;"> </span><span style="color:#7F000000;"> </span>
+        <span style="color:#7E000000;"> </span><span style="color:#7E000000;"> </span><br><span style="color:#7F000000;"> </span>
+        <span style="color:#7E000000;"> </span><span style="color:#7E000000;"> </span><span style="color:#7E000000;"> </span>
+        <span style="color:#7E000000;"> </span><span style="color:#7E000000;"> </span><span style="color:#F3F3F3;">@</span>
+        <span style="color:#F3F3F3;">@</span><span style="color:#1A82F0;">(</span><span style="color:#F2F0F1;">@</span>
+        <span style="color:#1D88F6;">(</span><span style="color:#F2F0F1;">@</span><span style="color:#1993F4;">(</span>
+        <span style="color:#1897F3;">(</span><span style="color:#179BF2;">(</span><span style="color:#F2F0F1;">@</span>
+        <span style="color:#16A2F3;">(</span><span style="color:#15A1F1;">(</span><span style="color:#15A1F1;">(</span>
+        <span style="color:#15A0F1;">(</span><span style="color:#F2F0F1;">@</span><span style="color:#169CF2;">(</span>
+        <span style="color:#1898F3;">(</span><span style="color:#1993F4;">(</span><span style="color:#BED9F1;">&amp;</span>
+        <span style="color:#1D89F6;">(</span><span style="color:#F2F0F1;">@</span><span style="color:#1B82F1;">(</span>
+        <span style="color:#F3F3F3;">@</span><span style="color:#F3F3F3;">@</span><span style="color:#7E000000;"> </span>
+        <span style="color:#7E000000;"> </span><span style="color:#7F000000;"> </span><span style="color:#7E000000;"> </span>
+        <span style="color:#7E000000;"> </span><br><span style="color:#7F000000;"> </span><span style="color:#7E000000;"> </span>
+        <span style="color:#7E000000;"> </span><span style="color:#7E000000;"> </span><span style="color:#EEEEEE;">@</span>
+        <span style="color:#EEEEEE;">@</span><span style="color:#1A82F0;">(</span><span style="color:#2A8BF5;">(</span>
+        <span style="color:#1C8AF6;">(</span><span style="color:#1A92F4;">(</span><span style="color:#1799F3;">(</span>
+        <span style="color:#15A0F1;">(</span><span style="color:#13A6F0;">(</span><span style="color:#11ACEF;">(</span>
+        <span style="color:#10ADEE;">(</span><span style="color:#10AEEE;">(</span><span style="color:#10AFEE;">(</span>
+        <span style="color:#0FAFED;">(</span><span style="color:#0FAFED;">(</span><span style="color:#10AFEE;">(</span>
+        <span style="color:#10AEEE;">(</span><span style="color:#10ADEE;">(</span><span style="color:#11ACEF;">(</span>
+        <span style="color:#13A7F0;">(</span><span style="color:#15A1F1;">(</span><span style="color:#179AF3;">(</span>
+        <span style="color:#1993F4;">(</span><span style="color:#FD504F;">(</span><span style="color:#F1EFF0;">@</span>
+        <span style="color:#1B82F1;">(</span><span style="color:#EEEEEE;">@</span><span style="color:#EEEEEE;">@</span>
+        <span style="color:#7F000000;"> </span><span style="color:#7E000000;"> </span><span style="color:#7E000000;"> </span>
+        <span style="color:#7E000000;"> </span><br><span style="color:#7F000000;"> </span><span style="color:#7E000000;"> </span>
+        <span style="color:#7E000000;"> </span><span style="color:#E9E9E9;">@</span><span style="color:#1780EB;">(</span>
+        <span style="color:#1B82F1;">(</span><span style="color:#F2F0F1;">@</span><span style="color:#1B8DF5;">(</span>
+        <span style="color:#1998F5;">(</span><span style="color:#159FF2;">(</span><span style="color:#13A7F0;">(</span>
+        <span style="color:#11ADEF;">(</span><span style="color:#10AFEE;">(</span><span style="color:#0FB1ED;">(</span>
+        <span style="color:#0EB2EC;">(</span><span style="color:#0DB4EB;">(</span><span style="color:#0EB7ED;">(</span>
+        <span style="color:#0CB5EA;">(</span><span style="color:#0CB5EA;">(</span><span style="color:#0DB5EB;">(</span>
+        <span style="color:#0DB4EB;">(</span><span style="color:#0EB3EC;">(</span><span style="color:#0FB1ED;">(</span>
+        <span style="color:#FD504F;">(</span><span style="color:#FF5150;">(</span><span style="color:#BF3C3C;">/</span>
+        <span style="color:#0E6CA1;">*</span><span style="color:#1898F3;">(</span><span style="color:#1A8FF5;">(</span>
+        <span style="color:#F2F0F1;">@</span><span style="color:#1B82F2;">(</span><span style="color:#1880EC;">(</span>
+        <span style="color:#EBEBEB;">@</span><span style="color:#7E000000;"> </span><span style="color:#7E000000;"> </span>
+        <br><span style="color:#7F000000;"> </span><span style="color:#7E000000;"> </span><span style="color:#E4E4E4;">&amp;</span>
+        <span style="color:#167FE8;">/</span><span style="color:#ABCCF0;">&amp;</span><span style="color:#F2F0F1;">@</span>
+        <span style="color:#1C8BF6;">(</span><span style="color:#1994F4;">(</span><span style="color:#169EF2;">(</span>
+        <span style="color:#13A7F0;">(</span><span style="color:#10ADEE;">(</span><span style="color:#0FAFED;">(</span>
+        <span style="color:#0EB2EC;">(</span><span style="color:#0DB4EB;">(</span><span style="color:#0CB6EA;">(</span>
+        <span style="color:#0AB8E9;">(</span><span style="color:#09BAE8;">(</span><span style="color:#08BBE7;">(</span>
+        <span style="color:#08BBE7;">(</span><span style="color:#09B9E7;">(</span><span style="color:#FD504F;">(</span>
+        <span style="color:#FD504F;">(</span><span style="color:#BF3C3C;">/</span><span style="color:#BF3C3C;">/</span>
+        <span style="color:#0A749C;">*</span><span style="color:#10AEEE;">(</span><span style="color:#12A9F0;">(</span>
+        <span style="color:#159FF1;">(</span><span style="color:#1896F3;">(</span><span style="color:#1B8DF5;">(</span>
+        <span style="color:#F2F0F1;">@</span><span style="color:#F2F0F1;">@</span><span style="color:#1781EB;">(</span>
+        <span style="color:#E4E4E4;">&amp;</span><span style="color:#7E000000;"> </span><br><span style="color:#7F000000;"> </span>
+        <span style="color:#7CACACA;">%</span><span style="color:#DFDFDF;">&amp;</span><span style="color:#167FE8;">/</span>
+        <span style="color:#1A82EF;">(</span><span style="color:#1D84F6;">(</span><span style="color:#1B8CF5;">(</span>
+        <span style="color:#1896F3;">(</span><span style="color:#159FF1;">(</span><span style="color:#12A9F0;">(</span>
+        <span style="color:#10AEEE;">(</span><span style="color:#0FB0ED;">(</span><span style="color:#0EB2EC;">(</span>
+        <span style="color:#0DB5EB;">(</span><span style="color:#0BB7E9;">(</span><span style="color:#09BAE8;">(</span>
+        <span style="color:#FF5150;">(</span><span style="color:#FD504F;">(</span><span style="color:#FD504F;">(</span>
+        <span style="color:#FD504F;">(</span><span style="color:#BF3C3C;">/</span><span style="color:#BF3C3C;">/</span>
+        <span style="color:#077598;">*</span><span style="color:#0EB3EC;">(</span><span style="color:#0FB1ED;">(</span>
+        <span style="color:#10AEEE;">(</span><span style="color:#11ABEF;">(</span><span style="color:#15A1F1;">(</span>
+        <span style="color:#1898F3;">(</span><span style="color:#1B8EF5;">(</span><span style="color:#1E84F7;">(</span>
+        <span style="color:#1B82F0;">(</span><span style="color:#1882EC;">(</span><span style="color:#DFDFDF;">&amp;</span>
+        <span style="color:#DEDEDE;">&amp;</span><br><span style="color:#7F000000;"> </span><span style="color:#DADADA;">&amp;</span>
+        <span style="color:#DADADA;">&amp;</span><span style="color:#157FE6;">/</span><span style="color:#1981ED;">(</span>
+        <span style="color:#1C83F4;">(</span><span style="color:#1D89F6;">(</span><span style="color:#1A92F4;">(</span>
+        <span style="color:#179BF2;">(</span><span style="color:#14A4F1;">(</span><span style="color:#11ACEF;">(</span>
+        <span style="color:#10AFEE;">(</span><span style="color:#0FB1ED;">(</span><span style="color:#0EB3EC;">(</span>
+        <span style="color:#EFEFEF;">@</span><span style="color:#EFEFEF;">@</span><span style="color:#EFEFEF;">@</span>
+        <span style="color:#B4B4B4;">%</span><span style="color:#B4B4B4;">%</span><span style="color:#BF3C3C;">/</span>
+        <span style="color:#BF3C3C;">/</span><span style="color:#0DB5EA;">(</span><span style="color:#0DB3EB;">(</span>
+        <span style="color:#0EB1EC;">(</span><span style="color:#10AFEE;">(</span><span style="color:#11ADEF;">(</span>
+        <span style="color:#13A6F0;">(</span><span style="color:#169DF2;">(</span><span style="color:#1994F4;">(</span>
+        <span style="color:#1C8AF6;">(</span><span style="color:#1D83F5;">(</span><span style="color:#1981EE;">(</span>
+        <span style="color:#1781EA;">(</span><span style="color:#DADADA;">&amp;</span>`
     } else if (logo == "NEON") {
         return '<span style="color:#1BDB99;">             `..---+/---..`<br>         `---.``   ``   `.---.`<br>      .--.`        ``        `-:-.<br>    `:/:     `.----//----.`     :/-<br>   .:.    `---`          `--.`    .:`<br>  .:`   `--`                .:-    `:.<br> `/    `:.      `.-::-.`      -:`   `/`<br> /.    /.     `:++++++++:`     .:    .:<br>`/    .:     `+++++++++++/      /`   `+`<br>/+`   --     .++++++++++++`     :.   .+:<br>`/    .:     `+++++++++++/      /`   `+`<br> /`    /.     `:++++++++:`     .:    .:<br> ./    `:.      `.:::-.`      -:`   `/`<br>  .:`   `--`                .:-    `:.<br>   .:.    `---`          `--.`    .:`<br>    `:/:     `.----//----.`     :/-<br>      .-:.`        ``        `-:-.<br>         `---.``   ``   `.---.`<br>             `..---+/---..`<br></span>'
     } else if (logo == "awash") {

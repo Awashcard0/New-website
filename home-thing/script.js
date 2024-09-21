@@ -226,18 +226,10 @@ function tickFPS() {
 }
 tickFPS();
 
-fetch("https://awashcard0.com/")
-      .then(response => {
-        if (response.status === 200) {
-          online = true;
-        } else {
-          online = false;
-        }
-      }
-      );
 
-      window.addEventListener("load", () => {
-        if ("serviceWorker" in navigator) {
-          navigator.serviceWorker.register("https://awashcard0.com/service-worker.js");
-        }
-      });
+
+window.addEventListener("load", () => {
+  if ("serviceWorker" in navigator) {
+    navigator.serviceWorker.register("./../service-worker.js");
+  }
+});

@@ -1,29 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta property="og:title" content="Awashcard0" />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://awashcard0.com/" />
     <meta property="og:image" content="https://awashcard0.com/icon-big.png" />
-    <meta property="og:description" content="No clue what to put here" />
+    <meta property="og:description" content="I use Arch btw" />
     <meta property="og:site_name" content="Awashcard0's website" />
-    <link href="favicon.ico" type="image/x-icon" rel="shortcut icon"><link href="favicon.ico" type="image/x-icon" rel="icon">
+    <link href="favicon.ico" type="image/x-icon" rel="shortcut icon">
+    <link href="favicon.ico" type="image/x-icon" rel="icon">
     <link rel="stylesheet" href="ok-style.css">
+    <script src="https://unpkg.com/typewriter-effect@2.3.1/dist/core.js"></script>
     <title>Awashcard0</title>
 </head>
+
 <body>
     <section class="hero">
         <div class="hero-content">
-           <h1 class="hero-title">Discover the World</h1>
-           <h2 class="hero-subtitle">We offer the best adventure holidays and tailor-made trips!</h2>
+            <h1 class="hero-title">Hello, I'm Awashcard0</h1>
+            <h2 class="hero-subtitle" id="app"">A programer</h2>
+            <noscript>
+                <p>It is <strong>new Date().getFullYear();</strong> and you dont have javascript on. You do you I guess.</p>
+            </noscript>
+            ㅤ<br>
+            <div class="scroll-down"></div>
+            ㅤ<br>ㅤ<br>
         </div>
     </section>
-
-    <div class="titleb">
-        <div class="title">
-            <div class="titleText">
-                <img id="img" class="centerimg" src="https://awashcard0.com/icon-big.png"><h1>Awashcard0</h1>
+    <div class="premain">
+        <div class="main">
+            <div class="top">
+                <img id="img" class="centerimg" src="https://awashcard0.com/icon-big.png" style="vertical-align: bottom;">
+                <div style="display: inline; font-size: 50px;"> ⋅</div>
+                <h1 style="display: inline; font-size: 50px;">Awashcard0</h1>
+            </div>
+            <div class="mainContent">
+                <h2>Hello, I'm Awashcard0</h2>
             </div>
         </div>
     </div>
@@ -34,18 +48,75 @@
     var deg = spining ? 14400 : 0;
 
     img.addEventListener("mouseenter", () => {
-      spining = true;
-      spin();
+        spining = true;
+        spin();
     });
 
     img.addEventListener("mouseleave", () => {
-      spining = false;
-      spin();
+        spining = false;
+        spin();
     });
 
     function spin() {
-      deg = spining ? 14400 : 0;
-      img.style.transform = "rotate(" + deg + "deg)";
+        deg = spining ? 14400 : 0;
+        img.style.transform = "rotate(" + deg + "deg)";
     }
+
+    const images = [
+        "./images/nestThermostatVro.jpg", // vro is hot
+    ];
+
+    // Randomize background image
+
+    let colors = [];
+
+    for (let i = 0; i < 6; i++) {
+        colors.push(Math.floor(Math.random() * 255));
+    }
+
+    console.log(colors);
+
+    document.documentElement.style.setProperty("background", `linear-gradient(rgba(${colors[0]}, ${colors[1]}, ${colors[2]}, 0.6), rgba(${colors[3]}, ${colors[4]}, ${colors[5]}, 0.6))`)
+    document.documentElement.style.setProperty("background-size", "cover");
+    document.documentElement.style.setProperty("background-position", "center center");
+    document.documentElement.style.setProperty("background-attachment", "fixed");
+    document.documentElement.style.setProperty("background-repeat", "no-repeat");
+
+    setTimeout(() => {
+        if (Math.floor(Math.random() * 10) == 5) {
+
+            var index = Math.floor(Math.random() * images.length);
+            var pic = images[index];
+            if (pic === images[0]) {
+                document.querySelector('.hero-subtitle').innerText = "Vro is hot";
+            }
+
+            document.documentElement.style.setProperty("background", `linear-gradient(rgba(255, 30, 30, 0.5), rgba(11, 0, 105, 0.5)), url('${pic}'`)
+            document.documentElement.style.setProperty("background-size", "cover");
+            document.documentElement.style.setProperty("background-position", "center center");
+            document.documentElement.style.setProperty("background-attachment", "fixed");
+            document.documentElement.style.setProperty("background-repeat", "no-repeat");
+        }
+    }, 15000);
+
+    var typewriter = new Typewriter(app, {
+            loop: true
+        });
+
+
+        typewriter.typeString('A Programmer')
+            .pauseFor(1500)
+            .deleteChars(10)
+            .typeString("Gamer")
+            .pauseFor(1500)
+            .deleteChars(5)
+            .typeString('Linux User')
+            .pauseFor(1500)
+            .deleteChars(10)
+            .typeString("Nerd")
+            .pauseFor(1500)
+            .deleteAll()
+            .start();
 </script>
+
 </html>
