@@ -8,7 +8,7 @@
     <meta property="og:url" content="https://awashcard0.com/" />
     <meta property="og:image" content="https://awashcard0.com/icon-big.png" />
     <meta property="og:description" content="I use Arch btw" />
-    <meta property="og:site_name" content="Awashcard0's website" />
+    <meta property="og:site_name" content="Vro's Fanclub Emporium" />
     <link href="favicon.ico" type="image/x-icon" rel="shortcut icon">
     <link href="favicon.ico" type="image/x-icon" rel="icon">
     <link rel="stylesheet" href="ok-style.css">
@@ -20,9 +20,10 @@
     <section class="hero">
         <div class="hero-content">
             <h1 class="hero-title">Hello, I'm Awashcard0</h1>
-            <h2 class="hero-subtitle" id="app"">A programer</h2>
+            <h2 class="hero-subtitle">A Linux User, Avid Programmer, and a fan of Vro.</h2>
             <noscript>
-                <p>It is <strong>new Date().getFullYear();</strong> and you dont have javascript on. You do you I guess.</p>
+                <p>It is <strong>new Date().getFullYear();</strong> and you dont have javascript on. You do you I guess.
+                </p>
             </noscript>
             ㅤ<br>
             <div class="scroll-down"></div>
@@ -69,27 +70,38 @@
     // Randomize background image
 
     let colors = [];
+    let vroed = false;
 
-    for (let i = 0; i < 6; i++) {
-        colors.push(Math.floor(Math.random() * 255));
+    function setRandomBackground() {
+
+
+        colors = [];
+        for (let i = 0; i < 6; i++) {
+            colors.push(Math.floor(Math.random() * 255));
+        }
+
+        document.documentElement.style.setProperty("background", `linear-gradient(rgba(${colors[0]}, ${colors[1]}, ${colors[2]}, 0.6), rgba(${colors[3]}, ${colors[4]}, ${colors[5]}, 0.6))${vroed ? `, url('${images[0]}')` : ''}`);
+        document.documentElement.style.setProperty("background-size", "cover");
+        document.documentElement.style.setProperty("background-position", "center center");
+        document.documentElement.style.setProperty("background-attachment", "fixed");
+        document.documentElement.style.setProperty("background-repeat", "no-repeat");
+        document.documentElement.style.setProperty("transition", "background 2s ease-in-out, background-color 2s ease-in-out");
+        document.documentElement.style.transition = "background 2s ease-in-out, background-color 2s ease-in-out";
     }
 
-    console.log(colors);
-
-    document.documentElement.style.setProperty("background", `linear-gradient(rgba(${colors[0]}, ${colors[1]}, ${colors[2]}, 0.6), rgba(${colors[3]}, ${colors[4]}, ${colors[5]}, 0.6))`)
-    document.documentElement.style.setProperty("background-size", "cover");
-    document.documentElement.style.setProperty("background-position", "center center");
-    document.documentElement.style.setProperty("background-attachment", "fixed");
-    document.documentElement.style.setProperty("background-repeat", "no-repeat");
+    setInterval(setRandomBackground, 5000);
+    setRandomBackground();
 
     setTimeout(() => {
         if (Math.floor(Math.random() * 10) == 5) {
 
-            var index = Math.floor(Math.random() * images.length);
-            var pic = images[index];
+            const index = Math.floor(Math.random() * images.length);
+            const pic = images[index];
             if (pic === images[0]) {
                 document.querySelector('.hero-subtitle').innerText = "Vro is hot";
             }
+
+            vroed = true;
 
             document.documentElement.style.setProperty("background", `linear-gradient(rgba(255, 30, 30, 0.5), rgba(11, 0, 105, 0.5)), url('${pic}'`)
             document.documentElement.style.setProperty("background-size", "cover");
@@ -99,24 +111,7 @@
         }
     }, 15000);
 
-    var typewriter = new Typewriter(app, {
-            loop: true
-        });
-
-
-        typewriter.typeString('A Programmer')
-            .pauseFor(1500)
-            .deleteChars(10)
-            .typeString("Gamer")
-            .pauseFor(1500)
-            .deleteChars(5)
-            .typeString('Linux User')
-            .pauseFor(1500)
-            .deleteChars(10)
-            .typeString("Nerd")
-            .pauseFor(1500)
-            .deleteAll()
-            .start();
 </script>
 
 </html>
+</div>
