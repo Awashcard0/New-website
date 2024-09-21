@@ -196,7 +196,7 @@ const fs = new Map();
 
 fs.set("aboutMe.txt", "Hello! I'm Awashard0, a self-taught developer. <br> I like gaming with my friends and coding. ");
 fs.set("myStuff.txt", `Type "myfetch" to see what I use. `);
-fs.set("controls.txt", "tab autocomplete commands and files <br>TODO: autocomplete arguments</br>");
+fs.set("controls.txt", "Tab Complete Arguments & Commands. (v.0.1.0)");
 
 document.addEventListener("DOMContentLoaded", function() {
     // Get the varibles
