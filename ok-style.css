@@ -138,3 +138,18 @@ body {
    display: flex;
    flex-direction: column;
  }
+ :root {
+   --color-1: rgba(0, 0, 0, 0.6);
+   --color-2: rgba(0, 0, 0, 0.6);
+   --next-color-1: rgba(0, 0, 0, 0.6);
+   --next-color-2: rgba(0, 0, 0, 0.6);
+ }
+ 
+ html {
+   background: linear-gradient(var(--color-1), var(--color-2));
+   background-size: cover;
+   background-position: center center;
+   background-attachment: fixed;
+   background-repeat: no-repeat;
+   transition: background 2s ease-in-out, background-color 2s ease-in-out;
+ }
