@@ -135,7 +135,7 @@ async function checkCommand(input) {
             break;
         case "myfetch":
             const arg = input.split(" ")[1].toLowerCase();
-            
+
             if (arg == "-l" || arg == "--laptop") {
                 // Laptop
                 const ascii = asciiLogo("NEON");
@@ -158,8 +158,29 @@ CPU: AMD Ryzen 3 3200U with Radeon Vega Mobile Gfx (4) @ 2.600GHz <br>
 GPU: AMD ATI Radeon Vega Series / Radeon Vega Mobile Series <br>
 Memory: 13903MiB <br><br> (As of May 9, 2024)</div>`;
                 output(fetch);
-            } else if (arg === "-d" || arg === "--desktop") {
+            } else if (arg == "-d" || arg == "--desktop") {
                 // Desktop
+                const ascii = asciiLogo("NEON");
+                let fetch = `<div style="display: inline-block; vertical-align: top"><span style="color:#7F000000;"><pre>${ascii}</pre></div>`;
+                fetch += `<div style="display: inline-block; vertical-align: top">&nbsp;&nbsp;</div>`;
+                fetch += `<div style="display: inline-block; vertical-align: top">awash@awash-hp <br>
+   -------------- <br>
+   OS: Kubuntu 23.10 x86_64 <br>
+   Host: 750-417c 1.01 <br>
+   Kernel: 6.5.0-28-generic <br>
+   Packages: 2902 (dpkg), 29 (flatpak), 7 (snap) <br>
+   Shell: bash 5.2.15 <br>
+   Resolution: 1920x1080, 1680x1050, 1920x1080 <br>
+   DE: Plasma 5.27.8 <br>
+   WM: KWin <br>
+   Theme: [Plasma], Breeze [GTK2/3] <br>
+   Icons: [Plasma], breeze-dark [GTK2/3] <br>
+   Terminal: yakuake <br>
+   CPU: Intel i5-6400 (4) @ 3.300GHz <br>
+   GPU: Intel HD Graphics 530 <br>
+   GPU: NVIDIA Geforce RTX 3050 <br>
+   Memory: 15886MiB  <br><br> (As of May 10, 2024)</div>`;
+                output(fetch);
             } else {
                 output("myfetch: invalid argument<br><br>Usage: myfetch [option]<br><br>Options:\n-l, --laptop\t\tShow laptop setup\n-d, --desktop\t\tShow desktop setup");
             }
