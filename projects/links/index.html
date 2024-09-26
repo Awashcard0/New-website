@@ -48,7 +48,8 @@ const crypto = window.crypto;
         // Found url
 
         // Get id
-        const id = location.href.split("#id=")[1]
+        const stupidSchoolBlocker = location.href.split("#id=")[1];
+        const id = stupidSchoolBlocker.split("?")[0]; // It hates my website so it puts a quary at the end of it
         let output = false
         const dialog = document.getElementById("dialog");
         const dialogCont = document.getElementById("dialogCont");
@@ -72,7 +73,7 @@ const crypto = window.crypto;
         } else if (id === "git") {
             output = {
                 "type": "link",
-                "data": "https://nextcloud.awashcard0.com/s/HKJomQ6rZKac8Bx"
+                "data": "https://nextcloud.awashcard0.com/s/QcLe7iePszYEpJn"
             }
         } else if (id === "historicalContext") {
             output = {
