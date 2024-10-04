@@ -2,12 +2,12 @@ body {
     font-family: "Noto Sans", sans-serif;
     margin: 0;
     padding: 0;
-    background: rgb(41, 41, 41);
+    background: rgb(36, 39, 58);
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center center;
     background-attachment: fixed;
-    color: white;
+    color: rgb(202, 211, 245);
     overflow-x: hidden;
 }
 
@@ -37,14 +37,13 @@ body {
  .hero-content {
    position: relative;
    font-family: "Monserrat", sans-serif;
-   color: white;
    text-align: left;
    margin: 0.625rem;
    justify-content: left;
    align-items: left;
    position: absolute;
-   background: rgba(0, 0, 0, 0.4);
-   box-shadow: rgb(0 0 0 / 37%) 0px 3.2px 7.2px 0px, rgb(0 0 0 / 35%) 0px 0.6px 1.8px 0px;
+   background: rgba(73, 77, 100, 0.4);
+   box-shadow: rgb(73 77 100 / 37%) 0px 3.2px 7.2px 0px, rgb(73 77 100 / 35%) 0px 0.6px 1.8px 0px;
    border-radius: 8px;
    display: flex;
    flex-direction: column;
@@ -112,7 +111,7 @@ body {
  .premain {
       position: relative;
       width: 100vw;
-      height: 50vh;
+      height: 150vh;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -121,8 +120,8 @@ body {
  .main {
    justify-content: center;
    position: absolute;
-   background: rgba(0, 0, 0, 0.4);
-   box-shadow: rgb(0 0 0 / 37%) 0px 3.2px 7.2px 0px, rgb(0 0 0 / 35%) 0px 0.6px 1.8px 0px;
+   background: rgba(73, 77, 100, 0.4);
+   box-shadow: rgb(73 77 100 / 37%) 0px 3.2px 7.2px 0px, rgb(73 77 100 / 35%) 0px 0.6px 1.8px 0px;
    border-radius: 8px;
    display: flex;
    flex-direction: column;
@@ -133,13 +132,94 @@ body {
  }
 
  .mainContent {
-   align-items: center;
+   display: grid;
+   width: 100%;
+   grid-template-columns: 50% 50%;
+   grid-template-rows: auto;
    justify-content: center;
-   display: flex;
-   flex-direction: column;
+   align-items: center;
+   margin: auto 0;
  }
 
  .top {
    position: sticky;
    top: 0;
+ }
+
+ .gradient {
+   background: -webkit-linear-gradient(#8aadf4, rgb(152, 195.5, 196.5), #a6da95);
+   background-clip: text;
+  -webkit-text-fill-color: transparent;
+ }
+
+ .tile {
+   background: rgba(128, 135, 162, 0.4);
+   box-shadow: rgb(128 135 162 / 37%) 0px 3.2px 7.2px 0px, rgb(128 135 162 / 35%) 0px 0.6px 1.8px 0px;
+   border-radius: 8px;
+   display: flex;
+   flex-direction: column;
+   overflow: hidden;
+   padding: 1rem;
+   width: 90%;
+   height: auto;
+ }
+
+ .tilenottop {
+   margin-top: 5%;
+ }
+
+ .section-1 {
+   background: rgba(166, 218, 149, 0.4);
+   box-shadow: rgb(166 218 149 / 37%) 0px 3.2px 7.2px 0px, rgb(166 218 149 / 35%) 0px 0.6px 1.8px 0px;
+   border-radius: 8px;
+   display: flex;
+   flex-direction: column;
+   overflow: hidden;
+   padding: 1rem;
+   width: 90%;
+   height: auto;
+   padding: 5px;
+   grid-area: section-1;
+ }
+
+ .section-2 {
+   background: rgba(238, 212, 159, 0.4);
+   box-shadow: rgb(238 212 159 / 37%) 0px 3.2px 7.2px 0px, rgb(238 212 159 / 35%) 0px 0.6px 1.8px 0px;
+   border-radius: 8px;
+   display: flex;
+   flex-direction: column;
+   overflow: hidden;
+   padding: 1rem;
+   width: 90%;
+   height: auto;
+   padding: 5px;
+   grid-area: section-2;
+ }
+
+ .section-3 {
+   /* padding-top: 5px; */
+   background: rgba(237, 135, 150, 0.4);
+   box-shadow: rgb(237 135 150 / 37%) 0px 3.2px 7.2px 0px, rgb(237 135 150 / 35%) 0px 0.6px 1.8px 0px;
+   border-radius: 8px;
+   display: flex;
+   flex-direction: column;
+   overflow: hidden;
+   padding: 1rem;
+   width: 95%;
+   height: auto;
+   padding: 5px;
+   grid-area: section-3;
+ }
+
+ .skills {
+   display: grid;
+   width: 100%;
+   grid-template-columns: 50% 50%;
+   grid-template-rows: auto;
+   justify-content: center;
+   align-items: center;
+   grid-template-areas: 
+    "section-1 section-2"
+    "section-3 section-3";
+   margin: auto 0;
  }

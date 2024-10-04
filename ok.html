@@ -7,23 +7,21 @@
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://awashcard0.com/" />
     <meta property="og:image" content="https://awashcard0.com/icon-big.png" />
-    <meta property="og:description" content="I use Arch btw" />
-    <meta property="og:site_name" content="Vro's Fanclub Emporium" />
+    <meta property="og:description" content="" />
+    <meta property="og:site_name" content="Awashcard0" />
     <link href="favicon.ico" type="image/x-icon" rel="shortcut icon">
     <link href="favicon.ico" type="image/x-icon" rel="icon">
     <link rel="stylesheet" href="ok-style.css">
-    <script src="https://unpkg.com/typewriter-effect@2.3.1/dist/core.js"></script>
     <title>Awashcard0</title>
 </head>
 
 <body>
     <section class="hero">
         <div class="hero-content">
-            <h1 class="hero-title">Hello, I'm Awashcard0</h1>
-            <h2 class="hero-subtitle">A Linux User, Avid Programmer..</h2>
+            <h1 class="gradient hero-title">Hello, I'm Awashcard0</h1>
+            <h2 class="hero-subtitle">A <a title="I use Arch btw">Linux Connoisseur</a>, Avid Programmer.</h2>
             <noscript>
-                <p>It is <strong>new Date().getFullYear();</strong> and you dont have javascript on. You do you I guess.
-                </p>
+                <p>It is <strong>new Date().getFullYear();</strong> and you dont have javascript on. You do you I guess.</p>
             </noscript>
             ㅤ<br>
             <div class="scroll-down"></div>
@@ -34,11 +32,47 @@
         <div class="main">
             <div class="top">
                 <img id="img" class="centerimg" src="/images/icon-big.png" style="vertical-align: bottom;">
-                <div style="display: inline; font-size: 50px;"> ⋅</div>
-                <h1 style="display: inline; font-size: 50px;">Awashcard0</h1>
+                <div style="display: inline; font-size: 50px;" class="gradient"> ⋅</div>
+                <h1 style="display: inline; font-size: 50px;" class="gradient">Awashcard0</h1>
             </div>
+            <br>ㅤ
             <div class="mainContent">
-                <h2>Hello, I'm Awashcard0</h2>
+                <div class="tile">
+                    <h2>About Me</h2>
+                    <p>Hello, Thanks for stopping by my website. </p>
+                </div>
+                <div class="tile">
+                    <h2>Skills</h2>
+                    <div class="skills">
+                        <div class="section-1">
+                            <h2>Stuff I know</h2>
+                            <h3>Programming</h3>
+                            <p>C++, Java, JavaScript, HTML, CSS</p>
+                            <h3>Tools</h3>
+                            <p>Git, Docker, Linux, Android</p>
+                        </div>
+                        <div class="section-2">
+                            <h2>Skills I'm learning</h2>
+                            <h3>Programming</h3>
+                            <p>Python, TypeScript</p>
+                            <h3>Frameworks</h3>
+                            <p>React, TailwindCSS</p>
+                        </div>
+                        <div class="section-3">
+                            <h2>Skills I want to learn</h2>
+                            <h3>Programming</h3>
+                            <p>Rust, Go, C</p>
+                            <h3>Tools</h3>
+                            <p>Ansible, Kubernetes</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="tile tilenottop">
+                    <h2>What I use</h2>
+                </div>
+                <div class="tile tilenottop">
+                    <h2>Interests</h2>
+                </div>
             </div>
         </div>
     </div>
@@ -93,6 +127,8 @@
 
     setTimeout(() => {
         if (Math.floor(Math.random() * 10) == 5) {
+
+            return; // disable vro temporarily
 
             const index = Math.floor(Math.random() * images.length);
             const pic = images[index];
