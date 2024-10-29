@@ -9,8 +9,8 @@
     <meta property="og:image" content="https://awashcard0.com/icon-big.png" />
     <meta property="og:description" content="" />
     <meta property="og:site_name" content="Awashcard0" />
-    <link href="favicon.ico" type="image/x-icon" rel="shortcut icon">
-    <link href="favicon.ico" type="image/x-icon" rel="icon">
+    <link href="/favicon.ico" type="image/x-icon" rel="shortcut icon">
+    <link href="/favicon.ico" type="image/x-icon" rel="icon">
     <link rel="stylesheet" href="ok-style.css">
     <title>Awashcard0</title>
 </head>
@@ -18,18 +18,21 @@
 <body>
     <section class="hero">
         <div class="hero-content">
-            <h1 class="gradient hero-title">Hello, I'm Awashcard0</h1>
-            <h2 class="hero-subtitle">A <a title="I use Arch btw">Linux Connoisseur</a>, Avid Programmer.</h2>
+            <div>
+                <img class="centerimg hero-title" src="/images/icon-big.png" style="vertical-align: bottom;">
+                <h1 style="display: inline; font-size: 50px;" class="gradient hero-title">Hello, I'm Awashcard0</h1>
+            </div>
+            <h2 class="hero-subtitle">A <a title="I use Arch btw">Linux Connoisseur</a>, Avid Programmer and Open Source lover.</h2>
             <noscript>
                 <p>It is <strong>new Date().getFullYear();</strong> and you dont have javascript on. You do you I guess.</p>
             </noscript>
-            ㅤ<br>
-            <div class="scroll-down"></div>
-            ㅤ<br>ㅤ<br>
+            ㅤ<br onclick="document.getElementById('main').scrollIntoView({behavior: 'smooth', block: 'center'});">
+            <div class="scroll-down" onclick="document.getElementById('main').scrollIntoView({behavior: 'smooth', block: 'center'});"></div>
+            ㅤ<br onclick="document.getElementById('main').scrollIntoView({behavior: 'smooth', block: 'center'});">ㅤ<br onclick="document.getElementById('main').scrollIntoView({behavior: 'smooth', block: 'center'});">
         </div>
     </section>
     <div class="premain">
-        <div class="main">
+        <div class="main" id="main">
             <div class="top">
                 <img id="img" class="centerimg" src="/images/icon-big.png" style="vertical-align: bottom;">
                 <div style="display: inline; font-size: 50px;" class="gradient"> ⋅</div>
@@ -39,40 +42,69 @@
             <div class="mainContent">
                 <div class="tile">
                     <h2>About Me</h2>
-                    <p>Hello, Thanks for stopping by my website. </p>
+                    <p>Welcome to my little spot on the web.</p>
                 </div>
                 <div class="tile">
-                    <h2>Skills</h2>
-                    <div class="skills">
-                        <div class="section-1">
-                            <h2>Stuff I know</h2>
-                            <h3>Programming</h3>
-                            <p>C++, Java, JavaScript, HTML, CSS</p>
-                            <h3>Tools</h3>
-                            <p>Git, Docker, Linux, Android</p>
-                        </div>
-                        <div class="section-2">
-                            <h2>Skills I'm learning</h2>
-                            <h3>Programming</h3>
-                            <p>Python, TypeScript</p>
-                            <h3>Frameworks</h3>
-                            <p>React, TailwindCSS</p>
-                        </div>
-                        <div class="section-3">
-                            <h2>Skills I want to learn</h2>
-                            <h3>Programming</h3>
-                            <p>Rust, Go, C</p>
-                            <h3>Tools</h3>
-                            <p>Ansible, Kubernetes</p>
-                        </div>
+                    <h2 id="profiles">Online Profiles</h2>
+                    <div class="profile">
+                        <a href="https://github.com/Awashcard0">
+                            <img src="/images/icons/github.svg" alt="GitHub">
+                            <h2 style="display: inline;">Awashcard0</h2>
+                        </a>
+                    </div>
+                    <div class="profile">
+                        <a href="https://discord.com/users/598999688103985223">
+                            <img src="/images/icons/discord.svg" alt="Discord">
+                            <h2 style="display: inline;">@awashcard0</h2>
+                        </a>
                     </div>
                 </div>
-                <div class="tile tilenottop">
+            <!--- <div class="tile">
+                        <h2>Skills</h2>
+                        <div class="skills">
+                            <div class="section-1">
+                                <h2>Stuff I know</h2>
+                                <h3>Programming</h3>
+                                <p>C++, Java, JavaScript, HTML, CSS</p>
+                                <h3>Tools</h3>
+                                <p>Git, Docker, Linux, Android</p>
+                            </div>
+                            <div class="section-2">
+                                <h2>Skills I'm learning</h2>
+                                <h3>Programming</h3>
+                                <p>Python, TypeScript</p>
+                                <h3>Frameworks</h3>
+                                <p>React, TailwindCSS</p>
+                            </div>
+                            <div class="section-3">
+                                <h2>Skills I want to learn</h2>
+                                <h3>Programming</h3>
+                                <p>Rust, Go, C</p>
+                                <h3>Tools</h3>
+                                <p>Ansible, Kubernetes</p>
+                            </div>
+                        </div>
+                    </div> -->
+                <div class="footer tilenottop">
+                    <p>Made By Awashcard0</p>
+                    <div class="88x31">
+                        <a href="https://awashcard0.com/">
+                            <img src="/images/88x31.png" alt="Awash 88x31">
+                        </a>
+                    </div>
+                </div>
+                <!-- <div class="tile tilenottop">
                     <h2>What I use</h2>
+                    <p>The hardware and software I use</p>
+                    <h3>Hardware</h3>
+                    <p>I use the Framework Laptop 13.</p>
+                    <h3>Software</h3>
+                    <p>I use Endeavor OS on my laptop and Kubuntu on my desktop. I care more about stability on my desktop but Endeavor OS has been pritty stable (Once it told me to run fsck manually which was not fun because I have never seen it before).</p>
+                    
                 </div>
                 <div class="tile tilenottop">
                     <h2>Interests</h2>
-                </div>
+                </div> -->
             </div>
         </div>
     </div>
@@ -96,6 +128,16 @@
         deg = spining ? 14400 : 0;
         img.style.transform = "rotate(" + deg + "deg)";
     }
+
+    const profiles = document.getElementById("profiles");
+
+    profiles.addEventListener("mouseenter", () => {
+        profiles.innerText = "Ways to stalk me";
+    });
+
+    profiles.addEventListener("mouseleave", () => {
+        profiles.innerText = "Online Profiles";
+    });
 
     const images = [
         "./images/nestThermostatVro.jpg", // vro is hot
@@ -146,6 +188,17 @@
         }
     }, 15000);
 
+    let scrolled = false;
+
+    addEventListener("scroll", () => {
+        console.log(scrolled);
+        if (Math.floor(window.scrollY) > 30 && !scrolled) {
+            document.getElementById("main").scrollIntoView({behavior: "smooth", block: "center"});
+            setTimeout(() => {
+                scrolled = true;
+            }, 1000);
+        }
+    });    
 </script>
 
 </html>
