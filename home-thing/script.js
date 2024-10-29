@@ -166,7 +166,7 @@ fetch('https://awashcard0.com/info.json')
       <p>Tip: Press the button twice to go home</p>
       <p>Also tip: Press <code>Ctrl + .</code> to open this menu</p>
       <span class="close" onclick="closeHomeThing(this.parentElement)">×</span>
-      <a href="https://awashcard0.pages.dev/" class="homeLink">Go home</a>
+      <a href="https://awashcard0.com/" class="homeLink">Go home</a>
       <button onclick="askForDarkMode()">Ask for dark mode</button>
       <p id="HomeThingShowFPS">FPS: Loading</p>
       `;
@@ -203,7 +203,7 @@ function startExit() {
         if (online) {
             location.href = "https://awashcard0.com/"
         } else {
-            location.href = "https://awashcard0.pages.dev/"
+            location.href = "https://awashcard0.com/"
         }
         
       });
