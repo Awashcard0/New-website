@@ -27,7 +27,7 @@
                 <img class="centerimg hero-title" src="/icon-big.png" style="vertical-align: bottom;">
                 <h1 style="display: inline; font-size: 50px;" class="gradient hero-title">Hello, I'm Awashcard0</h1>
             </div>
-            <h2 class="hero-subtitle">A <a title="I use Arch btw">Linux Connoisseur</a>, Avid Programmer and Open Source lover.</h2>
+            <h2 class="hero-subtitle">A <a id="distro">Linux Connoisseur</a>, Avid Programmer and Open Source lover.</h2>
             <noscript>
                 <p>It is <strong>new Date().getFullYear();</strong> and you dont have javascript on. You do you I guess.</p>
             </noscript>
@@ -143,6 +143,16 @@
 
     profiles.addEventListener("mouseleave", () => {
         profiles.innerText = "Online Profiles";
+    });
+
+    const distro = document.getElementById("distro");
+
+    distro.addEventListener("mouseenter", () => {
+        distro.innerHTML = "EndeavorOS user so basically <b>I use Arch btw<b>";
+    });
+
+    distro.addEventListener("mouseleave", () => {
+        distro.innerText = "Linux Connoisseur";
     });
 
     const images = [
