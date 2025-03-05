@@ -21,9 +21,9 @@ function showContent() {
 // Add event listener for animation end
 nameElement.addEventListener('animationend', showContent);
 
-setTimeout(() => {
-  showContent();
-}, 2000);
+// setTimeout(() => {
+//   showContent();
+// }, 2000);
 
 const toggleSwitch = document.getElementById('dark-mode-toggle');
 

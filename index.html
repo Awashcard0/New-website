@@ -27,7 +27,7 @@
                 <img class="centerimg hero-title" src="/icon-big.png" style="vertical-align: bottom;">
                 <h1 style="display: inline; font-size: 50px;" class="gradient hero-title">Hello, I'm Awashcard0</h1>
             </div>
-            <h2 class="hero-subtitle">A <a id="distro">Linux Connoisseur</a>, Avid Programmer and Open Source lover.</h2>
+            <h2 class="hero-subtitle">A <a id="distro">Linux Connoisseur</a>, Avid Programmer and Open Sorcerer.</h2>
             <noscript>
                 <p>It is <strong>new Date().getFullYear();</strong> and you dont have javascript on. You do you I guess.</p>
             </noscript>
@@ -39,9 +39,31 @@
     <div class="premain">
         <div class="main" id="main">
             <div class="top">
-                <img id="img" class="centerimg" src="/icon-big.png" style="vertical-align: bottom;">
-                <div style="display: inline; font-size: 50px;" class="gradient"> ⋅</div>
-                <h1 style="display: inline; font-size: 50px;" class="gradient">Awashcard0</h1>
+                <div class="left-side">
+                    <img id="img" class="centerimg" src="/icon-big.png" style="vertical-align: bottom;">
+                    <div style="display: inline; font-size: 50px;" class="gradient"> ⋅</div>
+                    <h1 style="display: inline; font-size: 50px;" class="gradient">Awashcard0</h1>
+                </div>
+                <div class="right-side">
+                    <div class="music-player">
+                        <!-- Album cover and song info side by side -->
+                        <div class="player-header">
+                            <div class="album-cover">
+                                <img src="https://via.placeholder.com/150" alt="Album Cover">
+                            </div>
+                
+                            <div class="song-info">
+                                <h2 id="song-name"><a style="color: rgb(202, 211, 245);" href="404.html" target="_blank" rel="noopener noreferrer">Now Playing</a></h2>
+                                <p class="song-title">Artist - Album</p>
+                            </div>
+                        </div>
+                
+                        <!-- Progress bar -->
+                        <div class="progress-bar">
+                            <progress class="progress" value="50" max="100"></progress>
+                        </div>
+                    </div>
+                </div>
             </div>
             <br>ㅤ
             <div class="mainContent">
@@ -120,6 +142,13 @@
             </div>
         </div>
     </div>
+    <div class="loader hidden">
+        <!-- <h1 class="loader__name">Awashcard0</h1> -->
+        <div class="loader__name">
+            <img class="hero-title" src="/icon-big.png" style="vertical-align: bottom; height: 72px; width: 72px; border-radius: 50%;">
+            <h1 style="display: inline; font-size: 50px;" class="gradient hero-title">Awashcard0</h1>
+        </div>
+    </div>
 </body>
 <script>
     const img = document.getElementById("img");
@@ -154,7 +183,7 @@
     const distro = document.getElementById("distro");
 
     distro.addEventListener("mouseenter", () => {
-        distro.innerHTML = "EndeavorOS user so basically <b>I use Arch btw<b>";
+        distro.innerHTML = "<b style='font-size: 35px;'>I use Arch btw<b>";
     });
 
     distro.addEventListener("mouseleave", () => {
@@ -192,7 +221,7 @@
     setTimeout(() => {
         if (Math.floor(Math.random() * 10) == 5) {
 
-            return; // disable vro temporarily
+            return; // disable vro temporarily, more like permanently
 
             const index = Math.floor(Math.random() * images.length);
             const pic = images[index];
@@ -221,7 +250,89 @@
         } else if (Math.floor(window.scrollY) < 30) {
             scrolled = false;
         }
-    });    
+    });
+
+    // Music Thing
+
+    /* fetch("http://localhost:3000/")
+        .then(response => response.json())
+        .then(data => {
+            handleMusic(data);
+        });
+    */
+    let music_progress_date
+    let music_progress
+    let music_state
+
+    setInterval(() => {
+        if (music_state == "playing" || music_state == "paused") {
+            const progress = document.querySelector(".progress");
+            const currentTime = new Date();
+            const diff = currentTime - music_progress_date;
+            const newProgress = music_progress + diff / 1000;
+            progress.value = newProgress;
+            music_progress = newProgress;
+            music_progress_date = currentTime;
+        }
+    }, 500);
+/*
+     setInterval(() => {
+        fetch("http://localhost:3000/")
+            .then(response => response.json())
+            .then(data => {
+                handleMusic(data);
+            });
+    }, 9000);
+    */
+
+    // https://open.spotify.com/track/1udKn1oNKYQSQ9OmiIWCMu
+
+    function handleMusic(data) {
+        const player = document.querySelector(".right-side");
+        const songInfo = document.querySelector(".song-info");
+        const songTitle = songInfo.querySelector(".song-title");
+        const songLink = songInfo.querySelector("a");
+        const songName = document.getElementById("song-name");
+        const albumCover = document.querySelector(".album-cover img");
+        const progress = document.querySelector(".progress");
+
+        music_state = data.state;
+
+        const formattedLink = `https://open.spotify.com/${data.id.split(":")[1]}/${data.id.split(":")[2]}`;
+
+        if (data.state == "idle" || window.innerWidth < 980) {
+            player.style.display = "none";
+        } else {
+            player.style.display = "flex";
+            songLink.innerText = data.title;
+            songLink.href = formattedLink;
+            songTitle.innerText = `${data.artist} - ${data.album}`;
+            albumCover.src = data.image;
+            progress.max = data.duration;
+            music_progress_date = new Date(data.progress_date);
+            music_progress = data.progress;
+        }
+           
+        
+    }
+
+    // loader
+    const loader = document.querySelector('.loader');
+    const nameElement = document.querySelector('.loader__name');
+    loader.classList.remove('hidden');
+    
+
+    // Function to hide the loader and show the content
+    function showContent() {
+        setTimeout(() => {
+            document.body.scrollTop = 0;
+            document.documentElement.scrollTop = 0;
+            loader.classList.add('hidden');
+        }, 250);
+    }
+
+    // Add event listener for animation end
+    nameElement.addEventListener('animationend', showContent);
 </script>
 
 </html>
