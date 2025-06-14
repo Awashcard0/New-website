@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="google-site-verification" content="y0mgvDJ26LcHGs5D61JCy_7_7x7EWCw7EdGTEmgKgGo" />
-    <meta name="description" content="My little space on the internet."> 
+    <meta name="description" content="My little space on the internet.">
     <meta name="keywords" content="Awashcard0, Awashcard0 projects , awash, wash card, wash card0">
     <meta name="author" content="Awashcard0">
     <meta property="og:title" content="Awashcard0" />
@@ -15,7 +15,8 @@
     <meta property="og:description" content="My little space on the internet." />
     <meta property="og:site_name" content="Awashcard0's lovely website" />
     <link rel="manifest" href="manifest.json" />
-    <link href="favicon.ico" type="image/x-icon" rel="shortcut icon"><link href="favicon.ico" type="image/x-icon" rel="icon">
+    <link href="favicon.ico" type="image/x-icon" rel="shortcut icon">
+    <link href="favicon.ico" type="image/x-icon" rel="icon">
     <link rel="stylesheet" href="style.css">
     <title>Awashcard0</title>
 </head>
@@ -29,11 +30,14 @@
             </div>
             <h2 class="hero-subtitle">A <a id="distro">Linux Connoisseur</a>, Avid Programmer and Open Sorcerer.</h2>
             <noscript>
-                <p>It is <strong>new Date().getFullYear();</strong> and you dont have javascript on. You do you I guess.</p>
+                <p>It is <strong>new Date().getFullYear();</strong> and you dont have javascript on. You do you I guess.
+                </p>
             </noscript>
             ㅤ<br onclick="document.getElementById('main').scrollIntoView({behavior: 'smooth', block: 'center'});">
-            <div class="scroll-down" onclick="document.getElementById('main').scrollIntoView({behavior: 'smooth', block: 'center'});"></div>
-            ㅤ<br onclick="document.getElementById('main').scrollIntoView({behavior: 'smooth', block: 'center'});">ㅤ<br onclick="document.getElementById('main').scrollIntoView({behavior: 'smooth', block: 'center'});">
+            <div class="scroll-down"
+                onclick="document.getElementById('main').scrollIntoView({behavior: 'smooth', block: 'center'});"></div>
+            ㅤ<br onclick="document.getElementById('main').scrollIntoView({behavior: 'smooth', block: 'center'});">ㅤ<br
+                onclick="document.getElementById('main').scrollIntoView({behavior: 'smooth', block: 'center'});">
         </div>
     </section>
     <div class="premain">
@@ -49,18 +53,23 @@
                         <!-- Album cover and song info side by side -->
                         <div class="player-header">
                             <div class="album-cover">
-                                <img src="https://via.placeholder.com/150" alt="Album Cover">
+                                <img src="" alt="Album Cover">
                             </div>
-                
+
                             <div class="song-info">
-                                <h2 id="song-name"><a style="color: rgb(202, 211, 245);" href="404.html" target="_blank" rel="noopener noreferrer">Now Playing</a></h2>
+                                <h2 id="song-name"><a style="color: rgb(202, 211, 245);" href="404.html" target="_blank"
+                                        rel="noopener noreferrer">Now Playing</a></h2>
                                 <p class="song-title">Artist - Album</p>
                             </div>
                         </div>
-                
+
                         <!-- Progress bar -->
                         <div class="progress-bar">
                             <progress class="progress" value="50" max="100"></progress>
+                            <div class="progress-time">
+                                <span class="current-time">0:00</span>
+                                <span class="duration">3:30</span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -70,7 +79,8 @@
                 <div class="tile">
                     <h2>About Me</h2>
                     <p>Welcome to my little spot on the web.</p>
-                    <p>To see my projects, visit my <a style="color: rgb(202, 211, 245);" href="/projects">projects page</a>.</p>
+                    <p>To see my projects, visit my <a style="color: rgb(202, 211, 245);" href="/projects">projects
+                            page</a>.</p>
                 </div>
                 <div class="tile">
                     <h2 id="profiles">Online Profiles</h2>
@@ -81,7 +91,8 @@
                         </a>
                     </div>
                     <div class="profile">
-                        <a target="_blank" rel="noopener noreferrer" href="https://discord.com/users/598999688103985223">
+                        <a target="_blank" rel="noopener noreferrer"
+                            href="https://discord.com/users/598999688103985223">
                             <img src="/images/icons/discord.svg" alt="Discord">
                             <h2 style="display: inline;">@awashcard0</h2>
                         </a>
@@ -93,7 +104,7 @@
                         </a>
                     </div>
                 </div>
-            <!--- <div class="tile">
+                <!--- <div class="tile">
                         <h2>Skills</h2>
                         <div class="skills">
                             <div class="section-1">
@@ -145,7 +156,8 @@
     <div class="loader hidden">
         <!-- <h1 class="loader__name">Awashcard0</h1> -->
         <div class="loader__name">
-            <img class="hero-title" src="/icon-big.png" style="vertical-align: bottom; height: 72px; width: 72px; border-radius: 50%;">
+            <img class="hero-title" src="/icon-big.png"
+                style="vertical-align: bottom; height: 72px; width: 72px; border-radius: 50%;">
             <h1 style="display: inline; font-size: 50px;" class="gradient hero-title">Awashcard0</h1>
         </div>
     </div>
@@ -243,7 +255,7 @@
 
     addEventListener("scroll", () => {
         if (Math.floor(window.scrollY) > 30 && !scrolled) {
-            document.getElementById("main").scrollIntoView({behavior: "smooth", block: "center"});
+            document.getElementById("main").scrollIntoView({ behavior: "smooth", block: "center" });
             setTimeout(() => {
                 scrolled = true;
             }, 1000);
@@ -254,12 +266,12 @@
 
     // Music Thing
 
-    /* fetch("http://localhost:3000/")
+    fetch("https://api.awashcard0.com/api/music/playing")
         .then(response => response.json())
         .then(data => {
             handleMusic(data);
         });
-    */
+
     let music_progress_date
     let music_progress
     let music_state
@@ -267,23 +279,31 @@
     setInterval(() => {
         if (music_state == "playing" || music_state == "paused") {
             const progress = document.querySelector(".progress");
+            const currentTimeText = document.querySelector(".current-time");
             const currentTime = new Date();
             const diff = currentTime - music_progress_date;
             const newProgress = music_progress + diff / 1000;
             progress.value = newProgress;
             music_progress = newProgress;
+            currentTimeText.innerText = formatTime(newProgress);
+            if (newProgress >= progress.max) {
+                music_progress = 0;
+                progress.value = 0;
+                currentTimeText.innerText = "0:00";
+            }
+            // Update the progress date to the current time
             music_progress_date = currentTime;
         }
     }, 500);
-/*
-     setInterval(() => {
-        fetch("http://localhost:3000/")
+
+    setInterval(() => {
+        fetch("https://api.awashcard0.com/api/music/playing")
             .then(response => response.json())
             .then(data => {
                 handleMusic(data);
             });
     }, 9000);
-    */
+
 
     // https://open.spotify.com/track/1udKn1oNKYQSQ9OmiIWCMu
 
@@ -295,6 +315,7 @@
         const songName = document.getElementById("song-name");
         const albumCover = document.querySelector(".album-cover img");
         const progress = document.querySelector(".progress");
+        const duration = document.querySelector(".duration");
 
         music_state = data.state;
 
@@ -311,16 +332,21 @@
             progress.max = data.duration;
             music_progress_date = new Date(data.progress_date);
             music_progress = data.progress;
+            duration.innerText = formatTime(data.duration);
         }
-           
-        
+    }
+
+    function formatTime(unformattedTime) {
+        const minutes = Math.floor(unformattedTime / 60);
+        const seconds = Math.floor(unformattedTime % 60);
+        return `${minutes}:${seconds < 10 ? '0' + seconds : seconds}`;
     }
 
     // loader
     const loader = document.querySelector('.loader');
     const nameElement = document.querySelector('.loader__name');
     loader.classList.remove('hidden');
-    
+
 
     // Function to hide the loader and show the content
     function showContent() {
