@@ -323,6 +323,14 @@ body {
 .song-title {
   font-size: 14px;
   color: #aaa;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+  white-space: normal;
 }
 
 .progress {
