@@ -161,6 +161,24 @@
             <h1 style="display: inline; font-size: 50px;" class="gradient hero-title">Awashcard0</h1>
         </div>
     </div>
+    <div id="screensaver">
+        <marquee behavior="alternate" scrollamount="30">
+            <marquee behavior="alternate" scrollamount="30" direction="down">
+                <img class="hero-title" src="/icon-big.png"
+                    style="vertical-align: bottom; height: 72px; width: 72px; border-radius: 50%;">
+                <h1 style="display: inline; font-size: 50px;" class="gradient hero-title">Awashcard0</h1>
+            </marquee>
+        </marquee>
+        <!-- Screensaver Music Info -->
+        <div class="screensaverMusic">
+            <div class="ss-album-cover">
+                <img id="ss-album-cover" src="" alt="Album Cover">
+            </div>
+            <div class="song-info">
+                <h2 id="ss-song-name">Now Playing</h2>
+                <p class="song-title" id="ss-song-title">Artist - Album</p>
+            </div>
+    </div>
 </body>
 <script>
     const img = document.getElementById("img");
@@ -316,6 +334,8 @@
         const albumCover = document.querySelector(".album-cover img");
         const progress = document.querySelector(".progress");
         const duration = document.querySelector(".duration");
+        //screen saver elements
+		const screensaverMusicElement = document.querySelector(".screensaverMusic");
 
         music_state = data.state;
 
@@ -323,8 +343,10 @@
 
         if (data.state == "idle" || window.innerWidth < 980) {
             player.style.display = "none";
+			screensaverMusicElement.style.display = "none";
         } else {
             player.style.display = "flex";
+			screensaverMusicElement.style.display = "block";
             songLink.innerText = data.title;
             songLink.href = formattedLink;
             songTitle.innerText = `${data.artist} - ${data.album}`;
@@ -333,6 +355,7 @@
             music_progress_date = new Date(data.progress_date);
             music_progress = data.progress;
             duration.innerText = formatTime(data.duration);
+			randomSSMusicPos(data);
         }
     }
 
@@ -359,6 +382,52 @@
 
     // Add event listener for animation end
     nameElement.addEventListener('animationend', showContent);
+
+    // Screen Savers
+    const fadeScreen = document.getElementById('screensaver');
+    let fadeTimer;
+
+    function fadeToBlack() {
+        fadeScreen.style.opacity = '1';
+        fadeScreen.style.pointerEvents = 'auto';
+    }
+
+    function unfade() {
+        fadeScreen.style.opacity = '0';
+        fadeScreen.style.pointerEvents = 'none';
+        resetFadeTimer();
+    }
+
+    function resetFadeTimer() {
+        clearTimeout(fadeTimer);
+        fadeTimer = setTimeout(fadeToBlack, 60000);
+    }
+
+    document.addEventListener('mousemove', unfade);
+
+    document.addEventListener(`keydown`, unfade);
+
+    resetFadeTimer();
+
+    fadeToBlack();
+
+    function randomSSMusicPos(data) {
+        const screensaverMusicElement = document.querySelector(".screensaverMusic");
+		const ssAlbumCover = document.getElementById("ss-album-cover");
+		const ssSongName = document.getElementById("ss-song-name");
+		const ssSongTitle = document.getElementById("ss-song-title");
+
+		screensaverMusicElement.style.opacity = "0";
+
+		setTimeout(() => {
+			ssAlbumCover.src = data.image;
+			ssSongTitle.innerText = `${data.artist} - ${data.album}`;
+			ssSongName.innerText = data.title;
+			screensaverMusicElement.style.right = Math.floor(Math.random() * 67) + "%";
+			screensaverMusicElement.style.top = Math.floor(Math.random() * 60) + "%";
+			screensaverMusicElement.style.opacity = "1";
+		}, 2000);
+    }
 </script>
 
 </html>
