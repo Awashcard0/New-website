@@ -26,7 +26,7 @@ setTimeout(() => {
 function handleMusic(data) {
 	const screensaverMusicElement = document.querySelector(".screensaverMusic");
 
-    if (!data.state == "playing" || window.innerWidth < 980) {
+    if (data.state == "idle" || data.state == "paused" || window.innerWidth < 980) {
         screensaverMusicElement.style.opacity = "0";
     } else {
 		randomSSMusicPos(data);
