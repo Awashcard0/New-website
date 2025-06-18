@@ -415,6 +415,7 @@ marquee {
 
 .screensaverMusic {
 	position: fixed;
+	display: none;
 	top: 0%;
 	right: 0%;
 	transform: none;
@@ -424,7 +425,6 @@ marquee {
 	max-width: 30vw;
 	box-sizing: border-box;
 	margin: 32px;
-	overflow: hidden;
 	z-index: 10000;
 	background: rgba(0, 0, 0, 0.4);
 	border-radius: 8px;

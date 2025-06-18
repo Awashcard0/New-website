@@ -1,0 +1,122 @@
+body {
+    font-family: "Noto Sans", sans-serif;
+}
+
+#screensaver {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    opacity: 1;
+    pointer-events: none;
+    z-index: 9995;
+}
+
+marquee {
+    height: 100vh;
+}
+
+.screensaverMusic {
+    position: fixed;
+    opacity: 0;
+    display: none;
+    top: 0%;
+    right: 0%;
+    transform: none;
+    color: white;
+    font-size: 24px;
+    text-align: center;
+    max-width: 30vw;
+    box-sizing: border-box;
+    margin: 32px;
+    background: rgba(0, 0, 0, 0.4);
+    border-radius: 8px;
+    overflow: hidden;
+    padding: 1rem;
+    opacity: 1;
+    transition: opacity 2s ease-in-out;
+}
+
+.ss-album-cover img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+#ss-song-title {
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+    white-space: normal;
+}
+
+#ss-song-name {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+    white-space: normal;
+}
+
+.gradient {
+    background: -webkit-linear-gradient(#8aadf4, rgb(152, 195.5, 196.5), #a6da95);
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Loader */
+.loader {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    background-color: #111;
+    opacity: 1;
+    transition: opacity 2s ease-in-out;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 9998;
+    pointer-events: none;
+}
+
+.loader.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.loader-name {
+    font-size: 60px;
+    color: #fff;
+    animation: moveName 1s ease-in-out forwards;
+    animation-delay: 0.25s;
+    opacity: 0;
+    top: 50%;
+    left: 50%;
+}
+
+@keyframes moveName {
+    0% {
+        opacity: 0;
+        rotate: 0deg;
+        font-size: 60px;
+    }
+
+    100% {
+        opacity: 1;
+        rotate: 360deg;
+        font-size: 30px;
+    }
+}
