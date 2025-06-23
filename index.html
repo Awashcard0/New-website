@@ -79,8 +79,7 @@
                 <div class="tile">
                     <h2>About Me</h2>
                     <p>Welcome to my little spot on the web.</p>
-                    <p>To see my projects, visit my <a style="color: rgb(202, 211, 245);" href="/projects">projects
-                            page</a>.</p>
+                    <p>To see my projects, visit my <a style="color: rgb(202, 211, 245);" href="/projects" id="projectsLink">projects page</a>.</p>
                 </div>
                 <div class="tile">
                     <h2 id="profiles">Online Profiles</h2>
@@ -339,13 +338,12 @@
 
         music_state = data.state;
 
-        const formattedLink = `https://open.spotify.com/${data.id.split(":")[1]}/${data.id.split(":")[2]}`;
-
         if (data.state == "idle" || window.innerWidth < 980) {
             player.style.display = "none";
 			screensaverMusicElement.style.display = "none";
         } else {
             player.style.display = "flex";
+            const formattedLink = `https://open.spotify.com/${data.id.split(":")[1]}/${data.id.split(":")[2]}`;
 			screensaverMusicElement.style.display = "block";
             songLink.innerText = data.title;
             songLink.href = formattedLink;
@@ -426,6 +424,31 @@
 			screensaverMusicElement.style.opacity = "1";
 		}, 2000);
     }
+
+    document.getElementById("projectsLink").addEventListener("click", function(event) {
+        event.preventDefault();
+        goToProjects();
+    });
+
+    function goToProjects() {
+      let callout = document.createElement("div");
+      callout.setAttribute('class', 'exitBackground');
+      callout.setAttribute('id', 'exitBackgroundDiv')
+      document.body.appendChild(callout);
+
+      let calloutClose = document.createElement("h1");
+      calloutClose.setAttribute('class', 'exitNameElement');
+      calloutClose.innerText = "Awashcard0";
+      callout.appendChild(calloutClose);
+
+      const exitBackground = document.getElementById('exitBackgroundDiv');
+      const exitNameElement = document.querySelector('.exitNameElement');
+
+      exitBackground.style.backgroundColor = "#111";
+      exitBackground.style.opacity = "1";
+
+      exitNameElement.addEventListener('animationend', function() {location.href = "/projects";});
+}
 </script>
 
 </html>
